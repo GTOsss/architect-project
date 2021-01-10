@@ -2,6 +2,7 @@ const { toCamelCase, toKebabCase } = require('../../methods/index');
 
 // mock data {
 const mockMapSourceCurrentSection = {
+  // Данный объект нужно получать из source-map.js
   path: 'src/inputs',
   content: {
     i: ['index'],
