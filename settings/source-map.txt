@@ -1,0 +1,32 @@
+aliases {
+  icons,
+  index: i,
+  rc: react-component,
+  s: store,
+}
+
+map {
+	src/components/icons
+	- [icons]
+
+	src/components/inputs
+	- [i]
+	- [rc] button
+	- [rc] textarea
+	- [rc] input
+	- [rc] input-select
+
+	src/components/modals
+	- [i]
+	- [rc] base
+	- [rc] confirm
+	- [rc] confirm remove
+
+	src/components/profile/forms
+	- [rc] main
+	- [rc] avatar
+
+	src/store
+	- [s] user
+	- [s] forms
+}

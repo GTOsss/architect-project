@@ -1,0 +1,4 @@
+import {{toCamelCase(componentName)}}, { Props } from './{{toKebabCase(componentName)}}';
+
+export default toCamelCase(componentName);
+export { {{Props as toCamelCase(componentName)}}Props };
