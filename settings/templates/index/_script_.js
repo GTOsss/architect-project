@@ -15,7 +15,7 @@ const createImportLine = (componentName) =>
 
 const createExportLine = (componentNames) => `export { ${componentNames.map(toCamelCase).join()} };`;
 
-// сюда должен придти объект вида mockMeta из source-map
+// сюда должен придти объект вида mockMapSourceCurrentSection из source-map
 const getContent = (_, { mapSourceCurrentSection }) => {
   const componentNames = mapSourceCurrentSection.content.rc;
   const fileLines = componentNames.map(createImportLine);
