@@ -1,19 +1,20 @@
 const fs = require('file-system');
+const { resolve } = require('path');
 
 const getChildPaths = (dir, result) => {
   result = result || [];
 
   const files = fs.readdirSync(dir);
 
-  for (const i in files) {
-    const path = `${dir}/${files[i]}`;
+  files.forEach((fileName) => {
+    const path = resolve(dir, fileName);
 
     if (fs.statSync(path).isDirectory()) {
       getChildPaths(path, result);
     } else if (!/\_script_.js$/.test(path)) {
       result.push(path);
     }
-  }
+  });
 
   return result;
 };
@@ -21,12 +22,15 @@ const getChildPaths = (dir, result) => {
 const getFilesPath = (dir) => {
   const allPaths = [];
 
-  const parentPathsfile = fs.readdirSync(dir);
+  const parentPathsFile = fs.readdirSync(dir);
 
-  for (const i in parentPathsfile) {
-    let parentPaths = `${dir}/${parentPathsfile[i]}`;
-    allPaths.push(getChildPaths(parentPaths));
-  }
+  parentPathsFile.forEach((el) => {
+    allPaths.push({
+      templateName: el,
+      files: getChildPaths(resolve(dir, el)),
+    });
+  });
+
   return allPaths;
 };
 
