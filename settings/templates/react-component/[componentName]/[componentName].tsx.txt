@@ -6,7 +6,7 @@ type Props = {
 
 const {{toCamelCase(componentName)}}: React.FC<Props> = ({}) => {
 
-  return ();
+  return ({{content}});
 };
 const
 export default memo({{toCamelCase(componentName)}});

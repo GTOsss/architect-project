@@ -17,19 +17,25 @@ const parseFiles = (templates) => {
   const parsedTemplateMap = {};
 
   templates.forEach(({ files, script: templateScript, templateName }) => {
+    const parsedFiles = [];
+
     files.forEach((path) => {
-      const currentFile = fs.readFileSync(path, 'utf8');
-      const results = reExec(currentFile, reInterpolation);
-      parsedTemplates.push({
+      const content = fs.readFileSync(path, 'utf8');
+      const parsed = reExec(content, reInterpolation);
+      parsedFiles.push({
         file: path,
-        parseResult: results,
-        templateScript,
+        parsed,
+        content,
       });
     });
+
+    parsedTemplateMap[templateName] = {
+      parsedFiles,
+      templateScript,
+    };
   });
 
-  console.log(parsedTemplates);
-  return parsedTemplates;
+  return parsedTemplateMap;
 };
 
 module.exports = parseFiles;
