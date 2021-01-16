@@ -5,9 +5,9 @@ const createExecutingFile = require('./createExecutingFile');
 const methodsRequire = require('../../settings/methods');
 methodsRequire['toCamelCase']('getfunctions');
 
-const methods = fs.readFileSync('C:/Users/mail/Desktop/timoha/arhitect/architect/settings/methods.js', {
-  encoding: 'utf8',
-});
+// const methods = fs.readFileSync('C:/Users/mail/Desktop/timoha/arhitect/architect/settings/methods.js', {
+//   encoding: 'utf8',
+// });
 
 const reGetVariable = new RegExp('(?<=\\().+(?=\\))', 'g');
 const reGetFunction = new RegExp('.+(?=\\()', 'g');

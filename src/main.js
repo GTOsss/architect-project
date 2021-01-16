@@ -1,10 +1,12 @@
-const { getObjectWithPaths, matchFunctions } = require('./functions');
+const { resolve } = require('path');
+const { getObjectWithPaths, parseFiles } = require('./functions');
 
-const templatesPath = 'C:/Users/mail/Desktop/timoha/arhitect/architect/settings/templates';
+const templatesPath = resolve(__dirname, '../settings/templates');
 
-const objectWithPaths = getObjectWithPaths(templatesPath);
- //console.log(objectWithPaths);
+const templates = getObjectWithPaths(templatesPath);
+//console.log(objectWithPaths);
 
-const matchedFunctions = matchFunctions(objectWithPaths);
+const parseResult = parseFiles(templates);
+
 //console.log(matchedFunctions);
 // Второй таск

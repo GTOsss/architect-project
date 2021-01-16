@@ -8,15 +8,10 @@ const getObjectWithPaths = (dir) => {
   const arrOfObject = [];
 
   for (let i in allFilesPaths) {
-    const obj = {
-      files: [],
-      script: '',
-    };
+    const { files, templateName } = allFilesPaths[i];
+    const script = allScriptPaths[i];
 
-    obj.files = allFilesPaths[i];
-    obj.script = allScriptPaths[i].toString();
-
-    arrOfObject.push(obj);
+    arrOfObject.push({ templateName, files, script });
   }
   return arrOfObject;
 };
