@@ -8,7 +8,12 @@ const toKebabCase = (str) => {
   return _.kebabCase(str);
 };
 
+const toLowerCamelCase = (str) => {
+  return _.lowerFirst(_.camelCase(str));
+};
+
 module.exports = {
   toCamelCase,
   toKebabCase,
+  toLowerCamelCase,
 };

@@ -1,5 +1,4 @@
 const fs = require('file-system');
-const methods = require('../../settings/methods');
 const config = require('../../settings/config');
 
 const reInterpolation = new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
