@@ -2,12 +2,12 @@ const requireFunction = require('./requireFunction');
 const fs = require('file-system');
 const { resolve } = require('path');
 
-const generateTemplateFiles = (templateValue, variables) => {
-  const reGetFunction = new RegExp('.+(?=\\()', 'g');
+const reGetFunction = new RegExp('.+(?=\\()', 'g');
 
-  const inputPath = resolve(__dirname, '../../settings/templates');
-  const outputPath = resolve(__dirname, `../../output/`);
+const inputPath = resolve(__dirname, '../../settings/templates');
+const outputPath = resolve(__dirname, `../../output/`);
 
+const generateTemplateFiles = (templateValue, variables, template) => {
   const { parsedFiles, templateScript } = templateValue;
 
   parsedFiles.forEach((el) => {
@@ -19,7 +19,7 @@ const generateTemplateFiles = (templateValue, variables) => {
     parsedFunctions.forEach((el) => {
       const functionInterpolation = el.str.match(reGetFunction)[0];
 
-      const resultVariable = requireFunction(functionInterpolation, variables, templateScript);
+      const resultVariable = requireFunction(functionInterpolation, variables, templateScript, template);
       const functionSting = `{{${el.str}}}`;
 
       parsedContent = parsedContent.replace(functionSting, resultVariable);
@@ -33,7 +33,7 @@ const createFilesByTemplate = (templateMap, sourceMap) => {
   Object.entries(templateMap).forEach(([template, templateValue]) => {
     Object.entries(sourceMap).forEach(([key, value]) => {
       if (key === template) {
-        generateTemplateFiles(templateValue, value);
+        generateTemplateFiles(templateValue, value, template);
       }
     });
   });
