@@ -1,0 +1,4 @@
+import ТимохинКомпонент, { Props } from './тимохин-компонент';
+
+export default toCamelCase(componentName);
+export { Props as ТимохинКомпонентProps };

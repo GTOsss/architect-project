@@ -1,32 +1,42 @@
-const evalFile = require('./evalFile');
+const requireFunction = require('./requireFunction');
+const fs = require('file-system');
+const { resolve } = require('path');
 
-const generateTemplateFiles = (parsedFiles, variables) => {
+const generateTemplateFiles = (templateValue, variables) => {
   const reGetFunction = new RegExp('.+(?=\\()', 'g');
+
+  const inputPath = resolve(__dirname, '../../settings/templates');
+  const outputPath = resolve(__dirname, `../../output/`);
+
+  const { parsedFiles, templateScript } = templateValue;
 
   parsedFiles.forEach((el) => {
     const parsedFunctions = el.parsed;
     let parsedContent = el.content;
 
+    const filePath = el.file.replace(inputPath, outputPath);
+
     parsedFunctions.forEach((el) => {
       const functionInterpolation = el.str.match(reGetFunction)[0];
 
-      const resultVariable = evalFile(functionInterpolation, variables);
+      const resultVariable = requireFunction(functionInterpolation, variables, templateScript);
       const functionSting = `{{${el.str}}}`;
 
       parsedContent = parsedContent.replace(functionSting, resultVariable);
     });
-    console.log(parsedContent);
+
+    fs.writeFileSync(filePath, parsedContent);
   });
 };
 
-const functionCall = (template, parsedFiles) => {
-  const variables = { 'react-component': 'тимохин компонент', store: 'тимохин стор' };
-
-  Object.entries(variables).forEach(([key, value]) => {
-    if (key == template) {
-      generateTemplateFiles(parsedFiles, value);
-    }
+const createFilesByTemplate = (templateMap, sourceMap) => {
+  Object.entries(templateMap).forEach(([template, templateValue]) => {
+    Object.entries(sourceMap).forEach(([key, value]) => {
+      if (key === template) {
+        generateTemplateFiles(templateValue, value);
+      }
+    });
   });
 };
 
-module.exports = { generateTemplateFiles, functionCall };
+module.exports = createFilesByTemplate;
