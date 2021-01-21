@@ -1,8 +1,8 @@
-const getSources = (dirName) => {
+const getSources = ({ dirName }) => {
   // console.log('getSources dirName');
 };
 
-const createFile = () => {};
+const createFile = ({}) => {};
 
 module.exports = {
   getSources,
