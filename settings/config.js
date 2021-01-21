@@ -3,4 +3,7 @@ module.exports = {
   replace: false,
   itrStart: '{{',
   itrEnd: '}}',
+  itrFileNameStart: '[',
+  itrFileNameEnd: ']',
+  templateExt: '.txt',
 };
