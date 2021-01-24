@@ -1,30 +1,20 @@
 module.exports = {
-  aliases: {
-    'react-component': 'rc',
-    store: 's',
-    index: 'i',
-  },
   map: {
-    'src/components': {
-      icons: 'icons',
-    },
     'src/components/inputs': {
-      index: 'i',
-      button: 'rc',
-      textarea: 'rc',
-      input: 'rc',
-      'input-select': 'rc',
+      button: 'react-component',
+      textarea: 'react-component',
+      input: 'react-component',
+      'input-select': 'react-component',
     },
     'src/components/modals': {
-      index: 'i',
-      base: 'rc',
-      confirm: 'rc',
-      'confirm-remove': 'rc',
+      base: 'react-component',
+      confirm: 'react-component',
+      'confirm-remove': 'react-component',
     },
     'src/components/store': {
-      profile: 's',
-      user: 's',
-      users: 's',
+      profile: 'store',
+      user: 'store',
+      users: 'store',
     },
   },
 };
