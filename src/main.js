@@ -9,5 +9,5 @@ const sourceMapMock = { 'react-component': 'тимохин компонент', 
 const templates = getObjectWithPaths(templatesPath);
 const templateMap = parseFiles(templates);
 
-createFilesByTemplate(templateMap, sourceMapMock);
+// createFilesByTemplate(templateMap, sourceMapMock);
 createFilesBySourceMap(templateMap, sourcesMap.map);

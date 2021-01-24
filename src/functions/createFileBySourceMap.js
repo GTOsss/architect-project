@@ -13,7 +13,7 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template }
     const parsedFunctions = el.parsed;
     let parsedContent = el.content;
 
-    const filePath = generateFilePath({ filePath: el.file, componentName: template, outputPath });
+    const filePath = generateFilePath({ filePath: el.file, componentName: fileName, outputPath });
 
     parsedFunctions.forEach((el) => {
       const functionInterpolation = el.str.match(reGetFunction)[0];

@@ -1,7 +1,8 @@
 module.exports = {
   map: {
     'src/components/inputs': {
-      button: 'react-component',
+      index: 'index',
+      button: { template: 'react-component', sources: 'icons-sprite' },
       textarea: 'react-component',
       input: 'react-component',
       'input-select': 'react-component',

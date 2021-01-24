@@ -8,5 +8,5 @@ const {{toCamelCase(componentName)}}: React.FC<Props> = ({}) => {
 
   return ();
 };
-const
+
 export default memo({{toCamelCase(componentName)}});
