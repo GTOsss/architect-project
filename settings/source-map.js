@@ -5,7 +5,7 @@ module.exports = {
       button: { template: 'react-component', sources: 'icons-sprite' },
       textarea: 'react-component',
       input: 'react-component',
-      'input-select': 'react-component',
+      'input-select': { template: 'react-component', sources: 'icons-sprite' },
     },
     'src/components/modals': {
       base: 'react-component',
@@ -19,3 +19,5 @@ module.exports = {
     },
   },
 };
+
+// button: { template: 'react-component', sources: 'icons-sprite' },
