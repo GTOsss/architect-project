@@ -2,10 +2,11 @@ module.exports = {
   map: {
     'src/components/inputs': {
       index: 'index',
-      button: { template: 'react-component', sources: 'icons-sprite' },
+      button: 'react-component',
       textarea: 'react-component',
       input: 'react-component',
-      'input-select': { template: 'react-component', sources: 'icons-sprite' },
+      'input-select': 'react-component',
+      'svg-icons': { template: 'icons', assets: 'icons-sprite' },
     },
     'src/components/modals': {
       base: 'react-component',
@@ -19,5 +20,3 @@ module.exports = {
     },
   },
 };
-
-// button: { template: 'react-component', sources: 'icons-sprite' },

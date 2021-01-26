@@ -18,7 +18,12 @@ const generateTemplateFiles = ({ templateValue, variables, template }) => {
     parsedFunctions.forEach((el) => {
       const functionInterpolation = el.str.match(reGetFunction)[0];
 
-      const resultVariable = requireFunction(functionInterpolation, variables, templateScript, template);
+      const resultVariable = requireFunction({
+        functionName: functionInterpolation,
+        variableName: variables,
+        templateScript,
+        template,
+      });
       const functionSting = `{{${el.str}}}`;
 
       parsedContent = parsedContent.replace(functionSting, resultVariable);

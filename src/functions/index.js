@@ -6,7 +6,7 @@ const requireFunction = require('./requireFunction');
 const createFilesByTemplate = require('./createFilesByTemplate');
 const generateFilePath = require('./generateFilePath');
 const createFilesBySourceMap = require('./createFileBySourceMap');
-const getMapCurrentComponent = require('./getMapCurrentComponent');
+const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 
 module.exports = {
   getFilesPath,
@@ -17,5 +17,5 @@ module.exports = {
   createFilesByTemplate,
   generateFilePath,
   createFilesBySourceMap,
-  getMapCurrentComponent,
+  getSectionFromSourceMap,
 };

@@ -1,12 +1,3 @@
-import React, { memo } from 'react';
-import styles from './styles.module.scss'
-
-type Props = {
-}
-
-const {{toCamelCase(componentName)}}: React.FC<Props> = ({}) => {
-
-  return ();
+.wrap {
+  background: black;
 };
-
-export default memo({{toCamelCase(componentName)}});

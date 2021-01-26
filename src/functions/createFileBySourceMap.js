@@ -1,7 +1,7 @@
 const fs = require('file-system');
 const requireFunction = require('./requireFunction');
 const generateFilePath = require('./generateFilePath');
-const getMapCurrentComponent = require('./getMapCurrentComponent');
+const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const { resolve } = require('path');
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
@@ -20,13 +20,13 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
     parsedFunctions.forEach((el) => {
       const functionInterpolation = el.str.match(reGetFunction)[0];
 
-      const resultVariable = requireFunction(
-        functionInterpolation,
-        fileName,
+      const resultVariable = requireFunction({
+        functionName: functionInterpolation,
+        variableName: fileName,
         templateScript,
         template,
-        mapCurrentComponent,
-      );
+        sectionFromSourceMap: mapCurrentComponent,
+      });
       const functionSting = `{{${el.str}}}`;
 
       parsedContent = parsedContent.replace(functionSting, resultVariable);
@@ -38,7 +38,7 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
 
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   Object.entries(sourceMap).forEach(([sourcePath, components]) => {
-    let mapCurrentComponent = getMapCurrentComponent({ sourcePath, components });
+    let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components });
 
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {

@@ -14,7 +14,7 @@ const mockSources = [
 const main = () => {
   const sources = getSources('icons-sprite');
   //createFile('');
- // console.log(`main started`);
+  // console.log(`main started`);
 };
 main();
 module.exports = {
