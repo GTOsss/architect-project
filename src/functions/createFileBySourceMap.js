@@ -3,6 +3,7 @@ const requireFunction = require('./requireFunction');
 const generateFilePath = require('./generateFilePath');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const { resolve } = require('path');
+const config = require('../../settings/config');
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 
@@ -32,7 +33,15 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
       parsedContent = parsedContent.replace(functionSting, resultVariable);
     });
 
-    fs.writeFileSync(filePath, parsedContent);
+    if (config.replace === false) {
+      console.log(filePath, fs.existsSync(filePath));
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, parsedContent);
+      }
+    }
+    if (config.replace === true) {
+      fs.writeFileSync(filePath, parsedContent);
+    }
   });
 };
 
@@ -42,7 +51,9 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
 
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {
-        if (value === template) {
+        const valueComponent = value.template ? value.template : value;
+
+        if (valueComponent === template) {
           generateTemplateFiles({ sourcePath, fileName: key, templateValue, template, mapCurrentComponent });
         }
       });

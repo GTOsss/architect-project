@@ -1,6 +1,6 @@
 module.exports = {
   outputPath: 'output',
-  replace: false,
+  replace: true,
   itrStart: '{{',
   itrEnd: '}}',
   itrFileNameStart: '[',

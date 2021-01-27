@@ -3,10 +3,10 @@ const getObjectWithPaths = require('./getObjectWithPaths');
 const getScriptPath = require('./getScriptPath');
 const parseFiles = require('./parseFiles');
 const requireFunction = require('./requireFunction');
-const createFilesByTemplate = require('./createFilesByTemplate');
 const generateFilePath = require('./generateFilePath');
 const createFilesBySourceMap = require('./createFileBySourceMap');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
+const writeFile = require('./writeFile');
 
 module.exports = {
   getFilesPath,
@@ -14,8 +14,8 @@ module.exports = {
   getScriptPath,
   parseFiles,
   requireFunction,
-  createFilesByTemplate,
   generateFilePath,
   createFilesBySourceMap,
   getSectionFromSourceMap,
+  writeFile,
 };
