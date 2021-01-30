@@ -13,22 +13,23 @@ src/components
 
 src/components/inputs
 - [i]
-- [rc] button
-- [rc] textarea
-- [rc] input
-- [rc] input-select
+- [rc] button,
+- [rc] textarea,
+- [rc] input,
+- [rc] input-select,
 
 src/components/modals
 - [i]
-- [rc] base
-- [rc] confirm
-- [rc] confirm remove
+- [rc] base,
+- [rc] confirm,
+- [rc] confirm-remove,
 
 src/components/profile/forms
-- [rc] main
-- [rc] avatar
+- [rc] main,
+- [rc] avatar,
 
 src/store
-- [s] user
-- [s] forms
+- [s] user,
+- [s] forms,
 }
+
