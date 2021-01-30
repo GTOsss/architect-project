@@ -1,12 +1,15 @@
-aliases {
-  icons,
-  index: i,
-  rc: react-component,
-  s: store,
-}
+// $ = assets
+// [template]
 
+aliases {
+  rc: 'react-component',
+  s: 'store',
+  ix: 'index',
+  i: 'icons',
+}
+map {
 src/components
-- [icons] icons, assets: icons-sprite
+- [icons] icons, $icons-sprite
 
 src/components/inputs
 - [i]
@@ -28,3 +31,4 @@ src/components/profile/forms
 src/store
 - [s] user
 - [s] forms
+}

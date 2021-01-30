@@ -55,14 +55,15 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
   });
 };
 
-const createFilesBySourceMap = (templateMap, sourceMap, aliases) => {
-  Object.entries(sourceMap).forEach(([sourcePath, components]) => {
+const createFilesBySourceMap = (templateMap, sourceMap) => {
+  const { map, aliases } = sourceMap;
+  Object.entries(map).forEach(([sourcePath, components]) => {
     let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components });
 
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {
         let valueComponent = value.template ? value.template : value;
-        // valueComponent = aliases[valueComponent];
+        valueComponent = aliases[valueComponent];
 
         const assetsKey = value && value.assets;
         let assets = assetsKey ? parseAssets()[assetsKey] : null;

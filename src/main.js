@@ -7,8 +7,8 @@ const templatesPath = resolve(__dirname, '../settings/templates');
 const templates = getObjectWithPaths(templatesPath);
 const templateMap = parseFiles(templates);
 
-createFilesBySourceMap(templateMap, sourcesMap.map, sourcesMap.aliases);
+createFilesBySourceMap(templateMap, sourcesMap);
 
-const path = require('path');
-const appDir = path.dirname(require.main.filename);
-console.log(appDir);
+// const path = require('path');
+// const appDir = path.dirname(require.main.filename);
+// console.log(appDir);

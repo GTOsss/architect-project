@@ -1,23 +1,12 @@
 const { toCamelCase, toKebabCase } = require('../../methods');
 
-// mock data {
-const mockMapSourceCurrentSection = {
-  path: 'src/inputs',
-  content: {
-    i: ['index'],
-    rc: ['button', 'textarea', 'input', 'input-select'],
-  },
-};
-// }
-
 const createImportLine = (componentName) =>
   `import ${toCamelCase(componentName)} from '${toKebabCase(componentName)}';\n`;
 
 const createExportLine = (componentNames) => `export { ${componentNames.map(toCamelCase).join()} };`;
 
-// сюда должен придти объект вида mockMeta из source-map
 const getContent = (_, { sectionFromSourceMap }) => {
-  const componentNames = sectionFromSourceMap.content['react-component'];
+  const componentNames = sectionFromSourceMap.content['rc'];
 
   const fileLines = componentNames.map(createImportLine);
   fileLines.push('\n');
