@@ -5,7 +5,7 @@ const createImportLine = (componentName) =>
 
 const createExportLine = (componentNames) => `export { ${componentNames.map(toCamelCase).join()} };`;
 
-const getContent = (_, { sectionFromSourceMap }) => {
+const getContent = (_, { sectionFromSourceMap, params }) => {
   const componentNames = sectionFromSourceMap.content['rc'];
 
   const fileLines = componentNames.map(createImportLine);

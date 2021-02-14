@@ -2,27 +2,55 @@ const { resolve } = require('path');
 const fs = require('file-system');
 
 const sourceMapTxtPath = resolve(__dirname, '../../settings/source-map.txt');
-
 const content = fs.readFileSync(sourceMapTxtPath, 'utf8');
 
-const reParentObjects = new RegExp('\\w.+\\s{', 'gmi');
-const reAssets = new RegExp('\\$.+', 'gmi');
-const reTemplate = new RegExp('\\[.+]', 'gmi');
-const reComponent = new RegExp(']\\s(\\w.+,)', 'gmi');
-const reDir = new RegExp('src.+', 'gmi');
+const reInsides = new RegExp('(?<={)(\\n|.+)+?(?=})', 'gmi');
+const reComponent = new RegExp('(?<=\\]).+(?=,)', 'gmi');
+const reTemplate = new RegExp('(?<=\\[).+(?=])', 'gmi');
 
-const parentObjects = content.match(reParentObjects).map((el) => el.replace(' {', ''));
+const insidesBrackets = content.match(reInsides);
 
-const assets = content.match(reAssets);
-const template = content.match(reTemplate);
-const component = content.match(reComponent).map((el) => el.replace('] ', '').replace(',', ''));
-const dir = content.match(reDir);
+const aliases = insidesBrackets[0].slice(1, -1);
+const map = insidesBrackets[1].slice(1, -1);
 
-for (let i = 0; i < parentObjects.length; i++) {
-  const reSection =
-    parentObjects[i + 1] === undefined
-      ? new RegExp(`${parentObjects[i]}([\\s\\S]+?)}`, 'gmi')
-      : new RegExp(`${parentObjects[i]}([\\s\\S]+?)${parentObjects[i + 1]}`, 'gmi');
+const blocks = map.split('\n\n');
+const aliasesLines = aliases.split('\n');
 
-  const section = content.match(reSection);
-}
+const resultConfig = {};
+const aliasesObject = {};
+
+blocks.forEach((block) => {
+  const blockLines = block.split('\n');
+  const srcPath = blockLines[0];
+  const templateLines = blockLines.splice(1);
+
+  templateLines.forEach((line) => {
+    const template = line.match(reTemplate)[0];
+
+    const component = line.match(reComponent)[0].split(',');
+    const templateParams = {};
+
+    component.forEach((el, i) => {
+      if (i === 0) {
+        templateParams['template'] = template;
+      } else {
+        const [key, value] = el.split(':');
+        const trimKey = key.trim();
+
+        templateParams[trimKey] = value.replace(/'/gim, '').trim();
+      }
+    });
+    resultConfig[srcPath] = templateParams;
+  });
+});
+
+aliasesLines.forEach((line) => {
+  const aliasesMin = line.split(':')[0].trim();
+
+  aliasesObject[aliasesMin] = line.split(':')[1].replace(" '", '').replace("',", '');
+});
+console.log(aliasesObject, resultConfig);
+module.exports = {
+  aliases: aliasesObject,
+  map: resultConfig,
+};

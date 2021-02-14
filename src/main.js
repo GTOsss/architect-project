@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const { getObjectWithPaths, parseFiles, createFilesBySourceMap } = require('./functions');
-const sourcesMap = require('../settings/source-map');
+const sourcesMap = require('./functions/parseSourceMap');
 
 const templatesPath = resolve(__dirname, '../settings/templates');
 

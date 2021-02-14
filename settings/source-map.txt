@@ -9,17 +9,17 @@ aliases {
 }
 map {
 src/components
-- [icons] icons, $icons-sprite
+- [icons] icons, assets: 'icons-sprite',
 
 src/components/inputs
-- [i]
+- [ix] index, assets: 'icons-sprite', test: 2,
 - [rc] button,
 - [rc] textarea,
 - [rc] input,
 - [rc] input-select,
 
 src/components/modals
-- [i]
+- [ix] index,
 - [rc] base,
 - [rc] confirm,
 - [rc] confirm-remove,
