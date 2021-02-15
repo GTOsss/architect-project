@@ -7,6 +7,7 @@ const generateFilePath = require('./generateFilePath');
 const createFilesBySourceMap = require('./createFileBySourceMap');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const writeFile = require('./writeFile');
+const startEsLint = require('./startESLint');
 
 module.exports = {
   getFilesPath,
@@ -18,4 +19,5 @@ module.exports = {
   createFilesBySourceMap,
   getSectionFromSourceMap,
   writeFile,
+  startEsLint,
 };

@@ -5,7 +5,7 @@ const sourceMapTxtPath = resolve(__dirname, '../../settings/source-map.txt');
 const content = fs.readFileSync(sourceMapTxtPath, 'utf8');
 
 const reInsides = new RegExp('(?<={)(\\n|.+)+?(?=})', 'gmi');
-const reComponent = new RegExp('(?<=\\]).+(?=,)', 'gmi');
+const reComponent = new RegExp('(?<=]).+(?=,)', 'gmi');
 const reTemplate = new RegExp('(?<=\\[).+(?=])', 'gmi');
 
 const insidesBrackets = content.match(reInsides);
@@ -49,7 +49,7 @@ aliasesLines.forEach((line) => {
 
   aliasesObject[aliasesMin] = line.split(':')[1].replace(" '", '').replace("',", '');
 });
-console.log(aliasesObject, resultConfig);
+
 module.exports = {
   aliases: aliasesObject,
   map: resultConfig,

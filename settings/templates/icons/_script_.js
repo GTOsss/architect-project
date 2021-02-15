@@ -1,7 +1,7 @@
 const minimizeSVG = (svg) => svg;
 
 const getIndexContent = () => {
-  return 'export file';
+  return 'const t = "t"';
 };
 
 const main = (_, { assets, writeFile }) => {

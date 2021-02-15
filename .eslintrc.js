@@ -2,9 +2,11 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
+    sourceType: 'module',
   },
-  extends: ['prettier'],
-  plugins: ['prettier'],
+  parser: '@typescript-eslint/parser',
+  extends: ['prettier', 'prettier/@typescript-eslint'],
+  plugins: ['prettier', '@typescript-eslint'],
   rules: {
     'no-param-reassign': 'off',
     'prefer-destructuring': 'off',
