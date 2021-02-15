@@ -1,7 +1,17 @@
 const { resolve } = require('path');
-const { getObjectWithPaths, parseFiles, createFilesBySourceMap } = require('./functions');
-const sourcesMap = require('./functions/parseSourceMap');
+const fs = require('file-system');
+const { getObjectWithPaths, parseFiles, createFilesBySourceMap, startEsLint } = require('./functions');
+const eslintConfig = require('../.eslintrc.js');
 
+const sourcesMapTxtPath = resolve(__dirname, '../settings/source-map.txt');
+const sourcesMapJsPath = resolve(__dirname, '../settings/source-map.js');
+const outputPath = resolve(__dirname, '../output/**/*[.tsx, .ts, .js, .jsx,]');
+
+// switcher
+const ifExistSourceMapPath = fs.existsSync(sourcesMapTxtPath);
+const sourcesMap = ifExistSourceMapPath ? require('./functions/parseSourceMap') : require(sourcesMapJsPath);
+
+// main
 const templatesPath = resolve(__dirname, '../settings/templates');
 
 const templates = getObjectWithPaths(templatesPath);
@@ -9,6 +19,8 @@ const templateMap = parseFiles(templates);
 
 createFilesBySourceMap(templateMap, sourcesMap);
 
-// const path = require('path');
-// const appDir = path.dirname(require.main.filename);
-// console.log(appDir);
+// start EsLint
+startEsLint({ eslintConfig, outputPath }).catch((error) => {
+  process.exitCode = 1;
+  console.error(error);
+});
