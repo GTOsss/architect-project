@@ -1,8 +1,9 @@
 const _ = require('lodash');
 const { resolve } = require('path');
 const getWriteFile = require('./writeFile');
-const config = require('../../settings/config');
-const methods = require('../../settings/methods');
+const appRoot = process.cwd();
+const config = require(`${appRoot}/settings/config.js`);
+const methods = require(config.methodsPath);
 
 const requireFunction = ({ functionName, variableName, templateScript, template, sectionFromSourceMap, assets }) => {
   try {

@@ -1,17 +1,20 @@
+const appRoot = process.cwd();
 const fs = require('file-system');
 const requireFunction = require('./requireFunction');
 const generateFilePath = require('./generateFilePath');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const parseAssets = require('./parseAssets');
 const { resolve } = require('path');
-const config = require('../../settings/config');
+const config = require(`${appRoot}/settings/config.js`);
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 
 const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, mapCurrentComponent, assets }) => {
   const { parsedFiles, templateScript } = templateValue;
-  const outputPath = resolve(__dirname, `../../output/${sourcePath}/`);
-  const inputPath = resolve(__dirname, `../../settings/templates/${template}`);
+
+  const outputPath = resolve(config.outputPath, sourcePath);
+
+  const inputPath = resolve(config.templatesPath, template);
 
   parsedFiles.forEach((el) => {
     const parsedFunctions = el.parsed;

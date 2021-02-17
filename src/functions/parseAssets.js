@@ -1,9 +1,11 @@
-const { resolve, basename } = require('path');
+const appRoot = process.cwd();
+const config = require(`${appRoot}/settings/config.js`);
+const { basename } = require('path');
 const fs = require('file-system');
 const getFilesPath = require('./getFilesPath');
 
 const parseAssets = () => {
-  const assetsPath = resolve(__dirname, '../../settings/assets');
+  const assetsPath = config.assetsPath;
 
   const allFilesPaths = getFilesPath(assetsPath);
 

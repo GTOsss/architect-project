@@ -1,7 +1,8 @@
-const { resolve } = require('path');
 const fs = require('file-system');
+const appRoot = process.cwd();
+const config = require(`${appRoot}/settings/config.js`);
 
-const sourceMapTxtPath = resolve(__dirname, '../../settings/source-map.txt');
+const sourceMapTxtPath = config.sourcesMapTxtPath;
 const content = fs.readFileSync(sourceMapTxtPath, 'utf8');
 
 const reInsides = new RegExp('(?<={)(\\n|.+)+?(?=})', 'gmi');
