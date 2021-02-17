@@ -11,16 +11,20 @@ const outputPath = resolve(__dirname, '../output/**/*[.tsx, .ts, .js, .jsx,]');
 const ifExistSourceMapPath = fs.existsSync(sourcesMapTxtPath);
 const sourcesMap = ifExistSourceMapPath ? require('./functions/parseSourceMap') : require(sourcesMapJsPath);
 
-// main
+//arc
 const templatesPath = resolve(__dirname, '../settings/templates');
 
-const templates = getObjectWithPaths(templatesPath);
-const templateMap = parseFiles(templates);
+const arc = () => {
+  const templates = getObjectWithPaths(templatesPath);
+  const templateMap = parseFiles(templates);
 
-createFilesBySourceMap(templateMap, sourcesMap);
+  createFilesBySourceMap(templateMap, sourcesMap);
 
-// start EsLint
-startEsLint({ eslintConfig, outputPath }).catch((error) => {
-  process.exitCode = 1;
-  console.error(error);
-});
+  //start EsLint
+  startEsLint({ eslintConfig, outputPath }).catch((error) => {
+    process.exitCode = 1;
+    console.error(error);
+  });
+};
+
+module.exports = arc;
