@@ -1,4 +1,5 @@
-const config = require('../../settings/config');
+const appRoot = process.cwd();
+const config = require(`${appRoot}/settings/config.js`);
 
 const reGetFileName = new RegExp(`${config.itrFileNameStart}[a-z]+${config.itrFileNameEnd}`, 'gi');
 

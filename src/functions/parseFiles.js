@@ -1,5 +1,6 @@
 const fs = require('file-system');
-const config = require('../../settings/config');
+const appRoot = process.cwd();
+const config = require(`${appRoot}/settings/config.js`);
 
 const reInterpolation = new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
 
