@@ -1,6 +1,9 @@
 {
-  "name": "architect",
-  "version": "1.0.0",
+  "bin": {
+    "arc": "src/cli.js"
+  },
+  "name": "architect-project",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.1.0",
     "file-system": "^2.2.2",
+    "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "path": "^0.12.7"
   },
