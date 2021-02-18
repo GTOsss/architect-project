@@ -22,9 +22,9 @@ module.exports = {
       'confirm-remove': 'rc',
     },
     'src/components/store': {
-      profile: 'store',
-      user: 'store',
-      users: 'store',
+      profile: 's',
+      user: 's',
+      users: 's',
     },
   },
 };

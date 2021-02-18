@@ -6,7 +6,7 @@ const eslintConfig = require(config.eslintConfigPath);
 
 // switcher
 const ifExistSourceMapPath = fs.existsSync(config.sourcesMapTxtPath);
-const sourcesMap = ifExistSourceMapPath ? require(config.parseSourceMapPath) : require(config.sourcesMapJsPath);
+const sourcesMap = ifExistSourceMapPath ? require('./functions/parseSourceMap') : require(config.sourcesMapJsPath);
 
 //arc
 
@@ -22,5 +22,5 @@ const arc = () => {
     console.error(error);
   });
 };
-
+arc();
 module.exports = arc;
