@@ -1,11 +1,11 @@
 #!/usr/bin/env node
+const packageJson = require('../package.json');
 const commander = require('commander'),
-  { prompt } = require('inquirer'),
   chalk = require('chalk');
 const arc = require('./main');
 
 // cli
-commander.version('1.0.0').description('Configuration files creator.');
+commander.version(packageJson.version).description('Configuration files creator.');
 
 commander
   .command('start')
