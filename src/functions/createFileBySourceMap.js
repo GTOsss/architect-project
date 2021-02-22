@@ -48,12 +48,19 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
       assets,
     });
 
-    if (!config.replace) {
-      if (!fs.existsSync(filePath)) {
+    // if (!config.replace) {
+    //   if (!fs.existsSync(filePath)) {
+    //     fs.writeFileSync(filePath, parsedContent);
+    //   }
+    // }
+    // if (config.replace) {
+    //   fs.writeFileSync(filePath, parsedContent);
+    // }
+    if (fs.existsSync(filePath)) {
+      if (config.replace) {
         fs.writeFileSync(filePath, parsedContent);
       }
-    }
-    if (config.replace) {
+    } else {
       fs.writeFileSync(filePath, parsedContent);
     }
   });

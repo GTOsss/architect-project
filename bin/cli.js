@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 
 const packageJson = require('../package.json');
+const fs = require('file-system');
 const commander = require('commander'),
   { prompt } = require('inquirer'),
   chalk = require('chalk');
-const { arcWithEslint } = require('../src/main');
-const { changeOutput, changeOutputWithEslint, startWatcher, arcStart } = require('../src/functions');
+const { startWatcherWithEslint, startWatcher, arcStart, arcStartWithEslint } = require('../src/functions');
+const configPath = require('../src/configPath');
+
+// switcher
+const ifExistSourceMapPath = fs.existsSync(configPath.sourcesMapTxtPath);
+const sourcesMap = ifExistSourceMapPath
+  ? require('../src/functions/parseSourceMap')
+  : require(configPath.sourcesMapJsPath);
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
@@ -20,9 +27,10 @@ commander
   .description('Start architect-project generation with EsLint')
   .action(() => {
     if (options.watch) {
-      startWatcher(changeOutputWithEslint);
+      arcStartWithEslint({ str: 'Starting architect with EsLint & watcher...', sourcesMap });
+      startWatcherWithEslint();
     } else {
-      arcWithEslint();
+      arcStartWithEslint({ str: 'Starting architect with EsLint...', sourcesMap });
     }
 
     console.log(chalk.green('Success'));
@@ -34,10 +42,10 @@ commander
   .description('Start architect-project generation')
   .action(() => {
     if (options.watch) {
-      arcStart('Starting architect...');
-      startWatcher(changeOutput);
+      arcStart({ str: 'Starting architect with watcher...', sourcesMap });
+      startWatcher();
     } else {
-      arcStart('Starting architect...');
+      arcStart({ str: 'Starting architect...', sourcesMap });
     }
     console.log(chalk.green('Success'));
   });
