@@ -6,15 +6,16 @@ const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const parseAssets = require('./parseAssets');
 const { resolve } = require('path');
 const config = require(`${appRoot}/settings/config.js`);
+const configPath = require('../configPath');
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 
 const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, mapCurrentComponent, assets }) => {
   const { parsedFiles, templateScript } = templateValue;
 
-  const outputPath = resolve(config.outputPath, sourcePath);
+  const outputPath = resolve(configPath.outputPath, sourcePath);
 
-  const inputPath = resolve(config.templatesPath, template);
+  const inputPath = resolve(configPath.templatesPath, template);
 
   parsedFiles.forEach((el) => {
     const parsedFunctions = el.parsed;
@@ -47,12 +48,19 @@ const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, 
       assets,
     });
 
-    if (!config.replace) {
-      if (!fs.existsSync(filePath)) {
+    // if (!config.replace) {
+    //   if (!fs.existsSync(filePath)) {
+    //     fs.writeFileSync(filePath, parsedContent);
+    //   }
+    // }
+    // if (config.replace) {
+    //   fs.writeFileSync(filePath, parsedContent);
+    // }
+    if (fs.existsSync(filePath)) {
+      if (config.replace) {
         fs.writeFileSync(filePath, parsedContent);
       }
-    }
-    if (config.replace) {
+    } else {
       fs.writeFileSync(filePath, parsedContent);
     }
   });

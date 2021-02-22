@@ -1,11 +1,10 @@
-const appRoot = process.cwd();
-const config = require(`${appRoot}/settings/config.js`);
 const { basename } = require('path');
 const fs = require('file-system');
+const configPath = require('../configPath');
 const getFilesPath = require('./getFilesPath');
 
 const parseAssets = () => {
-  const assetsPath = config.assetsPath;
+  const assetsPath = configPath.assetsPath;
 
   const allFilesPaths = getFilesPath(assetsPath);
 
