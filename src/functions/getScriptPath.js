@@ -1,7 +1,6 @@
-const appRoot = process.cwd();
 const fs = require('file-system');
 const { resolve } = require('path');
-const config = require(`${appRoot}/settings/config.js`);
+const configPath = require('../configPath');
 
 const getScriptPath = (dir) => {
   const allScripts = [];
@@ -9,7 +8,7 @@ const getScriptPath = (dir) => {
   parentPathsFile.forEach((templateDir) => {
     let script = null;
     try {
-      const scriptPath = resolve(config.templatesPath, `${templateDir}/_script_`);
+      const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
       script = require(scriptPath);
     } catch (e) {}
     allScripts.push(script);

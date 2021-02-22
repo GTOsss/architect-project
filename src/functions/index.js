@@ -8,6 +8,9 @@ const createFilesBySourceMap = require('./createFileBySourceMap');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const writeFile = require('./writeFile');
 const startEsLint = require('./startESLint');
+const arcStart = require('./arcStart');
+const startWatcher = require('./startWatcher');
+const { changeOutput, changeOutputWithEslint } = require('./changeSourceMapHandler');
 
 module.exports = {
   getFilesPath,
@@ -20,4 +23,8 @@ module.exports = {
   getSectionFromSourceMap,
   writeFile,
   startEsLint,
+  arcStart,
+  changeOutput,
+  changeOutputWithEslint,
+  startWatcher,
 };

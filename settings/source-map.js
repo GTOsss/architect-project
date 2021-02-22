@@ -24,7 +24,9 @@ module.exports = {
     'src/components/store': {
       profile: 's',
       user: 's',
-      users: 's',
+      admin: 's',
+      force: 's',
+      new1: 's',
     },
   },
 };

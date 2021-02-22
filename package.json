@@ -1,23 +1,44 @@
 {
-  "bin": {
-    "arc": "src/cli.js"
-  },
   "name": "architect-project",
-  "version": "1.0.4",
-  "description": "",
+  "version": "1.0.29",
+  "bin": {
+    "arc": "./bin/cli.js"
+  },
+  "preferGlobal": true,
+  "description": "A flexible template generator for any project",
   "main": "index.js",
   "scripts": {
     "gen": "node src/main.js",
     "playGround": "node src/functions/playGround.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:circular": "dpdm src/** --exclude node_modules  --tree false --warning false"
   },
-  "author": "",
+  "author": "Yaroslav Semenov semyarvlad@gmail.com",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
+    "chokidar": "^3.5.1",
     "commander": "^7.1.0",
     "file-system": "^2.2.2",
+    "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "path": "^0.12.7"
-  }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "dpdm": "^3.6.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.5"
+  },
+  "files": [
+    "README.md",
+    "bin",
+    "src"
+  ]
 }

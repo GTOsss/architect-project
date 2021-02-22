@@ -1,26 +1,21 @@
-const appRoot = process.cwd();
-const fs = require('file-system');
-const { getObjectWithPaths, parseFiles, createFilesBySourceMap, startEsLint } = require('./functions');
-const config = require(`${appRoot}/settings/config.js`);
-const eslintConfig = require(config.eslintConfigPath);
-
-// switcher
-const ifExistSourceMapPath = fs.existsSync(config.sourcesMapTxtPath);
-const sourcesMap = ifExistSourceMapPath ? require('./functions/parseSourceMap') : require(config.sourcesMapJsPath);
+const { startEsLint, arcStart } = require('./functions');
+const configPath = require('./configPath');
 
 //arc
-
 const arc = () => {
-  const templates = getObjectWithPaths(config.templatesPath);
-  const templateMap = parseFiles(templates);
+  arcStart('Starting architect...');
+};
 
-  createFilesBySourceMap(templateMap, sourcesMap);
+const arcWithEslint = () => {
+  const eslintConfig = require(configPath.eslintConfigPath);
+
+  arcStart('Starting architect with EsLint...');
 
   //start EsLint
-  startEsLint({ eslintConfig, outputPath: config.esLintOutputPath }).catch((error) => {
+  startEsLint({ eslintConfig, outputPath: configPath.esLintOutputPath }).catch((error) => {
     process.exitCode = 1;
     console.error(error);
   });
 };
-arc();
-module.exports = arc;
+
+module.exports = { arcWithEslint, arc };
