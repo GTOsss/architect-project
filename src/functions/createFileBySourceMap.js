@@ -1,68 +1,14 @@
-const appRoot = process.cwd();
-const fs = require('file-system');
-const requireFunction = require('./requireFunction');
-const generateFilePath = require('./generateFilePath');
 const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const parseAssets = require('./parseAssets');
-const { resolve } = require('path');
-const config = require(`${appRoot}/settings/config.js`);
+const { generateTemplateFiles, generateTemplateFilesWithoutCash } = require('./generateTemplateFiles');
 const configPath = require('../configPath');
+const config = require(configPath.config);
 
-const reGetFunction = new RegExp('.+(?=\\()', 'gm');
+const memoData = {};
 
-const generateTemplateFiles = ({ sourcePath, fileName, templateValue, template, mapCurrentComponent, assets }) => {
-  const { parsedFiles, templateScript } = templateValue;
-
-  const outputPath = resolve(configPath.outputPath, sourcePath);
-
-  const inputPath = resolve(configPath.templatesPath, template);
-
-  parsedFiles.forEach((el) => {
-    const parsedFunctions = el.parsed;
-    let parsedContent = el.content;
-
-    const filePath = generateFilePath({ filePath: el.file, componentName: fileName, outputPath, inputPath });
-
-    parsedFunctions.forEach((el) => {
-      const functionInterpolation = el.str.match(reGetFunction)[0];
-
-      const resultVariable = requireFunction({
-        functionName: functionInterpolation,
-        variableName: fileName,
-        templateScript,
-        template,
-        sectionFromSourceMap: mapCurrentComponent,
-        assets,
-      });
-      const functionSting = `{{${el.str}}}`;
-
-      parsedContent = parsedContent.replace(functionSting, resultVariable);
-    });
-
-    requireFunction({
-      functionName: 'main',
-      variableName: fileName,
-      templateScript,
-      template,
-      sectionFromSourceMap: mapCurrentComponent,
-      assets,
-    });
-
-    // if (!config.replace) {
-    //   if (!fs.existsSync(filePath)) {
-    //     fs.writeFileSync(filePath, parsedContent);
-    //   }
-    // }
-    // if (config.replace) {
-    //   fs.writeFileSync(filePath, parsedContent);
-    // }
-    if (fs.existsSync(filePath)) {
-      if (config.replace) {
-        fs.writeFileSync(filePath, parsedContent);
-      }
-    } else {
-      fs.writeFileSync(filePath, parsedContent);
-    }
+const memoRebuild = (template) => {
+  memoData[template].forEach((templateParams) => {
+    generateTemplateFilesWithoutCash({ ...templateParams, template });
   });
 };
 
@@ -80,11 +26,22 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
         let assets = assetsKey ? parseAssets()[assetsKey] : null;
 
         if (valueComponent === template) {
-          generateTemplateFiles({ sourcePath, fileName: key, templateValue, template, mapCurrentComponent, assets });
+          const params = { sourcePath, fileName: key, templateValue, template, mapCurrentComponent, assets };
+
+          if (memoData[template]) {
+            memoData[template].push(params);
+          } else {
+            memoData[template] = [params];
+          }
+
+          generateTemplateFiles({ config, ...params });
         }
       });
     });
   });
 };
 
-module.exports = createFilesBySourceMap;
+module.exports = {
+  createFilesBySourceMap,
+  memoRebuild,
+};

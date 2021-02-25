@@ -24,7 +24,7 @@ module.exports = {
     'src/components/store': {
       profile: 's',
       user: 's',
-      admin: 's',
+      admin: { template: 's', assets: 'icons-sprite', test: '123' },
       force: 's',
       new1: 's',
       new2: 's',
