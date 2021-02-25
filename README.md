@@ -28,3 +28,8 @@ Start architect-project generation
 ```sh
 arc start | s
 ```
+Use watch mode with flag -w
+
+```sh
+arc e | s -w
+```

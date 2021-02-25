@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const getObjectWithPaths = require('./getObjectWithPaths');
 const parseFiles = require('./parseFiles');
-const createFilesBySourceMap = require('./createFileBySourceMap');
+const { createFilesBySourceMap } = require('./createFileBySourceMap');
 const configPath = require('../configPath');
 const startEsLint = require('./startESLint');
 

@@ -5,7 +5,13 @@ const fs = require('file-system');
 const commander = require('commander'),
   { prompt } = require('inquirer'),
   chalk = require('chalk');
-const { startWatcherWithEslint, startWatcher, arcStart, arcStartWithEslint } = require('../src/functions');
+const {
+  startWatcherWithEslint,
+  startWatcher,
+  arcStart,
+  arcStartWithEslint,
+  watchTemplateSettings,
+} = require('../src/functions');
 const configPath = require('../src/configPath');
 
 // switcher
@@ -29,6 +35,7 @@ commander
     if (options.watch) {
       arcStartWithEslint({ str: 'Starting architect with EsLint & watcher...', sourcesMap });
       startWatcherWithEslint();
+      watchTemplateSettings();
     } else {
       arcStartWithEslint({ str: 'Starting architect with EsLint...', sourcesMap });
     }
@@ -44,6 +51,7 @@ commander
     if (options.watch) {
       arcStart({ str: 'Starting architect with watcher...', sourcesMap });
       startWatcher();
+      watchTemplateSettings();
     } else {
       arcStart({ str: 'Starting architect...', sourcesMap });
     }
