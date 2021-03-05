@@ -33,3 +33,15 @@ module.exports = {
     },
   },
 };
+
+// const map = {
+//   'src/components': {
+//     users: component,
+//   },
+//   'src/types': {
+//     users: types,
+//   },
+//   'src/store': {
+//     users: store,
+//   },
+// };
