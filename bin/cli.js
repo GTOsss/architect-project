@@ -1,10 +1,7 @@
 #!/usr/bin/env node
 
-const packageJson = require('../package.json');
-const fs = require('file-system');
-const commander = require('commander'),
-  { prompt } = require('inquirer'),
-  chalk = require('chalk');
+const commander = require('commander');
+const chalk = require('chalk');
 const {
   startWatcherWithEslint,
   startWatcher,
@@ -12,13 +9,8 @@ const {
   arcStartWithEslint,
   watchTemplateSettings,
 } = require('../src/functions');
-const configPath = require('../src/configPath');
-
-// switcher
-const ifExistSourceMapPath = fs.existsSync(configPath.sourcesMapTxtPath);
-const sourcesMap = ifExistSourceMapPath
-  ? require('../src/functions/parseSourceMap')
-  : require(configPath.sourcesMapJsPath);
+const { getSourceMaps } = require('../src/functions/getSourceMap');
+const packageJson = require('../package.json');
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
@@ -26,36 +18,60 @@ commander.option('-w, --watch', 'use watcher');
 
 const options = commander.opts();
 
+// watcher
+
+const actionWatcher = (sourceMap) => {
+  if (options.watch) {
+    console.log('Watcher running...');
+    arcStartWithEslint({ sourcesMap: sourceMap });
+    startWatcherWithEslint();
+    watchTemplateSettings();
+  } else {
+    arcStartWithEslint({ sourcesMap: sourceMap });
+  }
+
+  console.log(chalk.green('Success'));
+};
+
 commander
   .command('eslint')
   .option('-w', 'Watcher')
   .alias('e')
-  .description('Start architect-project generation with EsLint')
+  .description('Start architect-project generation with ESLint')
   .action(() => {
-    if (options.watch) {
-      arcStartWithEslint({ str: 'Starting architect with EsLint & watcher...', sourcesMap });
-      startWatcherWithEslint();
-      watchTemplateSettings();
-    } else {
-      arcStartWithEslint({ str: 'Starting architect with EsLint...', sourcesMap });
-    }
-
-    console.log(chalk.green('Success'));
+    console.log(chalk.yellow('Starting architect with ESLint...'));
+    const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
+    console.log('Reading source-map-module...');
+    actionWatcher(sourceMapModule);
+    console.log('Reading source-map-atom...');
+    actionWatcher(sourceMapAtomAsModule);
   });
+
+// start
+
+const actionStart = (sourceMap) => {
+  if (options.watch) {
+    console.log('Watcher running...');
+    arcStart({ sourcesMap: sourceMap });
+    startWatcher();
+    watchTemplateSettings();
+  } else {
+    arcStart({ sourcesMap: sourceMap });
+  }
+  console.log(chalk.green('Success'));
+};
 
 commander
   .command('start')
   .alias('s')
   .description('Start architect-project generation')
   .action(() => {
-    if (options.watch) {
-      arcStart({ str: 'Starting architect with watcher...', sourcesMap });
-      startWatcher();
-      watchTemplateSettings();
-    } else {
-      arcStart({ str: 'Starting architect...', sourcesMap });
-    }
-    console.log(chalk.green('Success'));
+    console.log(chalk.yellow('Starting architect...'));
+    const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
+    // console.log('Reading source-map-module...');
+    // actionStart(sourceMapModule);
+    console.log('Reading source-map-atom...');
+    actionStart(sourceMapAtomAsModule);
   });
 
 commander.parse(process.argv);

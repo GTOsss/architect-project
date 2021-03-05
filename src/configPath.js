@@ -1,8 +1,9 @@
 const appRoot = process.cwd();
 
 const eslintConfigPath = `${appRoot}/.eslintrc.js`;
-const sourcesMapTxtPath = `${appRoot}/settings/source-map.txt`;
-const sourcesMapJsPath = `${appRoot}/settings/source-map.js`;
+const sourcesMapModuleTxtPath = `${appRoot}/settings/source-map-module.txt`;
+const sourcesMapModuleJsPath = `${appRoot}/settings/source-map-module.js`;
+const sourcesMapAtomJsPath = `${appRoot}/settings/source-map-atom.js`;
 const outputPath = `${appRoot}/output`;
 const settings = `${appRoot}/settings`;
 const esLintOutputPath = `${appRoot}/output/**/*[.tsx, .ts, .js, .jsx,]`;
@@ -14,8 +15,9 @@ const config = `${appRoot}/settings/config.js`;
 
 module.exports = {
   eslintConfigPath,
-  sourcesMapTxtPath,
-  sourcesMapJsPath,
+  sourcesMapModuleTxtPath,
+  sourcesMapModuleJsPath,
+  sourcesMapAtomJsPath,
   esLintOutputPath,
   templatesPath,
   parseSourceMapPath,

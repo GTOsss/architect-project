@@ -8,7 +8,9 @@
   "description": "A flexible template generator for any project",
   "main": "index.js",
   "scripts": {
-    "gen": "node src/main.js",
+    "gen": "node bin/cli.js s",
+    "atomToSourceMap": "node src/utils/atomToSourceMap.js",
+    "sourceMapToAtom": "node src/utils/sourceMapToAtom.js",
     "arc:watch": "arc s -w",
     "playGround": "node src/functions/playGround.js",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -5,18 +5,14 @@ const { createFilesBySourceMap } = require('./createFileBySourceMap');
 const configPath = require('../configPath');
 const startEsLint = require('./startESLint');
 
-const arcStart = ({ str, sourcesMap }) => {
-  console.log(chalk.yellow(str));
-
+const arcStart = ({ sourcesMap }) => {
   const templates = getObjectWithPaths(configPath.templatesPath);
   const templateMap = parseFiles(templates);
 
   createFilesBySourceMap(templateMap, sourcesMap);
 };
 
-const arcStartWithEslint = ({ str, sourcesMap }) => {
-  console.log(chalk.yellow(str));
-
+const arcStartWithEslint = ({ sourcesMap }) => {
   const templates = getObjectWithPaths(configPath.templatesPath);
   const templateMap = parseFiles(templates);
 
