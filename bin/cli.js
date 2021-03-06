@@ -68,8 +68,8 @@ commander
   .action(() => {
     console.log(chalk.yellow('Starting architect...'));
     const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
-    // console.log('Reading source-map-module...');
-    // actionStart(sourceMapModule);
+    console.log('Reading source-map-module...');
+    actionStart(sourceMapModule);
     console.log('Reading source-map-atom...');
     actionStart(sourceMapAtomAsModule);
   });

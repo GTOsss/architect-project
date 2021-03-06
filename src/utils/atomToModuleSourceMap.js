@@ -25,8 +25,6 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
     });
   });
 
-  console.log(map);
-
   return { map, aliases };
 };
 
