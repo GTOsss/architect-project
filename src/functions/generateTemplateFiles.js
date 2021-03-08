@@ -58,7 +58,12 @@ const generateTemplateFiles = ({
         });
         interpolationValue = `{{${el.str}}}`;
       } else {
-        interpolationResult = el.str;
+        interpolationValue = el.str ? `{{${el.str}}}` : '';
+
+        if (typeof templateParams[el.str] === 'undefined') {
+          console.log(chalk.yellow(`Missing parameter ${chalk.blue(el.str)} in template ${chalk.blue(template)} `));
+        }
+        interpolationResult = templateParams[el.str];
       }
 
       parsedContent = parsedContent.replace(interpolationValue, interpolationResult);

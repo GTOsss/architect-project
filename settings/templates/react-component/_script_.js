@@ -6,7 +6,7 @@ const createImportLine = (componentName) =>
 const createExportLine = (componentNames) => `export { ${componentNames.map(toCamelCase).join()} };`;
 
 const getContent = (_, { sectionFromSourceMap }) => {
-  const componentNames = sectionFromSourceMap.content['rc'];
+  const componentNames = sectionFromSourceMap.content['react-component'];
 
   const fileLines = componentNames.map(createImportLine);
   fileLines.push('\n');

@@ -15,7 +15,7 @@ const memoRebuild = (template) => {
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   const { map, aliases } = sourceMap;
   Object.entries(map).forEach(([sourcePath, components]) => {
-    let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components });
+    let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
 
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {
