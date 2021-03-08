@@ -15,7 +15,13 @@ const requireFunction = ({
 }) => {
   try {
     const currentMethod = _.get(templateScript, functionName) || _.get(methods, functionName);
-    const writeFilePath = resolve(__dirname, '../..', configPath.outputPath, sectionFromSourceMap.path, resultFileName);
+    const writeFilePath = resolve(
+      __dirname,
+      '../..',
+      configPath.outputPath,
+      sectionFromSourceMap.path,
+      resultFileName || '',
+    );
     const writeFile = getWriteFile(writeFilePath);
     return currentMethod(variableValue, { sectionFromSourceMap, writeFile, assets });
   } catch (e) {
