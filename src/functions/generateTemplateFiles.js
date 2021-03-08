@@ -7,6 +7,7 @@ const configPath = require('../configPath');
 const config = require(configPath.config);
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
+const reGetFunctionArgument = /(?<=\().+(?=\))/gm;
 
 const generateTemplateFiles = ({
   sourcePath,
@@ -16,6 +17,7 @@ const generateTemplateFiles = ({
   mapCurrentComponent,
   assets,
   config,
+  templateParams,
 }) => {
   const { parsedFiles, templateScript } = templateValue;
 
@@ -34,21 +36,32 @@ const generateTemplateFiles = ({
     let parsedContent = el.content;
 
     const filePath = generateFilePath({ filePath: el.file, componentName: fileName, outputPath, inputPath });
-
     parsedFunctions.forEach((el) => {
-      const functionInterpolation = el.str.match(reGetFunction)[0];
+      let interpolationValue = '';
+      let interpolationResult = '';
 
-      const resultVariable = requireFunction({
-        functionName: functionInterpolation,
-        variableName: fileName,
-        templateScript,
-        template,
-        sectionFromSourceMap: mapCurrentComponent,
-        assets,
-      });
-      const functionSting = `{{${el.str}}}`;
+      const searchFunctionResult = el.str.match(reGetFunction);
 
-      parsedContent = parsedContent.replace(functionSting, resultVariable);
+      if (searchFunctionResult) {
+        const functionInterpolation = searchFunctionResult[0];
+        const searchFunctionArgument = el.str.match(reGetFunctionArgument) || [];
+        const functionArgument = searchFunctionArgument[0];
+
+        interpolationResult = requireFunction({
+          functionName: functionInterpolation,
+          variableValue: templateParams[functionArgument],
+          resultFileName: templateParams.name,
+          templateScript,
+          template,
+          sectionFromSourceMap: mapCurrentComponent,
+          assets,
+        });
+        interpolationValue = `{{${el.str}}}`;
+      } else {
+        interpolationResult = el.str;
+      }
+
+      parsedContent = parsedContent.replace(interpolationValue, interpolationResult);
     });
 
     requireFunction({

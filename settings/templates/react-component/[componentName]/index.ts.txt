@@ -1,6 +1,6 @@
-import {{toCamelCase(componentName)}}, { Props } from './{{toKebabCase(componentName)}}';
+import {{toCamelCase(name)}}, { Props } from './{{toKebabCase(name)}}';
 
-export default {{toCamelCase(componentName, {})}};
-export { Props as {{toCamelCase(componentName)}}Props };
+export default {{toCamelCase(name)}};
+export { Props as {{toCamelCase(name)}}Props };
 
 {{getContent()}}

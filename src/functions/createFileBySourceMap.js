@@ -34,7 +34,9 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
             memoData[template] = [params];
           }
 
-          generateTemplateFiles({ config, ...params });
+          const templateParams = { ...value, name: key };
+
+          generateTemplateFiles({ ...params, config, templateParams });
         }
       });
     });
