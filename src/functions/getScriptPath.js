@@ -9,6 +9,10 @@ const getScriptPath = (dir) => {
     let script = null;
     try {
       const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
+      // todo Тут может возникнуть ошибка по 2 причинам
+      // 1 не удалось выполнить require модуля (он отсуствует), это стандартная ошибка, ее можно не отлавливать
+      // 2 внутри импортируемого модуля может быть ошибка, если это произошло, нужно отловить ее
+      // и уведомить пользователя об ошибке внутри скрипта.
       script = require(scriptPath);
     } catch (e) {}
     allScripts.push(script);
