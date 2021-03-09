@@ -7,14 +7,18 @@ const getScriptPath = (dir) => {
   const parentPathsFile = fs.readdirSync(dir);
   parentPathsFile.forEach((templateDir) => {
     let script = null;
+    const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
+
     try {
-      const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
-      // todo Тут может возникнуть ошибка по 2 причинам
-      // 1 не удалось выполнить require модуля (он отсуствует), это стандартная ошибка, ее можно не отлавливать
-      // 2 внутри импортируемого модуля может быть ошибка, если это произошло, нужно отловить ее
-      // и уведомить пользователя об ошибке внутри скрипта.
       script = require(scriptPath);
-    } catch (e) {}
+    } catch (e) {
+      const skipErr = `Cannot find module '${scriptPath}'`;
+
+      if (e.message === skipErr) {
+        return;
+      }
+      console.log(`${e.message}\n${e.stack}`);
+    }
     allScripts.push(script);
   });
   return allScripts;

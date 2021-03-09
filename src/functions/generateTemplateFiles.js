@@ -80,6 +80,7 @@ const generateTemplateFiles = ({
       templateScript,
       template,
       sectionFromSourceMap: mapCurrentComponent,
+      resultFileName: templateParams.name,
       assets,
     });
 
