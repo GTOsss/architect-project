@@ -1,4 +1,4 @@
-const { getSources, createFile } = require('../../../src/utils');
+//const { getSources, createFile } = require('../../../src/utils');
 
 const mockSources = [
   {
@@ -11,12 +11,12 @@ const mockSources = [
   },
 ];
 
-const main = () => {
-  const sources = getSources('icons-sprite');
-  //createFile('');
-  // console.log(`main started`);
-};
-main();
-module.exports = {
-  main,
-};
+// const main = () => {
+//   const sources = getSources('icons-sprite');
+//   //createFile('');
+//   // console.log(`main started`);
+// };
+// main();
+// module.exports = {
+//   main,
+// };
