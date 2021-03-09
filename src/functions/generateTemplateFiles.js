@@ -35,7 +35,12 @@ const generateTemplateFiles = ({
     const parsedFunctions = el.parsed;
     let parsedContent = el.content;
 
-    const filePath = generateFilePath({ filePath: el.file, componentName: fileName, outputPath, inputPath });
+    const filePath = generateFilePath({
+      filePath: el.file,
+      outputPath,
+      inputPath,
+      templateParams,
+    });
     parsedFunctions.forEach((el) => {
       let interpolationValue = '';
       let interpolationResult = '';
