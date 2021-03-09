@@ -7,11 +7,16 @@ const getScriptPath = (dir) => {
   const parentPathsFile = fs.readdirSync(dir);
   parentPathsFile.forEach((templateDir) => {
     let script = null;
-    try {
-      const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
+    const scriptPath = resolve(configPath.templatesPath, `${templateDir}/_script_`);
 
+    try {
       script = require(scriptPath);
     } catch (e) {
+      const skipErr = `Cannot find module '${scriptPath}'`;
+
+      if (e.message === skipErr) {
+        return;
+      }
       console.log(`${e.message}\n${e.stack}`);
     }
     allScripts.push(script);

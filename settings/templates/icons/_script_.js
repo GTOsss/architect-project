@@ -7,7 +7,7 @@ const getIndexContent = () => {
 const main = (_, { assets, writeFile }) => {
   assets.forEach(({ content, fileName }) => {
     const result = minimizeSVG(content);
-    writeFile(result, { path: `svg/${fileName}` });
+    writeFile('test', { path: `svg/${fileName}` });
   });
 };
 
