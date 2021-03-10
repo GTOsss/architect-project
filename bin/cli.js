@@ -15,6 +15,7 @@ const packageJson = require('../package.json');
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
 commander.option('-w, --watch', 'use watcher');
+commander.option('-e, --eslint', 'use esLint');
 
 const options = commander.opts();
 
@@ -32,25 +33,6 @@ const actionEsLint = (sourceMap) => {
 
   console.log(chalk.green('Success'));
 };
-
-commander
-  .command('eslint')
-  .option('-w', 'Watcher')
-  .alias('e')
-  .description('Start architect-project generation with ESLint')
-  .action(() => {
-    console.log(chalk.yellow('Starting architect with ESLint...'));
-    const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
-
-    if (sourceMapModule) {
-      actionEsLint(sourceMapModule);
-      console.log('Reading source-map-module...');
-    }
-    if (sourceMapAtomAsModule) {
-      actionEsLint(sourceMapAtomAsModule);
-      console.log('Reading source-map-atom...');
-    }
-  });
 
 // start
 
@@ -71,6 +53,22 @@ commander
   .alias('s')
   .description('Start architect-project generation')
   .action(() => {
+    if (options.eslint) {
+      console.log(chalk.yellow('Starting architect with ESLint...'));
+      const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
+
+      if (sourceMapModule) {
+        actionEsLint(sourceMapModule);
+        console.log('Reading source-map-module...');
+      }
+      if (sourceMapAtomAsModule) {
+        actionEsLint(sourceMapAtomAsModule);
+        console.log('Reading source-map-atom...');
+      }
+
+      return;
+    }
+
     console.log(chalk.yellow('Starting architect...'));
     const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
 

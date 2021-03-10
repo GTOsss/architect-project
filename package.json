@@ -13,7 +13,7 @@
     "sourceMapToAtom": "node src/utils/sourceMapToAtom.js",
     "arc:watch": "arc s -w",
     "arc:start": "arc s",
-    "arc:esLint": "arc e",
+    "arc:esLint": "arc s -e",
     "playGround": "node src/functions/playGround.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:circular": "dpdm src/** --exclude node_modules  --tree false --warning false"
