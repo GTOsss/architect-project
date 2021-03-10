@@ -18,9 +18,9 @@ commander.option('-w, --watch', 'use watcher');
 
 const options = commander.opts();
 
-// watcher
+// esLint
 
-const actionWatcher = (sourceMap) => {
+const actionEsLint = (sourceMap) => {
   if (options.watch) {
     console.log('Watcher running...');
     arcStartWithEslint({ sourcesMap: sourceMap });
@@ -41,10 +41,15 @@ commander
   .action(() => {
     console.log(chalk.yellow('Starting architect with ESLint...'));
     const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
-    console.log('Reading source-map-module...');
-    actionWatcher(sourceMapModule);
-    console.log('Reading source-map-atom...');
-    actionWatcher(sourceMapAtomAsModule);
+
+    if (sourceMapModule) {
+      actionEsLint(sourceMapModule);
+      console.log('Reading source-map-module...');
+    }
+    if (sourceMapAtomAsModule) {
+      actionEsLint(sourceMapAtomAsModule);
+      console.log('Reading source-map-atom...');
+    }
   });
 
 // start
