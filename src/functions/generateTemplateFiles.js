@@ -26,9 +26,11 @@ const generateTemplateFiles = ({
   const inputPath = resolve(configPath.templatesPath, template || '');
 
   //flag clean
-  const dirToRemove = resolve(outputPath, fileName);
+  const dirToRemove = outputPath;
   if (config.clean) {
-    fs.rmdirSync(dirToRemove, { recursive: true });
+    if (fs.existsSync(dirToRemove)) {
+      fs.rmdirSync(dirToRemove, { recursive: true });
+    }
   }
 
   parsedFiles.forEach((el) => {
@@ -111,7 +113,7 @@ const generateTemplateFilesWithoutCash = ({ assets, template, ...rest }) => {
     }, []);
     console.log(chalk.yellow(`Rebuilding template ${template} component ${rest.fileName}...`));
 
-    const templateConfig = config.templates[template];
+    const templateConfig = config.templates[template] ? config.templates[template] : config;
 
     generateTemplateFiles({ ...rest, assets: currentAssets, config: templateConfig });
 
