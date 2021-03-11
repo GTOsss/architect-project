@@ -27,7 +27,7 @@ const moduleToAtomSourceMap = (sourceMap, defaultParams = {}) => {
     });
   });
 
-  return map;
+  return { map, aliases: sourceMap.aliases };
 };
 
 module.exports = {

@@ -76,7 +76,7 @@ playGround.js
 
 # npm package
 output/
-settings/
+architect/
 yarn.lock
 .eslintignore
 .eslintrc.js

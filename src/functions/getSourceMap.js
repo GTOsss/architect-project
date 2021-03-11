@@ -1,5 +1,5 @@
 const configPath = require('../configPath');
-const { atomToModuleSourceMap } = require('../utils/atomToModuleSourceMap');
+const { sourceMapToModule } = require('../utils/atomToModuleSourceMap');
 
 const getSourceMaps = () => {
   let sourceMapAtom = null;
@@ -17,7 +17,7 @@ const getSourceMaps = () => {
     console.log('Can not find file source-map-module.js');
   }
 
-  return { sourceMapModule, sourceMapAtomAsModule: sourceMapAtom && atomToModuleSourceMap(sourceMapAtom) };
+  return { sourceMapModule, sourceMapAtomAsModule: sourceMapAtom && sourceMapToModule(sourceMapAtom) };
 };
 
 module.exports = {

@@ -1,6 +1,6 @@
 const fs = require('file-system');
 const appRoot = process.cwd();
-const config = require(`${appRoot}/settings/config.js`);
+const config = require(`${appRoot}/architect/config.js`);
 
 const reInterpolation = new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
 
