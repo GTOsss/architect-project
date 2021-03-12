@@ -14,6 +14,8 @@
     "arc:watch": "arc s -w",
     "arc:start": "arc s",
     "arc:esLint": "arc s -e",
+    "arc:undo": "arc change -u",
+    "arc:redo": "arc change -r",
     "playGround": "node src/functions/playGround.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:circular": "dpdm src/** --exclude node_modules  --tree false --warning false"

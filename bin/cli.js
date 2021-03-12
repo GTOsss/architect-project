@@ -11,9 +11,9 @@ const {
 } = require('../src/functions');
 const { getSourceMaps } = require('../src/functions/getSourceMap');
 const packageJson = require('../package.json');
-// const createAndCashSourceMapAtom = require('../src/utils/createAndCashSourceMapAtom');
-// const createAndCashSourceMapModule = require('../src/utils/createAndCashSourceMapModule');
-
+// const undoingChanges = require('../src/utils/undoingChanges');
+// const redoingChanges = require('../src/utils/redoingChanges');
+const { undoingChanges, redoingChanges } = require('../src/utils/doChanges');
 const { createAndCashSourceMapModule, createAndCashSourceMapAtom } = require('../src/utils/createAndCashSourceMap');
 
 // cli
@@ -22,6 +22,8 @@ commander.option('-w, --watch', 'use watcher');
 commander.option('-e, --eslint', 'use esLint');
 commander.option('-mta, --module_to_atom', 'from module to atom');
 commander.option('-atm, --atom_to_module', 'from atom to module');
+commander.option('-u, --undo', 'undoing changes');
+commander.option('-r, --redo', 'redoing changes');
 
 const options = commander.opts();
 
@@ -40,8 +42,6 @@ const actionEsLint = (sourceMap) => {
   console.log(chalk.green('Success'));
 };
 
-// start
-
 const actionStart = (sourceMap) => {
   if (options.watch) {
     console.log('Watcher running...');
@@ -53,6 +53,8 @@ const actionStart = (sourceMap) => {
   }
   console.log(chalk.green('Success'));
 };
+
+// start
 
 commander
   .command('start')
@@ -88,6 +90,8 @@ commander
     }
   });
 
+//convert
+
 commander
   .command('convert')
   .alias('con')
@@ -98,6 +102,20 @@ commander
     }
     if (options.atom_to_module) {
       createAndCashSourceMapModule();
+    }
+  });
+
+//change
+
+commander
+  .command('change')
+  .description('Undoing and Redoing Changes')
+  .action(() => {
+    if (options.undo) {
+      undoingChanges();
+    }
+    if (options.redo) {
+      redoingChanges();
     }
   });
 
