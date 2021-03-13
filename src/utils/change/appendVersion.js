@@ -16,11 +16,13 @@ const createVersionsJson = () => {
   } catch (err) {
     console.log(err);
   }
-
-  return require(versionsJsonPath);
 };
 
-const json = fs.existsSync(versionsJsonPath) ? require(versionsJsonPath) : createVersionsJson();
+if (!fs.existsSync(versionsJsonPath)) {
+  createVersionsJson();
+}
+
+const json = require(versionsJsonPath);
 
 const appendVersion = (date) => {
   json.versions.unshift(date);
