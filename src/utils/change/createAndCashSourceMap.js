@@ -1,16 +1,17 @@
 const stringifyObject = require('stringify-object');
+const smartRequire = require('../smartRequire');
 const chalk = require('chalk');
 const fs = require('file-system');
 const { resolve } = require('path');
 
 const configPath = require('../../configPath');
-const eslintConfig = require(configPath.eslintConfigPath);
+const eslintConfig = smartRequire(configPath.eslintConfigPath, {});
 
 const startEsLint = require('../../functions/startESLint');
 const appendVersion = require('./appendVersion');
 
-const sourceMapAtom = require(configPath.sourcesMapAtomJsPath);
-const sourceMapModule = require(configPath.sourcesMapModuleJsPath);
+const sourceMapAtom = smartRequire(configPath.sourcesMapAtomJsPath, {});
+const sourceMapModule = smartRequire(configPath.sourcesMapModuleJsPath, {});
 
 const { sourceMapToModule } = require('./atomToModuleSourceMap');
 const { sourceMapToAtom } = require('./moduleToAtomSourceMap');
