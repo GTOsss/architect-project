@@ -3,10 +3,10 @@ const chalk = require('chalk');
 const fs = require('file-system');
 const { resolve } = require('path');
 
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 const eslintConfig = require(configPath.eslintConfigPath);
 
-const startEsLint = require('../functions/startESLint');
+const startEsLint = require('../../functions/startESLint');
 const appendVersion = require('./appendVersion');
 
 const sourceMapAtom = require(configPath.sourcesMapAtomJsPath);

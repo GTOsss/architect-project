@@ -13,12 +13,14 @@ module.exports = {
   templates: {
     icons: {
       watch: ['assets/icons-sprite'],
-      replace: false,
+      replace: true,
       clean: true,
+      backups: 3,
     },
     store: {
       watch: ['assets/icons-standalone'],
       replace: true,
+      backups: 3,
     },
   },
 };

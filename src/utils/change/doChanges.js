@@ -1,6 +1,6 @@
 const fs = require('file-system');
 const chalk = require('chalk');
-const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../configPath');
+const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../../configPath');
 const json = require(versionsJsonPath);
 const { resolve } = require('path');
 

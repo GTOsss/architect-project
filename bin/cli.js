@@ -11,10 +11,12 @@ const {
 } = require('../src/functions');
 const { getSourceMaps } = require('../src/functions/getSourceMap');
 const packageJson = require('../package.json');
-// const undoingChanges = require('../src/utils/undoingChanges');
-// const redoingChanges = require('../src/utils/redoingChanges');
-const { undoingChanges, redoingChanges } = require('../src/utils/doChanges');
-const { createAndCashSourceMapModule, createAndCashSourceMapAtom } = require('../src/utils/createAndCashSourceMap');
+
+const { undoingChanges, redoingChanges } = require('../src/utils/change/doChanges');
+const {
+  createAndCashSourceMapModule,
+  createAndCashSourceMapAtom,
+} = require('../src/utils/change/createAndCashSourceMap');
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');

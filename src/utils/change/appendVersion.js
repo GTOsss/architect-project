@@ -1,5 +1,5 @@
 const fs = require('file-system');
-const { arcHistoryPath, versionsJsonPath } = require('../configPath');
+const { arcHistoryPath, versionsJsonPath } = require('../../configPath');
 const { resolve } = require('path');
 const exportPath = resolve(arcHistoryPath, 'versions.json');
 const cleanHistory = require('./cleanHistory');

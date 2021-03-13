@@ -3,7 +3,7 @@ const config = require(`${appRoot}/architect/config.js`);
 
 const reGetFileName = new RegExp(`(?<=\\${config.itrFileNameStart})(.+?)(?=\\${config.itrFileNameEnd})`, 'gi');
 
-const generateFilePath = ({ filePath, outputPath, inputPath, templateParams }) => {
+const generateFilePath = ({ filePath, outputPath, inputPath, templateParams, backupPath }) => {
   const matchedBracketsPath = filePath.match(reGetFileName);
 
   let pathWithSourceMapVariable = filePath;
@@ -14,7 +14,10 @@ const generateFilePath = ({ filePath, outputPath, inputPath, templateParams }) =
     pathWithSourceMapVariable = pathWithSourceMapVariable.replace(reComponentName, templateParams[el]);
   });
 
-  return pathWithSourceMapVariable.replace(inputPath, outputPath).replace(config.templateExt, '');
+  return {
+    filePath: pathWithSourceMapVariable.replace(inputPath, outputPath).replace(config.templateExt, ''),
+    backupFilePath: pathWithSourceMapVariable.replace(inputPath, backupPath).replace(config.templateExt, ''),
+  };
 };
 
 module.exports = generateFilePath;
