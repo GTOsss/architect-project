@@ -67,6 +67,17 @@ commander
       console.log(chalk.yellow('Starting architect with ESLint...'));
       const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
 
+      const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, myFunction }) => {
+        if (sourceMapModule) {
+          myFunction(sourceMapModule);
+          console.log('Reading source-map-module...');
+        }
+        if (sourceMapAtomAsModule) {
+          myFunction(sourceMapAtomAsModule);
+          console.log('Reading source-map-atom...');
+        }
+      };
+
       if (sourceMapModule) {
         actionEsLint(sourceMapModule);
         console.log('Reading source-map-module...');
