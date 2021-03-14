@@ -4,7 +4,9 @@ const { resolve } = require('path');
 const exportPath = resolve(arcHistoryPath, 'versions.json');
 const cleanHistory = require('./cleanHistory');
 
-const createVersionsJson = () => {
+let json;
+
+const createVersionsJson = async () => {
   const defContent = {
     versions: [],
     current: -1,
@@ -12,7 +14,9 @@ const createVersionsJson = () => {
   const prettyDefContent = JSON.stringify(defContent, null, '  ');
 
   try {
-    fs.writeFileSync(exportPath, prettyDefContent);
+    fs.writeFile(exportPath, prettyDefContent, null, () => {
+      json = require(versionsJsonPath);
+    });
   } catch (err) {
     console.log(err);
   }
@@ -21,8 +25,6 @@ const createVersionsJson = () => {
 if (!fs.existsSync(versionsJsonPath)) {
   createVersionsJson();
 }
-
-const json = require(versionsJsonPath);
 
 const appendVersion = (date) => {
   json.versions.unshift(date);

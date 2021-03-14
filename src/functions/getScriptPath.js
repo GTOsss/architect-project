@@ -14,7 +14,7 @@ const getScriptPath = (dir) => {
     } catch (e) {
       const skipErr = `Cannot find module '${scriptPath}'`;
 
-      if (e.message === skipErr) {
+      if (e.message.includes(skipErr)) {
         return;
       }
       console.log(`${e.message}\n${e.stack}`);
