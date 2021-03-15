@@ -6,7 +6,7 @@ const { memoRebuild } = require('./createFileBySourceMap');
 
 const watchTemplateSettings = () => {
   Object.entries(config.templates).forEach(([key, value]) => {
-    const watchPaths = value.watch.map((watchPath) => resolve(configPath.settings, watchPath));
+    const watchPaths = value.watch.map((watchPath) => resolve(configPath.architect, watchPath));
 
     console.log(`watching directory: ${watchPaths}`);
 
