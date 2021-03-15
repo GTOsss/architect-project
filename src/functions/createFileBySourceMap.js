@@ -36,7 +36,9 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
 
           const templateParams = { ...value, name: key };
 
-          generateTemplateFiles({ ...params, config, templateParams });
+          const templateConfig = config.templates[template] ? config.templates[template] : config;
+
+          generateTemplateFiles({ ...params, config: templateConfig, templateParams });
         }
       });
     });
