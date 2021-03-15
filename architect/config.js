@@ -1,9 +1,6 @@
 module.exports = {
-  esLint: {
-    quiet: false,
-  },
-  output: 'output',
-  replace: true,
+  output: 'output-test',
+  replace: false,
   clean: false,
   itrStart: '{{',
   itrEnd: '}}',
@@ -11,16 +8,10 @@ module.exports = {
   itrFileNameEnd: ']',
   templateExt: '.txt',
   templates: {
-    icons: {
-      watch: ['assets/icons-sprite'],
-      replace: true,
+    endpoints: {
+      watch: [],
       clean: true,
-      backups: 3,
-    },
-    store: {
-      watch: ['assets/icons-standalone'],
       replace: true,
-      backups: 3,
     },
   },
 };

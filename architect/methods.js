@@ -16,4 +16,6 @@ module.exports = {
   toCamelCase,
   toKebabCase,
   toLowerCamelCase,
+  toLowerFirst: _.lowerFirst,
+  getIn: _.get,
 };
