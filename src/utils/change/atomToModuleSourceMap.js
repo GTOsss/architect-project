@@ -1,4 +1,4 @@
-const atomToModuleSourceMap = ({ map: sourceMapByAtoms, allDefaultParams = {}, aliases }) => {
+const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaultParams = {}, aliases }) => {
   let map = {};
 
   Object.entries(sourceMapByAtoms).forEach(([componentName, templates]) => {

@@ -1,7 +1,8 @@
 const fs = require('file-system');
 const chalk = require('chalk');
-const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../configPath');
-const json = require(versionsJsonPath);
+const smartRequire = require('../smartRequire');
+const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../../configPath');
+const json = smartRequire(versionsJsonPath, {});
 const { resolve } = require('path');
 
 const doChanges = ({ json, logVariable }) => {

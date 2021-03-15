@@ -5,6 +5,7 @@ const requireFunction = require('./requireFunction');
 const generateFilePath = require('./generateFilePath');
 const configPath = require('../configPath');
 const config = require(configPath.config);
+const backupFile = require('../utils/backup/backupFile');
 
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 const reGetFunctionArgument = /(?<=\().+(?=\))/gm;
@@ -23,6 +24,8 @@ const generateTemplateFiles = ({
 
   const outputPath = resolve(configPath.outputPath, sourcePath);
 
+  const backupPath = resolve(configPath.arcBackupsPath, sourcePath);
+
   const inputPath = resolve(configPath.templatesPath, template || '');
 
   //flag clean
@@ -37,11 +40,12 @@ const generateTemplateFiles = ({
     const parsedFunctions = el.parsed;
     let parsedContent = el.content;
 
-    const filePath = generateFilePath({
+    const { filePath, backupFilePath } = generateFilePath({
       filePath: el.file,
       outputPath,
       inputPath,
       templateParams,
+      backupPath,
     });
     parsedFunctions.forEach((el) => {
       let interpolationValue = '';
@@ -90,10 +94,24 @@ const generateTemplateFiles = ({
 
     if (fs.existsSync(filePath)) {
       if (config.replace) {
-        fs.writeFileSync(filePath, parsedContent);
+        try {
+          fs.writeFileSync(filePath, parsedContent);
+        } catch (err) {
+          console.log(err);
+        }
       }
     } else {
-      fs.writeFileSync(filePath, parsedContent);
+      try {
+        fs.writeFileSync(filePath, parsedContent);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    //flag backup
+
+    if (config.backups) {
+      backupFile({ filePath, backupFilePath, template, config });
     }
   });
 };

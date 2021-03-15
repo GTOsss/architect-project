@@ -16,6 +16,8 @@ const outputPath = `${appRoot}/${output}`;
 const esLintOutputPath = `${appRoot}/${output}/**/*[.tsx, .ts, .js, .jsx,]`;
 const esLintSourceMapPath = `${appRoot}/architect/source_map/*[.js,]`;
 const arcHistoryPath = `${appRoot}/architect/.arc/history/source-map`;
+const arcBackupsPath = `${appRoot}/architect/.arc/backups`;
+const backupsVersionsJsonPath = `${appRoot}/architect/.arc/backups/versions.json`;
 const versionsJsonPath = `${appRoot}/architect/.arc/history/source-map/versions.json`;
 
 module.exports = {
@@ -35,4 +37,6 @@ module.exports = {
   arcHistoryPath,
   sourceMap,
   versionsJsonPath,
+  arcBackupsPath,
+  backupsVersionsJsonPath,
 };

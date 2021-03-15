@@ -1,10 +1,12 @@
 const fs = require('file-system');
-const { arcHistoryPath, versionsJsonPath } = require('../configPath');
+const { arcHistoryPath, versionsJsonPath } = require('../../configPath');
 const { resolve } = require('path');
 const exportPath = resolve(arcHistoryPath, 'versions.json');
 const cleanHistory = require('./cleanHistory');
 
-const createVersionsJson = () => {
+let json;
+
+const createVersionsJson = async () => {
   const defContent = {
     versions: [],
     current: -1,
@@ -20,9 +22,9 @@ const createVersionsJson = () => {
   return require(versionsJsonPath);
 };
 
-const json = fs.existsSync(versionsJsonPath) ? require(versionsJsonPath) : createVersionsJson();
-
 const appendVersion = (date) => {
+  const json = fs.existsSync(versionsJsonPath) ? require(versionsJsonPath) : createVersionsJson();
+
   json.versions.unshift(date);
   json.current = -1;
 
