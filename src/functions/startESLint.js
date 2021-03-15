@@ -11,7 +11,7 @@ const startEsLint = async ({ eslintConfig, outputPath }) => {
 
   await ESLint.outputFixes(results);
 
-  if (!config.esLint.quiet) {
+  if (config.esLint && !config.esLint.quiet) {
     // 3. Format the results.
     const formatter = await eslint.loadFormatter('stylish');
     const resultText = formatter.format(results);

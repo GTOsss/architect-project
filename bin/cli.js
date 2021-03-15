@@ -2,13 +2,6 @@
 
 const commander = require('commander');
 const chalk = require('chalk');
-const {
-  startWatcherWithEslint,
-  startWatcher,
-  arcStart,
-  arcStartWithEslint,
-  watchTemplateSettings,
-} = require('../src/functions');
 const { getSourceMaps } = require('../src/functions/getSourceMap');
 const packageJson = require('../package.json');
 
@@ -17,6 +10,8 @@ const {
   createAndCashSourceMapModule,
   createAndCashSourceMapAtom,
 } = require('../src/utils/change/createAndCashSourceMap');
+
+const { callFunctionWithCurrentSourceMap, actionStart, actionEsLint } = require('./utils');
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
@@ -29,78 +24,24 @@ commander.option('-r, --redo', 'redoing changes');
 
 const options = commander.opts();
 
-// esLint
-
-const actionEsLint = (sourceMap) => {
-  if (options.watch) {
-    console.log('Watcher running...');
-    arcStartWithEslint({ sourcesMap: sourceMap });
-    startWatcherWithEslint();
-    watchTemplateSettings();
-  } else {
-    arcStartWithEslint({ sourcesMap: sourceMap });
-  }
-
-  console.log(chalk.green('Success'));
-};
-
-const actionStart = (sourceMap) => {
-  if (options.watch) {
-    console.log('Watcher running...');
-    arcStart({ sourcesMap: sourceMap });
-    startWatcher();
-    watchTemplateSettings();
-  } else {
-    arcStart({ sourcesMap: sourceMap });
-  }
-  console.log(chalk.green('Success'));
-};
-
-// start
-
 commander
   .command('start')
   .alias('s')
   .description('Start architect-project generation')
   .action(() => {
+    const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
+
     if (options.eslint) {
       console.log(chalk.yellow('Starting architect with ESLint...'));
-      const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
 
-      const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, myFunction }) => {
-        if (sourceMapModule) {
-          myFunction(sourceMapModule);
-          console.log('Reading source-map-module...');
-        }
-        if (sourceMapAtomAsModule) {
-          myFunction(sourceMapAtomAsModule);
-          console.log('Reading source-map-atom...');
-        }
-      };
-
-      if (sourceMapModule) {
-        actionEsLint(sourceMapModule);
-        console.log('Reading source-map-module...');
-      }
-      if (sourceMapAtomAsModule) {
-        actionEsLint(sourceMapAtomAsModule);
-        console.log('Reading source-map-atom...');
-      }
+      callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, myFunction: actionEsLint, options });
 
       return;
     }
 
     console.log(chalk.yellow('Starting architect...'));
-    const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
 
-    if (sourceMapModule) {
-      actionStart(sourceMapModule);
-      console.log('Reading source-map-module...');
-    }
-    if (sourceMapAtomAsModule) {
-      actionStart(sourceMapAtomAsModule);
-      console.log('Reading source-map-atom...');
-    }
+    callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, myFunction: actionStart, options });
   });
 
 //convert

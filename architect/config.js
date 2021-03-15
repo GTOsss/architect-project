@@ -7,11 +7,14 @@ module.exports = {
   itrFileNameStart: '[',
   itrFileNameEnd: ']',
   templateExt: '.txt',
+  esLint: {
+    quiet: true,
+  },
   templates: {
     endpoints: {
-      watch: [],
       clean: true,
       replace: true,
+      watch: ['swagger.js'],
     },
   },
 };
