@@ -14,19 +14,17 @@ const createVersionsJson = async () => {
   const prettyDefContent = JSON.stringify(defContent, null, '  ');
 
   try {
-    fs.writeFile(exportPath, prettyDefContent, null, () => {
-      json = require(versionsJsonPath);
-    });
+    fs.writeFileSync(exportPath, prettyDefContent);
   } catch (err) {
     console.log(err);
   }
+
+  return require(versionsJsonPath);
 };
 
-if (!fs.existsSync(versionsJsonPath)) {
-  createVersionsJson();
-}
-
 const appendVersion = (date) => {
+  const json = fs.existsSync(versionsJsonPath) ? require(versionsJsonPath) : createVersionsJson();
+
   json.versions.unshift(date);
   json.current = -1;
 
