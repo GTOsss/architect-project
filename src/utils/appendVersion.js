@@ -1,29 +1,44 @@
 const fs = require('file-system');
-const configPath = require('../configPath');
+const { arcHistoryPath, versionsJsonPath } = require('../configPath');
 const { resolve } = require('path');
-const exportPath = resolve(configPath.arcHistoryPath, 'versions.json');
+const exportPath = resolve(arcHistoryPath, 'versions.json');
+const cleanHistory = require('./cleanHistory');
 
 const createVersionsJson = () => {
   const defContent = {
     versions: [],
-    current: 0,
+    current: -1,
   };
   const prettyDefContent = JSON.stringify(defContent, null, '  ');
 
-  fs.writeFileSync(exportPath, prettyDefContent);
+  try {
+    fs.writeFileSync(exportPath, prettyDefContent);
+  } catch (err) {
+    console.log(err);
+  }
 
-  return require(configPath.versionsJsonPath);
+  return require(versionsJsonPath);
 };
 
-const json = fs.existsSync(configPath.versionsJsonPath) ? require(configPath.versionsJsonPath) : createVersionsJson();
+const json = fs.existsSync(versionsJsonPath) ? require(versionsJsonPath) : createVersionsJson();
 
 const appendVersion = (date) => {
-  json.versions.push(date);
-  json.current = json.versions.length;
+  json.versions.unshift(date);
+  json.current = -1;
+
+  if (json.versions.length > 5) {
+    json.versions.pop();
+  }
 
   const content = JSON.stringify(json, null, '  ');
 
-  fs.writeFileSync(exportPath, content);
+  try {
+    fs.writeFileSync(exportPath, content);
+  } catch (err) {
+    console.log(err);
+  }
+
+  cleanHistory({ jsonArr: json.versions, arcHistoryPath });
 };
 
 module.exports = appendVersion;
