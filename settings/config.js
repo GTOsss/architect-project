@@ -1,4 +1,5 @@
 module.exports = {
+  output: 'output',
   replace: true,
   clean: false,
   itrStart: '{{',

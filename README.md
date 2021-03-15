@@ -11,7 +11,7 @@ A flexible template generator for any project
 
 ### Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v6+ to run.
+Architect-project requires [Node.js](https://nodejs.org/) v6+ to run.
 
 Install the dependencies and devDependencies.
 
