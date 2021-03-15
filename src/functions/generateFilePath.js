@@ -1,5 +1,5 @@
 const appRoot = process.cwd();
-const config = require(`${appRoot}/settings/config.js`);
+const config = require(`${appRoot}/architect/config.js`);
 
 const reGetFileName = new RegExp(`(?<=\\${config.itrFileNameStart})(.+?)(?=\\${config.itrFileNameEnd})`, 'gi');
 
