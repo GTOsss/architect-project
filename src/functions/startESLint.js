@@ -1,4 +1,6 @@
 const { ESLint } = require('eslint');
+const configPath = require('../configPath');
+const config = require(configPath.config);
 
 const startEsLint = async ({ eslintConfig, outputPath }) => {
   // 1. Create an instance.
@@ -9,12 +11,14 @@ const startEsLint = async ({ eslintConfig, outputPath }) => {
 
   await ESLint.outputFixes(results);
 
-  // 3. Format the results.
-  const formatter = await eslint.loadFormatter('stylish');
-  const resultText = formatter.format(results);
+  if (!config.esLint.quiet) {
+    // 3. Format the results.
+    const formatter = await eslint.loadFormatter('stylish');
+    const resultText = formatter.format(results);
 
-  // 4. Output it.
-  console.log(resultText);
+    // 4. Output it.
+    console.log(resultText);
+  }
 };
 
 module.exports = startEsLint;

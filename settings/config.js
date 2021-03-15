@@ -1,4 +1,7 @@
 module.exports = {
+  esLint: {
+    quiet: false,
+  },
   output: 'output',
   replace: true,
   clean: false,
