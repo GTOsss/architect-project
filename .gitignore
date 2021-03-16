@@ -75,10 +75,12 @@ yarn-error.log
 playGround.js
 
 # npm package
-output/
+output-test/
 architect/
 yarn.lock
 .eslintignore
 .eslintrc.js
 .prettierignore
 .prettierrc.js
+architectV1
+.arc

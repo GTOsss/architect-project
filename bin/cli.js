@@ -4,7 +4,6 @@ const commander = require('commander');
 const chalk = require('chalk');
 const { getSourceMaps } = require('../src/functions/getSourceMap');
 const packageJson = require('../package.json');
-
 const { undoingChanges, redoingChanges } = require('../src/utils/change/doChanges');
 const {
   createAndCashSourceMapModule,
@@ -12,6 +11,8 @@ const {
 } = require('../src/utils/change/createAndCashSourceMap');
 
 const { callFunctionWithCurrentSourceMap, actionStart, actionEsLint } = require('./utils');
+
+const config = require('../src/configPath');
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
@@ -21,6 +22,7 @@ commander.option('-mta, --module_to_atom', 'from module to atom');
 commander.option('-atm, --atom_to_module', 'from atom to module');
 commander.option('-u, --undo', 'undoing changes');
 commander.option('-r, --redo', 'redoing changes');
+commander.option('-c, --config <path>', 'path of the configuration to use');
 
 const options = commander.opts();
 
@@ -29,6 +31,10 @@ commander
   .alias('s')
   .description('Start architect-project generation')
   .action(() => {
+    if (options.config) {
+      config.settingsFolder = options.config;
+    }
+
     const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();
 
     if (options.eslint) {
