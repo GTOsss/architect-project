@@ -54,7 +54,7 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
+# dotenv environment variableInTemplate files
 .env*
 
 # gatsby files
@@ -82,5 +82,5 @@ yarn.lock
 .eslintrc.js
 .prettierignore
 .prettierrc.js
-architectV1
+__tests__/cases/architectV1
 .arc

@@ -1,4 +1,3 @@
-const getFilesPath = require('./getFilesPath');
 const getObjectWithPaths = require('./getObjectWithPaths');
 const getScriptPath = require('./getScriptPath');
 const { generateTemplateFiles } = require('./generateTemplateFiles');
@@ -14,7 +13,6 @@ const { startWatcher, startWatcherWithEslint } = require('./startWatcher');
 const watchTemplateSettings = require('./watchTemplateSettings');
 
 module.exports = {
-  getFilesPath,
   getObjectWithPaths,
   getScriptPath,
   generateTemplateFiles,

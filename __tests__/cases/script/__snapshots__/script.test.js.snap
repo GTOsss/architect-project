@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`script test call function from script 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": " const options = {
+    escapeString: false,
+    indent: 2,
+    escapeRegex: false,
+  };
+
+
+",
+      "path": "*/script/output/src/services/name/index.ts",
+    },
+  ],
+}
+`;

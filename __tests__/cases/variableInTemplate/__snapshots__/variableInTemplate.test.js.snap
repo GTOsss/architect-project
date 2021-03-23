@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`variable get content variableInTemplate in template 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "4
+",
+      "path": "*/variableInTemplate/output/src/icons/undefined/index.ts",
+    },
+  ],
+}
+`;
+
+exports[`variable get path from variableInTemplate in template 1`] = `
+Array [
+  "{
+  folder: 'src',
+  files: [
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInTemplate/output/src/icons/undefined/index.ts'
+  ]
+}",
+]
+`;

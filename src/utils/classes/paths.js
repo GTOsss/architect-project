@@ -1,65 +1,69 @@
 const appRoot = process.cwd();
+const { resolve } = require('path');
 
 module.exports = class Paths {
-  settingsFolder = '/architect';
+  _settingsFolder = 'architect';
 
   set settingsFolder(settingsFolder) {
-    this.settingsFolder = settingsFolder;
-    console.log('set', settingsFolder);
+    this._settingsFolder = settingsFolder;
   }
+
+  get output() {
+    const config = require(`${appRoot}/${this._settingsFolder}/config.js`);
+    return config.output;
+  }
+
   get eslintConfigPath() {
     return `${appRoot}/.eslintrc.js`;
   }
   get sourcesMapModuleTxtPath() {
-    return `${appRoot}${this.settingsFolder}/source_map/source-map-module.txt`;
+    return `${appRoot}/${this._settingsFolder}/source_map/source-map-module.txt`;
   }
   get sourcesMapModuleJsPath() {
-    return `${appRoot}${this.settingsFolder}/source_map/source-map-module.js`;
+    return `${appRoot}/${this._settingsFolder}/source_map/source-map-module.js`;
   }
   get sourcesMapAtomJsPath() {
-    return `${appRoot}${this.settingsFolder}/source_map/source-map-atom.js`;
+    return `${appRoot}/${this._settingsFolder}/source_map/source-map-atom.js`;
+  }
+
+  get templatesPath() {
+    return `${appRoot}/${this._settingsFolder}/templates`;
+  }
+
+  get outputPath() {
+    return resolve(appRoot, this.output);
   }
   get esLintOutputPath() {
-    return `${appRoot}/${output}/**/*[.tsx, .ts, .js, .jsx,]`;
-  }
-  get templatesPath() {
-    return `${appRoot}${this.settingsFolder}/templates`;
-  }
-  get parseSourceMapPath() {
-    return `${appRoot}/src/functions/parseSourceMap`;
-  }
-  get outputPath() {
-    const { output } = require(`${appRoot}/${this.settingsFolder}/config.js`);
-    return `${appRoot}/${output}`;
+    return `${appRoot}/${this.output}/**/*[.tsx, .ts, .js, .jsx,]`;
   }
   get assetsPath() {
-    return `${appRoot}${this.settingsFolder}/assets`;
+    return `${appRoot}/${this._settingsFolder}/assets`;
   }
   get methodsPath() {
-    return `${appRoot}${this.settingsFolder}/methods`;
+    return `${appRoot}/${this._settingsFolder}/methods`;
   }
   get config() {
-    return `${appRoot}${this.settingsFolder}/config.js`;
+    return `${appRoot}/${this._settingsFolder}/config.js`;
   }
   get esLintSourceMapPath() {
-    return `${appRoot}${this.settingsFolder}/source_map/*[.js,]`;
+    return `${appRoot}/${this._settingsFolder}/source_map/*[.js,]`;
   }
   get arcHistoryPath() {
-    return `${appRoot}${this.settingsFolder}/.arc/history/source-map`;
+    return `${appRoot}/${this._settingsFolder}/.arc/history/source-map`;
   }
   get sourceMap() {
-    return `${appRoot}/${this.settingsFolder}/source_map`;
+    return `${appRoot}/${this._settingsFolder}/source_map`;
   }
   get versionsJsonPath() {
-    return `${appRoot}${this.settingsFolder}/.arc/history/source-map/versions.json`;
+    return `${appRoot}/${this._settingsFolder}/.arc/history/source-map/versions.json`;
   }
   get arcBackupsPath() {
-    return `${appRoot}${this.settingsFolder}/.arc/backups`;
+    return `${appRoot}/${this._settingsFolder}/.arc/backups`;
   }
   get backupsVersionsJsonPath() {
-    return `${appRoot}${this.settingsFolder}/.arc/backups/versions.json`;
+    return `${appRoot}/${this._settingsFolder}/.arc/backups/versions.json`;
   }
   get architect() {
-    return `${appRoot}/${this.settingsFolder}`;
+    return `${appRoot}/${this._settingsFolder}`;
   }
 };

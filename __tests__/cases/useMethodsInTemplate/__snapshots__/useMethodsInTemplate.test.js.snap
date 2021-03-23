@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useMethodsInTemplate test call function from Method if this function does not exist in __script.js__ 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "const toCamelCase = 'VariDefPre';
+
+",
+      "path": "*/useMethodsInTemplate/output/src/services/vari-def-pre/index.ts",
+    },
+  ],
+}
+`;

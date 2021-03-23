@@ -2,7 +2,6 @@ const getSectionFromSourceMap = require('./getSectionFromSourceMap');
 const parseAssets = require('./parseAssets');
 const { generateTemplateFiles, generateTemplateFilesWithoutCash } = require('./generateTemplateFiles');
 const configPath = require('../configPath');
-const config = require(configPath.config);
 
 const memoData = {};
 
@@ -13,6 +12,7 @@ const memoRebuild = (template) => {
 };
 
 const createFilesBySourceMap = (templateMap, sourceMap) => {
+  const config = require(configPath.config);
   const { map, aliases } = sourceMap;
   Object.entries(map).forEach(([sourcePath, components]) => {
     let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
@@ -42,6 +42,7 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
       });
     });
   });
+  return true;
 };
 
 module.exports = {

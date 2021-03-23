@@ -1,7 +1,7 @@
 const { basename } = require('path');
 const fs = require('file-system');
 const configPath = require('../configPath');
-const getFilesPath = require('./getFilesPath');
+const getFilesPath = require('./getObjectWithPaths');
 
 const parseAssets = () => {
   const assetsPath = configPath.assetsPath;

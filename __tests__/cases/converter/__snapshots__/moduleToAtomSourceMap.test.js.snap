@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test moduleToAtom simple 1`] = `
+"{
+  map: {
+    endpoints: [
+      [
+        'endpoints',
+        {
+          path: 'src/services/endpoints'
+        }
+      ]
+    ]
+  },
+  aliases: {}
+}"
+`;
+
+exports[`test moduleToAtom simple with aliases 1`] = `
+"{
+  map: {
+    endpoints: [
+      [
+        'endpoints',
+        {
+          path: 'src/services/endpoints'
+        }
+      ]
+    ]
+  },
+  aliases: {
+    c: 'component',
+    s: 'store',
+    ix: 'index',
+    i: 'icons'
+  }
+}"
+`;
