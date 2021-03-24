@@ -9,4 +9,10 @@ const pathForCommand = {
   useMethodsInTemplate: `${pathToTests}/useMethodsInTemplate`,
 };
 
-module.exports = { pathForCommand };
+const casesOutputPath = Object.entries(pathForCommand).reduce((acc, [key, value]) => {
+  acc[key] = `${value}/output`;
+
+  return acc;
+}, {});
+
+module.exports = { pathForCommand, casesOutputPath };
