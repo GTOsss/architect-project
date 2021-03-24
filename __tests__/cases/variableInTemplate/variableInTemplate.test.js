@@ -6,11 +6,15 @@ const {
   returnOutputPaths,
   SnapshotSerializer,
 } = require('../../utils/utilsForArcStart');
-const { pathForCommand } = require('../casesConfigPath');
+const cleanOutPutBeforeTest = require('../../utils/cleanOutPutBeforeTest');
+
+const { pathForCommand, casesOutputPath } = require('../casesConfigPath');
 
 const currentCommand = pathForCommand.variableInTemplate;
 
 describe('variable', () => {
+  cleanOutPutBeforeTest(casesOutputPath.assetsFromSourceMap);
+
   test('get path from variableInTemplate in template', async () => {
     await promisifyCliCommand(`arc s -c ${currentCommand}`);
     const currentPathToOutput = resolve(appRoot, currentCommand, 'output');
