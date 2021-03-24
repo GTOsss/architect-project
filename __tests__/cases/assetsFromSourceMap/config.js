@@ -1,7 +1,7 @@
-const { pathForCommand } = require('../casesConfigPath');
+const { casesOutputPath } = require('../casesConfigPath');
 
 module.exports = {
-  output: `${pathForCommand.assetsFromSourceMap}/output`,
+  output: casesOutputPath.assetsFromSourceMap,
   replace: true,
   clean: true,
   itrStart: '{{',

@@ -2,7 +2,7 @@
 
 const commander = require('commander');
 const chalk = require('chalk');
-const { getSourceMaps } = require('../src/functions/getSourceMap');
+const { getSourceMaps } = require('../src/functions/getters/getSourceMap');
 const packageJson = require('../package.json');
 const { undoingChanges, redoingChanges } = require('../src/utils/change/doChanges');
 const {

@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const chalk = require('chalk');
 const { resolve } = require('path');
-const getWriteFile = require('./writeFile');
+const getWriteFile = require('../utils/writeFile');
 const configPath = require('../configPath');
 
 const requireFunction = ({

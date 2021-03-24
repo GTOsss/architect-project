@@ -2,7 +2,7 @@ const chokidar = require('chokidar');
 const { resolve } = require('path');
 const configPath = require('../configPath');
 
-const { memoRebuild } = require('./createFileBySourceMap');
+const { memoRebuild } = require('./generators/createFileBySourceMap');
 
 const watchTemplateSettings = () => {
   const config = require(configPath.config);

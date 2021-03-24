@@ -1,7 +1,7 @@
-const { pathForCommand } = require('../casesConfigPath');
+const { casesOutputPath } = require('../casesConfigPath');
 
 module.exports = {
-  output: `${pathForCommand.variableInFileName}/output`,
+  output: casesOutputPath.variableInFileName,
   replace: true,
   clean: true,
   itrStart: '{{',

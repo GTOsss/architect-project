@@ -7,7 +7,7 @@ const { resolve } = require('path');
 const configPath = require('../../configPath');
 const eslintConfig = smartRequire(configPath.eslintConfigPath, {});
 
-const startEsLint = require('../../functions/startESLint');
+const startEsLint = require('../../functions/starters/startESLint');
 const appendVersion = require('./appendVersion');
 
 const sourceMapAtom = smartRequire(configPath.sourcesMapAtomJsPath, {});

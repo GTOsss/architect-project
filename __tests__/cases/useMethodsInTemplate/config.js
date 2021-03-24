@@ -1,7 +1,7 @@
-const { pathForCommand } = require('../casesConfigPath');
+const { casesOutputPath } = require('../casesConfigPath');
 
 module.exports = {
-  output: `${pathForCommand.useMethodsInTemplate}/output`,
+  output: casesOutputPath.useMethodsInTemplate,
   replace: true,
   clean: true,
   itrStart: '{{',

@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
 const fs = require('file-system');
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 const { arcStart, arcStartWithEslint } = require('./arcStart');
 
 const sourceMapModulePath = fs.existsSync(configPath.sourcesMapModuleTxtPath)

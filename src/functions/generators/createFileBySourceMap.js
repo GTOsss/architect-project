@@ -1,7 +1,7 @@
-const getSectionFromSourceMap = require('./getSectionFromSourceMap');
-const parseAssets = require('./parseAssets');
+const getSectionFromSourceMap = require('../getters/getSectionFromSourceMap');
+const parseAssets = require('../parsers/parseAssets');
 const { generateTemplateFiles, generateTemplateFilesWithoutCash } = require('./generateTemplateFiles');
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 
 const memoData = {};
 

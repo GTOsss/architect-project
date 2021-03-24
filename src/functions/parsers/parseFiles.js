@@ -1,5 +1,5 @@
 const fs = require('file-system');
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 
 const reExec = (str, re) => {
   const results = [];
