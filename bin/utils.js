@@ -7,6 +7,8 @@ const {
   watchTemplateSettings,
 } = require('../src/functions');
 
+console.log('test');
+
 const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, myFunction, options }) => {
   if (sourceMapModule) {
     myFunction({ sourceMap: sourceMapModule, options });
