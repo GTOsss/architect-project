@@ -4,7 +4,6 @@ const fs = require('file-system');
 const requireFunction = require('../requireFunction');
 const generateFilePath = require('./generateFilePath');
 const configPath = require('../../configPath');
-//const config = require(configPath.config);
 const backupFile = require('../../utils/backup/backupFile');
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 const reGetFunctionArgument = /(?<=\().+(?=\))/gm;
