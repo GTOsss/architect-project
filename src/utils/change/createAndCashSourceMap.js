@@ -23,6 +23,11 @@ const atomToModuleParams = {
   currentSourceMap: sourceMapAtom,
   currentFileName: 'source-map-atom.js',
   method: sourceMapToModule,
+  prettyMap: {
+    indent: '  ',
+    singleQuotes: false,
+    inlineCharacterLimit: 12,
+  },
 };
 
 const moduleToAtomParams = {
@@ -32,6 +37,14 @@ const moduleToAtomParams = {
   currentSourceMap: sourceMapModule,
   currentFileName: 'source-map-module.js',
   method: sourceMapToAtom,
+  prettyMap: {
+    indent: '  ',
+    transform: (map, prop, originalResult) => {
+      return originalResult.replace(/\n/g, '');
+    },
+    singleQuotes: false,
+    inlineCharacterLimit: 12,
+  },
 };
 
 const date = new Date();
@@ -59,10 +72,7 @@ const createAndCashSourceMap = (params) => {
 
   const { map, aliases } = params.method(params.currentSourceMap);
 
-  const prettyMap = stringifyObject(map, {
-    indent: '  ',
-    singleQuotes: false,
-  });
+  const prettyMap = stringifyObject(map, params.prettyMap);
 
   const prettyAliases = stringifyObject(aliases, {
     indent: '  ',
