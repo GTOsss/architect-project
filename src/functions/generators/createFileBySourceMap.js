@@ -33,7 +33,7 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
             memoData[template] = [params];
           }
 
-          const templateParams = { value, name: key };
+          const templateParams = { ...value, name: key };
 
           const templateConfig = config.templates[template] ? config.templates[template] : config;
 

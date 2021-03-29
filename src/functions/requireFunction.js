@@ -21,6 +21,7 @@ const requireFunction = ({
     const writeFilePath = resolve(__dirname, '../..', configPath.outputPath, sectionFromSourceMap.path, resultFileName);
 
     const writeFile = getWriteFile(writeFilePath);
+
     return currentMethod(variableValue, { sectionFromSourceMap, writeFile, assets });
   } catch (e) {
     if (functionName !== 'main') {

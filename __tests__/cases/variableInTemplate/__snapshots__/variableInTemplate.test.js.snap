@@ -6,7 +6,7 @@ Object {
     Object {
       "content": "4
 ",
-      "path": "*/variableInTemplate/output/src/icons/undefined/index.ts",
+      "path": "*/variableInTemplate/output/src/icons/icons/index.ts",
     },
   ],
 }
@@ -17,7 +17,7 @@ Array [
   "{
   folder: 'src',
   files: [
-    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInTemplate/output/src/icons/undefined/index.ts'
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInTemplate/output/src/icons/icons/index.ts'
   ]
 }",
 ]
