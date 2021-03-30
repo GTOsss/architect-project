@@ -1,27 +1,30 @@
-const chalk = require('chalk');
 const getObjectWithPaths = require('./getObjectWithPaths');
 const parseFiles = require('./parseFiles');
 const { createFilesBySourceMap } = require('./createFileBySourceMap');
-const configPath = require('../configPath');
+const config = require('../configPath');
+
 const startEsLint = require('./startESLint');
 
-const arcStart = ({ sourcesMap }) => {
-  const templates = getObjectWithPaths(configPath.templatesPath);
-  const templateMap = parseFiles(templates);
+const getTemplateMap = () => {
+  const templates = getObjectWithPaths(config.templatesPath);
+  return parseFiles(templates);
+};
 
-  createFilesBySourceMap(templateMap, sourcesMap);
+const getEsLintOutputPath = () => {
+  return config.esLintOutputPath;
+};
+
+const arcStart = ({ sourcesMap }) => {
+  createFilesBySourceMap(getTemplateMap(), sourcesMap);
 };
 
 const arcStartWithEslint = ({ sourcesMap }) => {
-  const templates = getObjectWithPaths(configPath.templatesPath);
-  const templateMap = parseFiles(templates);
-
-  createFilesBySourceMap(templateMap, sourcesMap);
-
-  const eslintConfig = require(configPath.eslintConfigPath);
+  createFilesBySourceMap(getTemplateMap(), sourcesMap);
 
   //start EsLint
-  startEsLint({ eslintConfig, outputPath: configPath.esLintOutputPath }).catch((error) => {
+  const eslintConfig = require(config.eslintConfigPath);
+
+  startEsLint({ eslintConfig, outputPath: getEsLintOutputPath() }).catch((error) => {
     process.exitCode = 1;
     console.error(error);
   });

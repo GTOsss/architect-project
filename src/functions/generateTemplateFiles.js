@@ -4,9 +4,8 @@ const fs = require('file-system');
 const requireFunction = require('./requireFunction');
 const generateFilePath = require('./generateFilePath');
 const configPath = require('../configPath');
-const config = require(configPath.config);
+//const config = require(configPath.config);
 const backupFile = require('../utils/backup/backupFile');
-
 const reGetFunction = new RegExp('.+(?=\\()', 'gm');
 const reGetFunctionArgument = /(?<=\().+(?=\))/gm;
 
@@ -17,9 +16,9 @@ const generateTemplateFiles = ({
   template,
   mapCurrentComponent,
   assets,
-  config,
   templateParams,
 }) => {
+  const config = require(configPath.config);
   const { parsedFiles, templateScript } = templateValue;
 
   const outputPath = resolve(configPath.outputPath, sourcePath);
@@ -60,7 +59,7 @@ const generateTemplateFiles = ({
 
         interpolationResult = requireFunction({
           functionName: functionInterpolation,
-          variableValue: templateParams[functionArgument],
+          variableValue: templateParams.value[functionArgument],
           resultFileName: templateParams.name,
           templateScript,
           template,
@@ -74,7 +73,7 @@ const generateTemplateFiles = ({
         if (typeof templateParams[el.str] === 'undefined') {
           console.log(chalk.yellow(`Missing parameter ${chalk.blue(el.str)} in template ${chalk.blue(template)} `));
         }
-        interpolationResult = templateParams[el.str];
+        interpolationResult = templateParams.value[el.str];
       }
 
       parsedContent = parsedContent.replace(interpolationValue, interpolationResult);

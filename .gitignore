@@ -54,7 +54,7 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
+# dotenv environment variableInTemplate files
 .env*
 
 # gatsby files
@@ -75,10 +75,12 @@ yarn-error.log
 playGround.js
 
 # npm package
-output/
+output-test/
 architect/
 yarn.lock
 .eslintignore
 .eslintrc.js
 .prettierignore
 .prettierrc.js
+__tests__/cases/architectV1
+.arc

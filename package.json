@@ -16,8 +16,8 @@
     "arc:esLint": "arc s -e",
     "arc:undo": "arc change -u",
     "arc:redo": "arc change -r",
-    "playGround": "node src/functions/playGround.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "arc:config": "arc s -c __tests__/cases/variableInTemplate",
+    "test": "jest",
     "test:circular": "dpdm src/** --exclude node_modules  --tree false --warning false"
   },
   "author": "Yaroslav Semenov semyarvlad@gmail.com",
@@ -31,6 +31,7 @@
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "path": "^0.12.7",
+    "pretty-format": "^26.6.2",
     "stringify-object": "^3.3.0"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
     "node-html-parser": "^3.1.0",
     "prettier": "^2.2.1",
     "typescript": "^4.1.5"

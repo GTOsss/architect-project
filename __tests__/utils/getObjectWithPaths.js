@@ -1,6 +1,5 @@
 const fs = require('file-system');
 const { resolve } = require('path');
-const getScriptPath = require('./getScriptPath');
 
 const getChildPaths = (dir, result) => {
   result = result || [];
@@ -20,22 +19,19 @@ const getChildPaths = (dir, result) => {
   return result;
 };
 
-const getFilesPath = (dir) => {
+const getObjectWithPaths = (dir) => {
   const allPaths = [];
 
   const parentPathsFile = fs.readdirSync(dir);
 
   parentPathsFile.forEach((el) => {
-    const scriptPath = getScriptPath({ dir, template: el });
-
     allPaths.push({
-      templateName: el,
+      folder: el,
       files: getChildPaths(resolve(dir, el)),
-      script: scriptPath,
     });
   });
 
   return allPaths;
 };
 
-module.exports = getFilesPath;
+module.exports = getObjectWithPaths;

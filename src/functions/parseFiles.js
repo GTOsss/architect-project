@@ -1,8 +1,5 @@
 const fs = require('file-system');
-const appRoot = process.cwd();
-const config = require(`${appRoot}/architect/config.js`);
-
-const reInterpolation = new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
+const configPath = require('../configPath');
 
 const reExec = (str, re) => {
   const results = [];
@@ -14,6 +11,9 @@ const reExec = (str, re) => {
 };
 
 const parseFiles = (templates) => {
+  const config = require(configPath.config);
+  const reInterpolation = new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
+
   const parsedTemplateMap = {};
 
   templates.forEach(({ files, script: templateScript, templateName }) => {

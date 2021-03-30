@@ -1,10 +1,12 @@
 const chokidar = require('chokidar');
 const { resolve } = require('path');
 const configPath = require('../configPath');
-const config = require(configPath.config);
+
 const { memoRebuild } = require('./createFileBySourceMap');
 
 const watchTemplateSettings = () => {
+  const config = require(configPath.config);
+
   Object.entries(config.templates).forEach(([key, value]) => {
     const watchPaths = value.watch.map((watchPath) => resolve(configPath.architect, watchPath));
 

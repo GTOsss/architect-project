@@ -1,8 +1,8 @@
 const _ = require('lodash');
+const chalk = require('chalk');
 const { resolve } = require('path');
 const getWriteFile = require('./writeFile');
 const configPath = require('../configPath');
-const methods = require(configPath.methodsPath);
 
 const requireFunction = ({
   functionName,
@@ -13,16 +13,19 @@ const requireFunction = ({
   assets,
   resultFileName,
 }) => {
+  const methods = require(configPath.methodsPath);
+
   try {
     const currentMethod = _.get(templateScript, functionName) || _.get(methods, functionName);
+
     const writeFilePath = resolve(__dirname, '../..', configPath.outputPath, sectionFromSourceMap.path, resultFileName);
 
     const writeFile = getWriteFile(writeFilePath);
     return currentMethod(variableValue, { sectionFromSourceMap, writeFile, assets });
   } catch (e) {
     if (functionName !== 'main') {
-      const err = `Not found function ${functionName} in template ${template}`;
-      console.log(err);
+      const err = chalk.red(`Not found function ${functionName} in template ${template}`);
+      console.log(err, e.stack);
     }
   }
 };
