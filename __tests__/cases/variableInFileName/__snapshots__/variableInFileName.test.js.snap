@@ -16,7 +16,9 @@ Array [
   "{
   folder: 'src',
   files: [
-    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/index.ts'
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName-myName-any.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName.ts'
   ]
 }",
 ]
