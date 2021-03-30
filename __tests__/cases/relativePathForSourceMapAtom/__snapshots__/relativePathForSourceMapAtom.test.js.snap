@@ -4,27 +4,92 @@ exports[`relativePathForSourceMapAtom test relative Path For SourceMapAtom 1`] =
 Object {
   "src": Array [
     Object {
-      "content": "test",
-      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/a.svg",
-    },
-    Object {
-      "content": "test",
-      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/arrow-right.svg",
-    },
-    Object {
-      "content": "test",
-      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/blue-posts.svg",
-    },
-    Object {
-      "content": " const options = {
-    escapeString: false,
-    indent: 2,
-    escapeRegex: false,
-  };
+      "content": "import Stadiums from './stadiums';
 
-
+export default Stadiums;
 ",
-      "path": "*/assetsFromSourceMap/output/src/services/name/index.ts",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/index.ts",
+    },
+    Object {
+      "content": "",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.module.scss",
+    },
+    Object {
+      "content": "import React from 'react';
+import { storiesOf } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import Stadiums from './stadiums';
+
+const stories = storiesOf('stadiums', module).addDecorator(centered);
+
+stories.add('default', () => {
+
+  return <Stadiums />;
+});
+",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.stories.tsx",
+    },
+    Object {
+      "content": "import React from 'react';
+import styles from './Stadiums.module.scss';
+
+type Props = {};
+
+export const Stadiums = ({}: Props) => {
+  return (
+    <div>
+      content
+    </div>
+  );
+};
+
+export default Stadiums;
+",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.tsx",
+    },
+    Object {
+      "content": "import Stadiums from './stadiums';
+
+export default Stadiums;
+",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/index.ts",
+    },
+    Object {
+      "content": "",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.module.scss",
+    },
+    Object {
+      "content": "import React from 'react';
+import { storiesOf } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import Stadiums from './stadiums';
+
+const stories = storiesOf('stadiums', module).addDecorator(centered);
+
+stories.add('default', () => {
+
+  return <Stadiums />;
+});
+",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.stories.tsx",
+    },
+    Object {
+      "content": "import React from 'react';
+import styles from './Stadiums.module.scss';
+
+type Props = {};
+
+export const Stadiums = ({}: Props) => {
+  return (
+    <div>
+      content
+    </div>
+  );
+};
+
+export default Stadiums;
+",
+      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.tsx",
     },
   ],
 }

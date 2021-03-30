@@ -12,12 +12,12 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
 
       const defaultParams = allDefaultParams[templateName];
 
-      if (params.hasOwnProperty('rPath') && defaultParams.hasOwnProperty('path')) {
+      if (params.rPath && defaultParams.path) {
         params.rPath = `${defaultParams.path}${params.rPath}`;
       }
 
       const mergedParams = { ...defaultParams, ...params };
-      const currentPath = mergedParams.path;
+      const currentPath = mergedParams.rPath || mergedParams.path;
       delete mergedParams.path;
 
       const hasAdditionalParams = Object.keys(mergedParams).length;
