@@ -1,5 +1,5 @@
 const fs = require('file-system');
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 
 const sourceMapTxtPath = configPath.sourcesMapModuleTxtPath;
 const content = fs.readFileSync(sourceMapTxtPath, 'utf8');

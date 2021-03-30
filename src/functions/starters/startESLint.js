@@ -1,5 +1,5 @@
 const { ESLint } = require('eslint');
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 
 const startEsLint = async ({ eslintConfig, outputPath }) => {
   const config = require(configPath.config);

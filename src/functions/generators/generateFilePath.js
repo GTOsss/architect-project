@@ -1,4 +1,4 @@
-const configPath = require('../configPath');
+const configPath = require('../../configPath');
 
 const generateFilePath = ({ filePath, outputPath, inputPath, templateParams, backupPath }) => {
   const config = require(configPath.config);

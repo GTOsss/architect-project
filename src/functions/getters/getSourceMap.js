@@ -1,5 +1,5 @@
-const configPath = require('../configPath');
-const { sourceMapToModule } = require('../utils/change/atomToModuleSourceMap');
+const configPath = require('../../configPath');
+const { sourceMapToModule } = require('../../utils/change/atomToModuleSourceMap');
 
 const getSourceMaps = () => {
   let sourceMapAtom = null;

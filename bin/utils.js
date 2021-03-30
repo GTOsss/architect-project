@@ -7,13 +7,13 @@ const {
   watchTemplateSettings,
 } = require('../src/functions');
 
-const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, myFunction, options }) => {
+const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, callback, options }) => {
   if (sourceMapModule) {
-    myFunction({ sourceMap: sourceMapModule, options });
+    callback({ sourceMap: sourceMapModule, options });
     console.log('Reading source-map-module...');
   }
   if (sourceMapAtomAsModule) {
-    myFunction({ sourceMap: sourceMapAtomAsModule, options });
+    callback({ sourceMap: sourceMapAtomAsModule, options });
     console.log('Reading source-map-atom...');
   }
 };

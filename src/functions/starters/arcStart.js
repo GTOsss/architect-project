@@ -1,7 +1,7 @@
-const getObjectWithPaths = require('./getObjectWithPaths');
-const parseFiles = require('./parseFiles');
-const { createFilesBySourceMap } = require('./createFileBySourceMap');
-const config = require('../configPath');
+const getObjectWithPaths = require('../getters/getObjectWithPaths');
+const parseFiles = require('../parsers/parseFiles');
+const { createFilesBySourceMap } = require('../generators/createFileBySourceMap');
+const config = require('../../configPath');
 
 const startEsLint = require('./startESLint');
 
