@@ -8,6 +8,7 @@ const pathForCommand = {
   scriptCallMain: `${pathToTests}/scriptCallMain`,
   useMethodsInTemplate: `${pathToTests}/useMethodsInTemplate`,
   asyncFunctionInScript: `${pathToTests}/asyncFunctionInScript`,
+  redefenitionComponentNameForSourceMapAtom: `${pathToTests}/redefenitionComponentNameForSourceMapAtom`,
   relativePathForSourceMapAtom: `${pathToTests}/relativePathForSourceMapAtom`,
 };
 

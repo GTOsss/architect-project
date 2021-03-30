@@ -13,7 +13,7 @@ const memoRebuild = (template) => {
 
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   const config = require(configPath.config);
-  const { map, aliases } = sourceMap;
+  const { map, aliases = {} } = sourceMap;
   Object.entries(map).forEach(([sourcePath, components]) => {
     let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
     Object.entries(components).forEach(([key, value]) => {

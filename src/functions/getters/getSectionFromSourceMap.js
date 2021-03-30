@@ -1,4 +1,4 @@
-const getSectionFromSourceMap = ({ sourcePath, components, aliases }) => {
+const getSectionFromSourceMap = ({ sourcePath, components, aliases = {} }) => {
   let objTemplate = Object.entries(components).reduce((acc, [key, val]) => {
     let valTemplate = val.template ? val.template : val;
     valTemplate = aliases[valTemplate] || valTemplate;
