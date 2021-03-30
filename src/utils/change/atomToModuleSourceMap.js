@@ -6,7 +6,8 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtomsArc, defaultParams: allDef
     templates.forEach((template) => {
       const templateIsString = typeof template === 'string';
 
-      const params = templateIsString ? {} : template[1];
+      let params = templateIsString ? {} : template[1];
+      params = params || {};
 
       let templateName = templateIsString ? template : template[0];
       templateName = aliases[templateName] || templateName;
