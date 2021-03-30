@@ -1,0 +1,19 @@
+import React from 'react';
+import { NextPage } from 'next';
+import { serialize } from 'effector';
+import { commonGSSP } from '@utils/ssr/commonGSSP';
+import {{toCamelCase(name)}} from '@components/pages/{{name}}';
+
+export const getServerSideProps = () => {
+  const { props, scope } = commonGSSP();
+
+  return {
+    props: { ...props, store: serialize(scope, { onlyChanges: true }) },
+  };
+};
+
+const {{toCamelCase(name)}}Page = () => {
+  return <{{toCamelCase(name)}} />;
+};
+
+export default {{toCamelCase(name)}}Page;
