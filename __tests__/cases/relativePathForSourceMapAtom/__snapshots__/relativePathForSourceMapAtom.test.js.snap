@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`relativePathForSourceMapAtom test relative Path For SourceMapAtom 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/a.svg",
+    },
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/arrow-right.svg",
+    },
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/blue-posts.svg",
+    },
+    Object {
+      "content": " const options = {
+    escapeString: false,
+    indent: 2,
+    escapeRegex: false,
+  };
+
+
+",
+      "path": "*/assetsFromSourceMap/output/src/services/name/index.ts",
+    },
+  ],
+}
+`;
