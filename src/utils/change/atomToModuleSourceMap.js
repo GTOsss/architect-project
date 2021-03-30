@@ -1,5 +1,6 @@
-const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaultParams = {}, aliases = {} }) => {
+const atomToModuleSourceMap = ({ map: sourceMapByAtomsArc, defaultParams: allDefaultParams = {}, aliases = {} }) => {
   let map = {};
+  const sourceMapByAtoms = { ...sourceMapByAtomsArc };
 
   Object.entries(sourceMapByAtoms).forEach(([componentName, templates]) => {
     templates.forEach((template) => {
@@ -12,17 +13,21 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
 
       const defaultParams = allDefaultParams[templateName];
 
-      if (params.hasOwnProperty('rPath') && defaultParams.hasOwnProperty('path')) {
+      if (params.rPath && defaultParams.path) {
         params.rPath = `${defaultParams.path}${params.rPath}`;
       }
 
       const mergedParams = { ...defaultParams, ...params };
-      const currentPath = mergedParams.path;
+      const currentPath = mergedParams.rPath || mergedParams.path;
       delete mergedParams.path;
 
       const hasAdditionalParams = Object.keys(mergedParams).length;
 
       const valueInSourceMap = hasAdditionalParams ? { template: templateName, ...mergedParams } : templateName;
+
+      if (params.name) {
+        componentName = params.name;
+      }
 
       map[currentPath] = map[currentPath] ? map[currentPath] : {};
       map[currentPath] = { ...map[currentPath], [componentName]: valueInSourceMap };
