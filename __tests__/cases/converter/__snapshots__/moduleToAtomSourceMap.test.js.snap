@@ -3,11 +3,53 @@
 exports[`test moduleToAtom simple 1`] = `
 "{
   map: {
-    endpoints: [
+    icons: [
       [
-        'endpoints',
+        'i',
         {
-          path: 'src/services/endpoints'
+          assets: 'icons-sprite',
+          test: '123',
+          path: 'src/components'
+        }
+      ]
+    ],
+    index: [
+      [
+        'ix',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    button: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    textarea: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    input: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    'input-select': [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
         }
       ]
     ]
@@ -19,17 +61,59 @@ exports[`test moduleToAtom simple 1`] = `
 exports[`test moduleToAtom simple with aliases 1`] = `
 "{
   map: {
-    endpoints: [
+    icons: [
       [
-        'endpoints',
+        'icons',
         {
-          path: 'src/services/endpoints'
+          assets: 'icons-sprite',
+          test: '123',
+          path: 'src/components'
+        }
+      ]
+    ],
+    index: [
+      [
+        'index',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    button: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    textarea: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    input: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    'input-select': [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
         }
       ]
     ]
   },
   aliases: {
-    c: 'component',
+    rc: 'react-component',
     s: 'store',
     ix: 'index',
     i: 'icons'

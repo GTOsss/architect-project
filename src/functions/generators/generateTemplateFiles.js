@@ -5,8 +5,7 @@ const requireFunction = require('../requireFunction');
 const generateFilePath = require('./generateFilePath');
 const configPath = require('../../configPath');
 const backupFile = require('../../utils/backup/backupFile');
-const reGetFunction = new RegExp('.+(?=\\()', 'gm');
-const reGetFunctionArgument = /(?<=\().+(?=\))/gm;
+const parsedFunctionToMap = require('../../utils/parsedFunctionToMap');
 
 const generateTemplateFiles = ({
   sourcePath,
@@ -35,7 +34,7 @@ const generateTemplateFiles = ({
     }
   }
 
-  parsedFiles.forEach((el) => {
+  parsedFiles.forEach(async (el) => {
     const parsedFunctions = el.parsed;
     let parsedContent = el.content;
 
@@ -46,37 +45,20 @@ const generateTemplateFiles = ({
       templateParams,
       backupPath,
     });
-    parsedFunctions.forEach((el) => {
-      let interpolationValue = '';
-      let interpolationResult = '';
 
-      const searchFunctionResult = el.str.match(reGetFunction);
+    const interpolationMap = parsedFunctionToMap({
+      parsedFunctions,
+      templateParams,
+      templateScript,
+      template,
+      mapCurrentComponent,
+      assets,
+    });
 
-      if (searchFunctionResult) {
-        const functionInterpolation = searchFunctionResult[0];
-        const searchFunctionArgument = el.str.match(reGetFunctionArgument) || [];
-        const functionArgument = searchFunctionArgument[0];
+    const resolvingInterpolationMap = await Promise.all(interpolationMap);
 
-        interpolationResult = requireFunction({
-          functionName: functionInterpolation,
-          variableValue: templateParams.value[functionArgument],
-          resultFileName: templateParams.name,
-          templateScript,
-          template,
-          sectionFromSourceMap: mapCurrentComponent,
-          assets,
-        });
-        interpolationValue = `{{${el.str}}}`;
-      } else {
-        interpolationValue = el.str ? `{{${el.str}}}` : '';
-
-        if (typeof templateParams[el.str] === 'undefined') {
-          console.log(chalk.yellow(`Missing parameter ${chalk.blue(el.str)} in template ${chalk.blue(template)} `));
-        }
-        interpolationResult = templateParams.value[el.str];
-      }
-
-      parsedContent = parsedContent.replace(interpolationValue, interpolationResult);
+    resolvingInterpolationMap.forEach((el) => {
+      parsedContent = parsedContent.replace(el.interpolationValue, el.interpolationResult);
     });
 
     requireFunction({

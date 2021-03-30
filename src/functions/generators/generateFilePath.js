@@ -12,7 +12,7 @@ const generateFilePath = ({ filePath, outputPath, inputPath, templateParams, bac
     matchedBracketsPath.forEach((el) => {
       const reComponentName = new RegExp(`\\${config.itrFileNameStart}${el}\\${config.itrFileNameEnd}`, 'gi');
 
-      pathWithSourceMapVariable = pathWithSourceMapVariable.replace(reComponentName, templateParams.value[el]);
+      pathWithSourceMapVariable = pathWithSourceMapVariable.replace(reComponentName, templateParams[el]);
     });
   }
 

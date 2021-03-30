@@ -40,14 +40,14 @@ commander
     if (options.eslint) {
       console.log(chalk.yellow('Starting architect with ESLint...'));
 
-      callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, myFunction: actionEsLint, options });
+      callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, callback: actionEsLint, options });
 
       return;
     }
 
     console.log(chalk.yellow('Starting architect...'));
 
-    callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, myFunction: actionStart, options });
+    callFunctionWithCurrentSourceMap({ sourceMapModule, sourceMapAtomAsModule, callback: actionStart, options });
   });
 
 //convert
