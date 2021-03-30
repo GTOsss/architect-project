@@ -13,7 +13,7 @@ const { pathForCommand, casesOutputPath } = require('../casesConfigPath');
 const currentCommand = pathForCommand.variableInTemplate;
 
 describe('variable', () => {
-  cleanOutPutBeforeTest(casesOutputPath.assetsFromSourceMap);
+  cleanOutPutBeforeTest(casesOutputPath.variableInTemplate);
 
   test('get path from variableInTemplate in template', async () => {
     await promisifyCliCommand(`arc s -c ${currentCommand}`);

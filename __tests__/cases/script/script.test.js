@@ -11,7 +11,7 @@ const { pathForCommand, casesOutputPath } = require('../casesConfigPath');
 const currentCommand = pathForCommand.script;
 
 describe('script', () => {
-  cleanOutPutBeforeTest(casesOutputPath.assetsFromSourceMap);
+  cleanOutPutBeforeTest(casesOutputPath.script);
 
   test('test call function from script', async () => {
     await promisifyCliCommand(`arc s -c ${currentCommand}`);

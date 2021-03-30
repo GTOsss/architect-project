@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`script test call function from script 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "test 
+
+
+",
+      "path": "*/asyncFunctionInScript/output/src/services/name/index.ts",
+    },
+  ],
+}
+`;
