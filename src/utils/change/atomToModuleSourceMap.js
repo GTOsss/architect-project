@@ -1,4 +1,4 @@
-const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaultParams = {}, aliases }) => {
+const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaultParams = {}, aliases = {} }) => {
   let map = {};
 
   Object.entries(sourceMapByAtoms).forEach(([componentName, templates]) => {
@@ -11,6 +11,10 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
       templateName = aliases[templateName] || templateName;
 
       const defaultParams = allDefaultParams[templateName];
+
+      if (params.hasOwnProperty('rPath') && defaultParams.hasOwnProperty('path')) {
+        params.rPath = `${defaultParams.path}${params.rPath}`;
+      }
 
       const mergedParams = { ...defaultParams, ...params };
       const currentPath = mergedParams.path;
