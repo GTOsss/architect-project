@@ -1,11 +1,12 @@
 const { resolve } = require('path');
-const chalk = require('chalk');
 const fs = require('file-system');
 const requireFunction = require('../requireFunction');
 const generateFilePath = require('./generateFilePath');
 const configPath = require('../../configPath');
 const backupFile = require('../../utils/backup/backupFile');
 const parsedFunctionToMap = require('../../utils/parsedFunctionToMap');
+const { pushFiles, pushReplacedFiles } = require('../../store/createdFiles');
+require('../../store/createMap');
 
 const generateTemplateFiles = ({
   sourcePath,
@@ -33,6 +34,24 @@ const generateTemplateFiles = ({
       fs.rmdirSync(dirToRemove, { recursive: true });
     }
   }
+
+  parsedFiles.forEach((el) => {
+    const { filePath } = generateFilePath({
+      filePath: el.file,
+      outputPath,
+      inputPath,
+      templateParams,
+      backupPath,
+    });
+
+    if (fs.existsSync(filePath)) {
+      if (config.replace) {
+        pushReplacedFiles({ filePath });
+      }
+    } else {
+      pushFiles({ filePath });
+    }
+  });
 
   parsedFiles.forEach(async (el) => {
     const parsedFunctions = el.parsed;
@@ -89,37 +108,18 @@ const generateTemplateFiles = ({
       }
     }
 
-    //flag backup
-
     if (config.backups) {
       backupFile({ filePath, backupFilePath, template, config });
     }
   });
+
+  return new Promise((resolve, reject) => {
+    if (resolve) {
+      resolve(`${sourcePath}`);
+    } else {
+      reject('err');
+    }
+  });
 };
 
-const generateTemplateFilesWithoutCash = ({ assets, template, ...rest }) => {
-  if (assets) {
-    const currentAssets = assets.reduce((acc, { path, ...restAsset }) => {
-      if (fs.existsSync(path)) {
-        acc.push({
-          ...restAsset,
-          path,
-          content: fs.readFileSync(path),
-        });
-      }
-
-      return acc;
-    }, []);
-    console.log(chalk.yellow(`Rebuilding template ${template} component ${rest.fileName}...`));
-
-    const templateConfig = config.templates[template] ? config.templates[template] : config;
-
-    generateTemplateFiles({ ...rest, assets: currentAssets, config: templateConfig });
-
-    console.log(chalk.green('Success'));
-  } else {
-    console.log(chalk.red(`Assets does't exist in template ${template} component ${rest.fileName}!`));
-  }
-};
-
-module.exports = { generateTemplateFiles, generateTemplateFilesWithoutCash };
+module.exports = { generateTemplateFiles };

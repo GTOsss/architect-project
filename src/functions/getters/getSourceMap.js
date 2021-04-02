@@ -8,7 +8,7 @@ const getSourceMaps = () => {
   try {
     sourceMapAtom = require(configPath.sourcesMapAtomJsPath);
   } catch {
-    console.log('Can not find file source-map-atom.js');
+    console.log('Can not find file source-map-atom.js.ts');
   }
 
   try {

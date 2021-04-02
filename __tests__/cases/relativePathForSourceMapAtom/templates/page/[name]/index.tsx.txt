@@ -8,7 +8,7 @@ export const getServerSideProps = () => {
   const { props, scope } = commonGSSP();
 
   return {
-    props: { ...props, store: serialize(scope, { onlyChanges: true }) },
+    props: { ...props, createdFolders: serialize(scope, { onlyChanges: true }) },
   };
 };
 
