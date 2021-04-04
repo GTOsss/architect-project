@@ -1,96 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`relativePathForSourceMapAtom test relative Path For SourceMapAtom 1`] = `
-Object {
-  "src": Array [
-    Object {
-      "content": "import Stadiums from './stadiums';
-
-export default Stadiums;
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/index.ts",
-    },
-    Object {
-      "content": "",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.module.scss",
-    },
-    Object {
-      "content": "import React from 'react';
-import { storiesOf } from '@storybook/react';
-import centered from '@storybook/addon-centered/react';
-import Stadiums from './stadiums';
-
-const stories = storiesOf('stadiums', module).addDecorator(centered);
-
-stories.add('default', () => {
-
-  return <Stadiums />;
-});
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.stories.tsx",
-    },
-    Object {
-      "content": "import React from 'react';
-import styles from './Stadiums.module.scss';
-
-type Props = {};
-
-export const Stadiums = ({}: Props) => {
-  return (
-    <div>
-      content
-    </div>
-  );
-};
-
-export default Stadiums;
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.tsx",
-    },
-    Object {
-      "content": "import Stadiums from './stadiums';
-
-export default Stadiums;
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/index.ts",
-    },
-    Object {
-      "content": "",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.module.scss",
-    },
-    Object {
-      "content": "import React from 'react';
-import { storiesOf } from '@storybook/react';
-import centered from '@storybook/addon-centered/react';
-import Stadiums from './stadiums';
-
-const stories = storiesOf('stadiums', module).addDecorator(centered);
-
-stories.add('default', () => {
-
-  return <Stadiums />;
-});
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.stories.tsx",
-    },
-    Object {
-      "content": "import React from 'react';
-import styles from './Stadiums.module.scss';
-
-type Props = {};
-
-export const Stadiums = ({}: Props) => {
-  return (
-    <div>
-      content
-    </div>
-  );
-};
-
-export default Stadiums;
-",
-      "path": "*/relativePathForSourceMapAtom/output/src/page/test/stadiums/stadiums.tsx",
-    },
-  ],
-}
+Array [
+  "{
+  folder: 'src',
+  files: [
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/index.ts'
+  ]
+}",
+]
 `;

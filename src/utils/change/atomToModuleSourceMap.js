@@ -19,7 +19,11 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
       }
 
       if (params.rPath && defaultParams.path) {
-        params.rPath = `${defaultParams.path}${params.rPath}`;
+        if (params.rPath[0] === '/') {
+          params.rPath = `${defaultParams.path}${params.rPath}`;
+        } else {
+          params.rPath = `${defaultParams.path}/${params.rPath}`;
+        }
       }
 
       const mergedParams = { ...defaultParams, ...params };

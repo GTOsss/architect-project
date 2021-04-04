@@ -1,10 +1,6 @@
 const appRoot = process.cwd();
 const { resolve } = require('path');
-const {
-  returnOutputPathsWithContent,
-  promisifyCliCommand,
-  SnapshotSerializer,
-} = require('../../utils/utilsForArcStart');
+const { returnOutputPaths, promisifyCliCommand } = require('../../utils/utilsForArcStart');
 const cleanOutPutBeforeTest = require('../../utils/cleanOutPutBeforeTest');
 const { pathForCommand, casesOutputPath } = require('../casesConfigPath');
 
@@ -17,8 +13,6 @@ describe('relativePathForSourceMapAtom', () => {
     await promisifyCliCommand(`arc s -c ${currentCommand}`);
     const currentPathToOutput = resolve(appRoot, currentCommand, 'output');
 
-    SnapshotSerializer();
-
-    expect(returnOutputPathsWithContent(currentPathToOutput)).toMatchSnapshot();
+    expect(returnOutputPaths(currentPathToOutput)).toMatchSnapshot();
   });
 });

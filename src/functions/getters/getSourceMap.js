@@ -14,7 +14,7 @@ const getSourceMaps = () => {
   try {
     sourceMapModule = require(configPath.sourcesMapModuleJsPath);
   } catch {
-    console.log('Can not find file source-map-module.js');
+    console.log('Can not find file source-map-module.js.ts');
   }
 
   return { sourceMapModule, sourceMapAtomAsModule: sourceMapAtom && sourceMapToModule(sourceMapAtom) };
