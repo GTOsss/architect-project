@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+require('../src/store/index');
 const commander = require('commander');
 const chalk = require('chalk');
 const { getSourceMaps } = require('../src/functions/getters/getSourceMap');

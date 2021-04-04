@@ -1,6 +1,6 @@
 module.exports = {
   output: 'output-test',
-  replace: false,
+  replace: true,
   clean: false,
   itrStart: '{{',
   itrEnd: '}}',
