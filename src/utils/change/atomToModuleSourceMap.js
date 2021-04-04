@@ -31,12 +31,8 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtoms, defaultParams: allDefaul
       const valueInSourceMap = hasAdditionalParams ? { template: templateName, ...mergedParams } : templateName;
 
       map[currentPath] = map[currentPath] ? map[currentPath] : {};
-      if (params.name) {
-        const componentWithCustomName = params.name;
-        map[currentPath] = { ...map[currentPath], [componentWithCustomName]: valueInSourceMap };
-      } else {
-        map[currentPath] = { ...map[currentPath], [componentName]: valueInSourceMap };
-      }
+
+      map[currentPath] = { ...map[currentPath], [params.name || componentName]: valueInSourceMap };
     });
   });
 

@@ -50,8 +50,6 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
 
           const templateConfig = config.templates[template] ? config.templates[template] : config;
 
-          generateTemplateFiles({ ...params, config: templateConfig, templateParams });
-
           arrPromise.push(generateTemplateFiles({ ...params, config: templateConfig, templateParams }));
         }
       });

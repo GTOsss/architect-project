@@ -5,13 +5,13 @@ const { $createdFoldersList } = require('./createdFolders');
 const { toMapFolderWithFiles } = require('../utils/prettyLogCreatedFiles');
 
 sample({
-  source: { $createdFilesList, $createdFoldersList },
-  fn: ({ $createdFilesList, $createdFoldersList }) => toMapFolderWithFiles($createdFoldersList, $createdFilesList),
+  source: { filesList: $createdFilesList, foldersList: $createdFoldersList },
+  fn: toMapFolderWithFiles,
   target: $prettyMap,
 });
 
 sample({
-  source: { $replacedFilesList, $createdFoldersList },
-  fn: ({ $replacedFilesList, $createdFoldersList }) => toMapFolderWithFiles($createdFoldersList, $replacedFilesList),
+  source: { filesList: $replacedFilesList, foldersList: $createdFoldersList },
+  fn: toMapFolderWithFiles,
   target: $prettyMapReplaced,
 });

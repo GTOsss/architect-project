@@ -7,7 +7,7 @@ const { resolve } = require('path');
 
 const doChanges = ({ json, logVariable }) => {
   const current = json.versions[json.current];
-  const fileName = current.includes('atm') ? 'source-map-module.js' : 'source-map-atom.js.ts';
+  const fileName = current.includes('atm') ? 'source-map-module.js' : 'source-map-atom.js';
 
   const currentPath = resolve(arcHistoryPath, current, fileName);
   const targetPath = resolve(sourceMapPath, fileName);

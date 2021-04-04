@@ -6,7 +6,6 @@ const configPath = require('../../configPath');
 const backupFile = require('../../utils/backup/backupFile');
 const parsedFunctionToMap = require('../../utils/parsedFunctionToMap');
 const { pushFiles, pushReplacedFiles } = require('../../store/createdFiles');
-require('../../store/createMap');
 
 const generateTemplateFiles = ({
   sourcePath,

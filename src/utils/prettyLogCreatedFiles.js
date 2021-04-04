@@ -9,10 +9,12 @@ const prettyLogCreatedFiles = (obj, method) => {
   });
 };
 
-const toMapFolderWithFiles = (foldersList, filesList) => {
+const toMapFolderWithFiles = ({ foldersList, filesList }) => {
   return foldersList.reduce((acc, folder) => {
     const filter = filesList.filter((path) => {
-      return path.match([folder]);
+      const reFolder = new RegExp(`${folder}\/(?!.*\/)`, 'g');
+
+      return reFolder.test(path);
     });
     acc[folder] = filter;
     return acc;

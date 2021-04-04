@@ -7,6 +7,14 @@ Object {
       "content": "const variable = 'myName';",
       "path": "*/variableInFileName/output/src/icons/myName/index.ts",
     },
+    Object {
+      "content": "const variable = 'myName';",
+      "path": "*/variableInFileName/output/src/icons/myName/myName-myName-any/myName-myName-any.ts",
+    },
+    Object {
+      "content": "const variable = 'myName';",
+      "path": "*/variableInFileName/output/src/icons/myName/myName-myName-any/myName.ts",
+    },
   ],
 }
 `;

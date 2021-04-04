@@ -114,7 +114,7 @@ exports[`test moduleToAtom simple with aliases 1`] = `
   },
   aliases: {
     rc: 'react-component',
-    s: 'createdFolders',
+    s: 'store',
     ix: 'index',
     i: 'icons'
   }
