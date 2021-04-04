@@ -3,7 +3,7 @@
 exports[`test atomToModule simple with aliases 1`] = `
 "{
   map: {
-    undefined: {
+    src: {
       stadiums: 'store'
     },
     'src/components/pages': {

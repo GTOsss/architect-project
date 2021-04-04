@@ -1,7 +1,10 @@
 const getSectionFromSourceMap = require('../getters/getSectionFromSourceMap');
 const parseAssets = require('../parsers/parseAssets');
-const { generateTemplateFiles, generateTemplateFilesWithoutCash } = require('./generateTemplateFiles');
+const { generateTemplateFiles } = require('./generateTemplateFiles');
+const { generateTemplateFilesWithoutCash } = require('./generateTemplateFilesWithoutCash');
 const configPath = require('../../configPath');
+const { endGeneration } = require('../../store/prettyMap');
+const { pushFolders } = require('../../store/createdFolders');
 
 const memoData = {};
 
@@ -11,10 +14,19 @@ const memoRebuild = (template) => {
   });
 };
 
+const awaitEndGeneration = async (arrPromise, event) => {
+  await Promise.all(arrPromise);
+  event();
+};
+
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   const config = require(configPath.config);
   const { map, aliases = {} } = sourceMap;
   Object.entries(map).forEach(([sourcePath, components]) => {
+    const arrPromise = [];
+
+    pushFolders({ folder: sourcePath });
+
     let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {
@@ -32,16 +44,19 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
           } else {
             memoData[template] = [params];
           }
+          const valueIsString = typeof value === 'string';
 
-          const templateParams = { ...value, name: key };
+          const templateParams = valueIsString ? { value, name: key } : { ...value, name: key };
 
           const templateConfig = config.templates[template] ? config.templates[template] : config;
 
-          generateTemplateFiles({ ...params, config: templateConfig, templateParams });
+          arrPromise.push(generateTemplateFiles({ ...params, config: templateConfig, templateParams }));
         }
       });
     });
+    awaitEndGeneration(arrPromise, endGeneration);
   });
+
   return true;
 };
 
