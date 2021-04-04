@@ -15,7 +15,7 @@ const atomToModuleSourceMap = ({ map: sourceMapByAtomsArc, defaultParams: allDef
       const defaultParams = allDefaultParams[templateName];
 
       if (params.rPath && defaultParams.path) {
-        if (params.rPath.includes('/')) {
+        if (params.rPath[0] === '/') {
           params.rPath = `${defaultParams.path}${params.rPath}`;
         } else {
           params.rPath = `${defaultParams.path}/${params.rPath}`;

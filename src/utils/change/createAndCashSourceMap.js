@@ -18,7 +18,7 @@ const { sourceMapToAtom } = require('./moduleToAtomSourceMap');
 
 const atomToModuleParams = {
   prefix: 'atm_',
-  fileName: 'source-map-module.js.ts',
+  fileName: 'source-map-module.js',
   oldPath: resolve(configPath.sourcesMapModuleJsPath),
   currentSourceMap: sourceMapAtom,
   currentFileName: 'source-map-atom.js',
@@ -35,7 +35,7 @@ const moduleToAtomParams = {
   fileName: 'source-map-atom.js',
   oldPath: resolve(configPath.sourcesMapAtomJsPath),
   currentSourceMap: sourceMapModule,
-  currentFileName: 'source-map-module.js.ts',
+  currentFileName: 'source-map-module.js',
   method: sourceMapToAtom,
   prettyMap: {
     indent: '  ',

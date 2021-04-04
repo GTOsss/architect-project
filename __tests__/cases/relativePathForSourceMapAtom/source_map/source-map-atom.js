@@ -4,7 +4,9 @@ const defaultParams = {
 };
 
 const map = {
-  stadiums: ['component', ['component', { rPath: '/test' }]],
+  stadiums: ['component', ['component', { rPath: '/slesh' }]],
+  clubs: ['component', ['component', { rPath: 'withoutSlesh' }]],
+  comands: ['component', ['component', { rPath: 'test/test2' }]],
 };
 
 module.exports = {
