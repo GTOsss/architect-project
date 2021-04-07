@@ -3,7 +3,7 @@ const parseAssets = require('../parsers/parseAssets');
 const { generateTemplateFiles } = require('./generateTemplateFiles');
 const { generateTemplateFilesWithoutCash } = require('./generateTemplateFilesWithoutCash');
 const configPath = require('../../configPath');
-const { endGeneration } = require('../../store/prettyMap');
+const { endGeneration } = require('../../store/endGeneration');
 const { pushFolders } = require('../../store/createdFolders');
 
 const memoData = {};
@@ -16,15 +16,15 @@ const memoRebuild = (template) => {
 
 const awaitEndGeneration = async (arrPromise, event) => {
   await Promise.all(arrPromise);
+
   event();
 };
 
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   const config = require(configPath.config);
   const { map, aliases = {} } = sourceMap;
+  const arrPromise = [];
   Object.entries(map).forEach(([sourcePath, components]) => {
-    const arrPromise = [];
-
     pushFolders({ folder: sourcePath });
 
     let mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
@@ -54,9 +54,8 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
         }
       });
     });
-    awaitEndGeneration(arrPromise, endGeneration);
   });
-
+  awaitEndGeneration(arrPromise, endGeneration);
   return true;
 };
 
