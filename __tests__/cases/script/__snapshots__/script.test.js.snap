@@ -4,7 +4,8 @@ exports[`script test call function from script 1`] = `
 Object {
   "src": Array [
     Object {
-      "content": " const options = {
+      "content": "const t = "t"
+ = {
     escapeString: false,
     indent: 2,
     escapeRegex: false,

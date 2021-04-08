@@ -16,13 +16,7 @@ Object {
       "path": "*/assetsFromSourceMap/output/src/services/icons/svg/blue-posts.svg",
     },
     Object {
-      "content": " const options = {
-    escapeString: false,
-    indent: 2,
-    escapeRegex: false,
-  };
-
-
+      "content": "const t = "t"
 ",
       "path": "*/assetsFromSourceMap/output/src/services/name/index.ts",
     },
