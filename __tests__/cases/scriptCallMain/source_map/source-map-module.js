@@ -7,7 +7,7 @@ const aliases = {
 
 const map = {
   'src/services': {
-    icons: { template: 'icons', variable: 'переменная', assets: 'icons-sprite' },
+    icons: ['icons', { variable: 'переменная', assets: 'icons-sprite' }],
   },
 };
 

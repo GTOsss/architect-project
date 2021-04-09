@@ -5,13 +5,6 @@ Object {
   "src": Array [
     Object {
       "content": "const t = "t"
- = {
-    escapeString: false,
-    indent: 2,
-    escapeRegex: false,
-  };
-
-
 ",
       "path": "*/script/output/src/services/name/index.ts",
     },

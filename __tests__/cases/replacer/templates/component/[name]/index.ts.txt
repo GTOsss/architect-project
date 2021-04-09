@@ -1,0 +1,23 @@
+import {{toCamelCase(name)}} from './{{name}}';
+
+export default {{toCamelCase(name)}};
+
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';
+ const doChanges = 'do changes';

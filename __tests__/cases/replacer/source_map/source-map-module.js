@@ -6,8 +6,11 @@ const aliases = {
 };
 
 const map = {
-  'src/services': {
-    icons: ['icons', { variable: 'переменная' }],
+  'src/icons': {
+    icons: ['icons', { variable: '4' }],
+  },
+  'src/component': {
+    button: ['component'],
   },
 };
 
