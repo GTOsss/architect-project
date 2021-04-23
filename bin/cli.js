@@ -12,7 +12,7 @@ const {
 
 const { callFunctionWithCurrentSourceMap, actionStart, actionEsLint } = require('./utils');
 
-const config = require('../src/configPath');
+const configPath = require('../src/configPath');
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
@@ -32,7 +32,7 @@ commander
   .description('Start architect-project generation')
   .action(() => {
     if (options.config) {
-      config.settingsFolder = options.config;
+      configPath.settingsFolder = options.config;
     }
 
     const { sourceMapModule, sourceMapAtomAsModule } = getSourceMaps();

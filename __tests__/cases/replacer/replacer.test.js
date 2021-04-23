@@ -40,7 +40,7 @@ describe('replacer', () => {
     } else {
       console.log('какая-то ошибка...');
     }
-  });
+  }, 10000);
   test('flag replace in template', async () => {
     await promisifyCliCommand(`arc s -c ${currentCommand}`);
 
@@ -64,5 +64,5 @@ describe('replacer', () => {
         console.log('какая-то ошибка...');
       }
     });
-  });
+  }, 10000);
 });
