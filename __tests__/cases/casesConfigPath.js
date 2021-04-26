@@ -10,6 +10,7 @@ const pathForCommand = {
   asyncFunctionInScript: `${pathToTests}/asyncFunctionInScript`,
   redefenitionComponentNameForSourceMapAtom: `${pathToTests}/redefenitionComponentNameForSourceMapAtom`,
   relativePathForSourceMapAtom: `${pathToTests}/relativePathForSourceMapAtom`,
+  replacer: `${pathToTests}/replacer`,
 };
 
 const casesOutputPath = Object.entries(pathForCommand).reduce((acc, [key, value]) => {
