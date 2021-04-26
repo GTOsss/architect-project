@@ -14,16 +14,18 @@ const memoRebuild = (template) => {
   });
 };
 
-const awaitEndGeneration = async (arrPromise, event) => {
-  await Promise.all(arrPromise);
+const awaitEndGeneration = async (endGenerationPromises, event) => {
+  await Promise.all(endGenerationPromises);
 
   event();
 };
 
 const createFilesBySourceMap = (templateMap, sourceMap) => {
   const config = require(configPath.config);
-  const { map, aliases = {} } = sourceMap;
-  const arrPromise = [];
+  const { map = {}, aliases = {} } = sourceMap;
+
+  const endGenerationPromises = [];
+
   Object.entries(map).forEach(([sourcePath, components]) => {
     pushFolders({ folder: sourcePath });
 
@@ -50,12 +52,12 @@ const createFilesBySourceMap = (templateMap, sourceMap) => {
 
           const templateConfig = config.templates[template] ? config.templates[template] : config;
 
-          arrPromise.push(generateTemplateFiles({ ...params, config: templateConfig, templateParams }));
+          endGenerationPromises.push(generateTemplateFiles({ ...params, config: templateConfig, templateParams }));
         }
       });
     });
   });
-  awaitEndGeneration(arrPromise, endGeneration);
+  awaitEndGeneration(endGenerationPromises, endGeneration);
   return true;
 };
 

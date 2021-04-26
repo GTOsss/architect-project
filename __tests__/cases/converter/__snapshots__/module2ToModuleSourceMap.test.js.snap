@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test module2ToModule simple 1`] = `
+"{
+  map: {
+    'src/icons': {
+      icons: {
+        template: 'i',
+        variable: '4'
+      }
+    },
+    'src/component': {
+      button: {
+        template: 'icons'
+      }
+    }
+  },
+  aliases: {}
+}"
+`;
+
+exports[`test module2ToModule simple with aliases 1`] = `
+"{
+  map: {
+    'src/icons': {
+      icons: {
+        template: 'icons',
+        variable: '4'
+      }
+    },
+    'src/component': {
+      button: {
+        template: 'icons'
+      }
+    }
+  },
+  aliases: {
+    c: 'component',
+    s: 'store',
+    ix: 'index',
+    i: 'icons'
+  }
+}"
+`;
