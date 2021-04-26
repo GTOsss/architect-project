@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const {
   startWatcherWithEslint,
   startWatcher,
@@ -29,7 +28,6 @@ const actionStart = ({ sourceMap, options }) => {
   } else {
     arcStart({ sourcesMap: sourceMap });
   }
-  console.log(chalk.green('Success'));
 };
 
 // esLint
@@ -43,8 +41,6 @@ const actionEsLint = ({ sourceMap, options }) => {
   } else {
     arcStartWithEslint({ sourcesMap: sourceMap });
   }
-
-  console.log(chalk.green('Success'));
 };
 
 module.exports = {
