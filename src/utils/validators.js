@@ -44,13 +44,7 @@ const aliasesSchema = Joi.object().custom((value) => {
   return true;
 });
 
-const templateParamsSchema = Joi.array().items(
-  Joi.string().required(),
-  Joi.object({
-    variable: Joi.string(),
-    assets: Joi.string(),
-  }),
-);
+const templateParamsSchema = Joi.array().items(Joi.string().required(), Joi.object());
 
 const moduleMapSchema = Joi.object().custom((value) => {
   Object.values(value).forEach((component) => {
