@@ -34,6 +34,7 @@ module.exports = class Paths {
     return resolve(appRoot, this.output);
   }
   get esLintOutputPath() {
+    console.log(`>>>>${appRoot}/${this.output}/**/*[.tsx, .ts, .js, .jsx,]`);
     return `${appRoot}/${this.output}/**/*[.tsx, .ts, .js, .jsx,]`;
   }
   get assetsPath() {

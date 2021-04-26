@@ -8,13 +8,11 @@ module.exports = {
   itrFileNameEnd: ']',
   templateExt: '.txt',
   esLint: {
-    quiet: true,
+    quiet: false,
   },
   templates: {
-    endpoints: {
-      clean: true,
-      replace: true,
-      watch: ['swagger.js'],
+    component: {
+      replace: false,
     },
   },
 };

@@ -7,7 +7,7 @@ const startEsLint = async ({ eslintConfig, outputPath }) => {
   const eslint = new ESLint({ fix: true, baseConfig: eslintConfig });
 
   // 2. Lint files.
-  const results = await eslint.lintFiles([outputPath]);
+  const results = await eslint.lintFiles(outputPath);
 
   await ESLint.outputFixes(results);
 

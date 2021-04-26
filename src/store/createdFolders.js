@@ -1,6 +1,8 @@
-const { createStore, createEvent } = require('effector');
+const { createStore, createEvent, sample } = require('./rootDomain');
+const { endGeneration } = require('./endGeneration');
 
 const $createdFolders = createStore({ set: new Set() });
+const $createdFoldersList = createStore([]);
 
 const pushFolders = createEvent();
 
@@ -10,6 +12,11 @@ $createdFolders.on(pushFolders, ({ set }, { folder }) => {
   return { set };
 });
 
-const $createdFoldersList = $createdFolders.map(({ set }) => Array.from(set));
+sample({
+  source: $createdFolders,
+  clock: endGeneration,
+  fn: ({ set }) => Array.from(set),
+  target: $createdFoldersList,
+});
 
 module.exports = { pushFolders, $createdFoldersList };

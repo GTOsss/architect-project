@@ -1,7 +1,10 @@
-const { createStore, createEvent } = require('effector');
+const { createStore, createEvent, sample } = require('./rootDomain');
+const { endGeneration } = require('./endGeneration');
 
 const $createdFiles = createStore({ set: new Set() });
 const $replacedFiles = createStore({ set: new Set() });
+const $createdFilesList = createStore([]);
+const $replacedFilesList = createStore([]);
 
 const pushFiles = createEvent();
 const pushReplacedFiles = createEvent();
@@ -20,7 +23,18 @@ $replacedFiles.on(pushReplacedFiles, ({ set }, { filePath }) => {
   return { set };
 });
 
-const $createdFilesList = $createdFiles.map(({ set }) => Array.from(set));
-const $replacedFilesList = $replacedFiles.map(({ set }) => Array.from(set));
+sample({
+  source: $createdFiles,
+  clock: endGeneration,
+  fn: ({ set }) => Array.from(set),
+  target: $createdFilesList,
+});
+
+sample({
+  source: $replacedFiles,
+  clock: endGeneration,
+  fn: ({ set }) => Array.from(set),
+  target: $replacedFilesList,
+});
 
 module.exports = { pushFiles, pushReplacedFiles, $createdFilesList, $replacedFilesList };
