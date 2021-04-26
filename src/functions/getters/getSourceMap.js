@@ -11,46 +11,30 @@ const getSourceMaps = () => {
 
   try {
     sourceMapAtom = require(configPath.sourcesMapAtomJsPath);
-
-    if (sourceMapAtom.map) {
-      const validateAtomMapResult = validateAtomMap(sourceMapAtom.map);
-
-      if (validateAtomMapResult.error) {
-        console.log(validateAtomMapResult.error);
-      }
-    }
-
-    if (sourceMapAtom.aliases) {
-      const validateAliasesResult = validateAliases(sourceMapAtom.aliases);
-
-      if (validateAliasesResult.error) {
-        console.log(validateAliasesResult.error);
-      }
-    }
   } catch {
     console.log('Can not find file source-map-atom.js');
   }
 
+  if (sourceMapAtom?.aliases) {
+    validateAliases(sourceMapAtom?.aliases);
+  }
+
+  if (sourceMapAtom?.map) {
+    validateAtomMap(sourceMapAtom?.map);
+  }
+
   try {
     sourceMapModule = require(configPath.sourcesMapModuleJsPath);
-
-    if (sourceMapModule.map) {
-      const validateModuleMapResult = validateModuleMap(sourceMapModule.map);
-
-      if (validateModuleMapResult.error) {
-        console.log(validateModuleMapResult.error);
-      }
-    }
-
-    if (sourceMapModule.aliases) {
-      const validateAliasesResult = validateAliases(sourceMapModule.aliases);
-
-      if (validateAliasesResult.error) {
-        console.log(validateAliasesResult.error);
-      }
-    }
   } catch {
     console.log('Can not find file source-map-module.js');
+  }
+
+  if (sourceMapModule?.map) {
+    validateModuleMap(sourceMapModule?.map);
+  }
+
+  if (sourceMapModule?.aliases) {
+    validateAliases(sourceMapModule?.aliases);
   }
 
   return {

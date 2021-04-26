@@ -88,19 +88,35 @@ const atomMapSchema = Joi.object().custom((value) => {
 });
 
 const validateConfig = (config) => {
-  return configSchema.validate(config);
+  const validateConfigResult = configSchema.validate(config);
+
+  if (validateConfigResult.error) {
+    throw new Error(validateConfigResult.error);
+  }
 };
 
 const validateModuleMap = (map) => {
-  return moduleMapSchema.validate(map);
+  const validateModuleMapResult = moduleMapSchema.validate(map);
+
+  if (validateModuleMapResult.error) {
+    throw new Error(validateModuleMapResult.error);
+  }
 };
 
 const validateAtomMap = (map) => {
-  return atomMapSchema.validate(map);
+  const validateAtomMapResult = atomMapSchema.validate(map);
+
+  if (validateAtomMapResult.error) {
+    throw new Error(validateAtomMapResult.error);
+  }
 };
 
 const validateAliases = (aliases) => {
-  return aliasesSchema.validate(aliases);
+  const validateAliasesResult = aliasesSchema.validate(aliases);
+
+  if (validateAliasesResult.error) {
+    throw new Error(validateAliasesResult.error);
+  }
 };
 
 module.exports = { validateConfig, validateModuleMap, validateAtomMap, validateAliases };
