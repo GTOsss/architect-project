@@ -5,7 +5,7 @@ Object {
   "src": Array [
     Object {
       "content": "const variable = 'myName';",
-      "path": "*/variableInFileName/output/src/icons/myName/index.ts",
+      "path": "*/variableInFileName/output/src/icons/myName/dirName-myName_test_fox/test-myName-fox.js",
     },
     Object {
       "content": "const variable = 'myName';",
@@ -24,7 +24,7 @@ Array [
   "{
   folder: 'src',
   files: [
-    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/dirName-myName_test_fox/test-myName-fox.js',
     'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName-myName-any.ts',
     'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName.ts'
   ]

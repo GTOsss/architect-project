@@ -79,8 +79,8 @@ output-test/
 architect/
 yarn.lock
 .eslintignore
-.eslintrc.js
+../../../parse1Cdata/.eslintrc.js
 .prettierignore
-.prettierrc.js
+../../../parse1Cdata/.prettierrc.js
 __tests__/cases/architectV1
 .arc
