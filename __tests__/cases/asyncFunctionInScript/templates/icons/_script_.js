@@ -1,11 +1,15 @@
-const returnText = () => {
-  return 'test ';
-};
+const axios = require('axios');
 
-const asyncFunction = async () => {
-  return await new Promise((resolve) => {
-    setTimeout(resolve, 1000, returnText());
+const main = async (_, { writeFileStream }) => {
+  const { data } = await axios({
+    method: 'get',
+    url: 'http://bit.ly/2mTM3nY',
+    responseType: 'stream',
   });
+
+  writeFileStream({ data, fileName: 'photo.jpeg' });
 };
 
-module.exports = { asyncFunction };
+module.exports = {
+  main,
+};
