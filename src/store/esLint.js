@@ -1,11 +1,11 @@
-const { createStore, createApi } = require('./rootDomain');
+import { createApi, createStore } from './rootDomain';
+import config from '../configPath';
+
 const { $createdFilesList, $replacedFilesList } = require('./createdFiles');
 const startEsLint = require('../functions/starters/startESLint');
-const config = require('../configPath');
-
 const $esLintSwitcher = createStore(false);
 
-const { withEslint } = createApi($esLintSwitcher, {
+export const { withEslint } = createApi($esLintSwitcher, {
   withEslint: () => true,
 });
 
@@ -34,5 +34,3 @@ $esLintSwitcher.watch((esLintState) => {
     }
   });
 });
-
-module.exports = { withEslint };

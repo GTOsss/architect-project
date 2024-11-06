@@ -1,4 +1,4 @@
-const { sample, createDomain, guard, createApi } = require('effector');
+import { createApi, createDomain, guard, sample } from 'effector';
 
 const rootDomain = createDomain();
 
