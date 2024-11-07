@@ -2,16 +2,16 @@ import chalk from 'chalk';
 
 type FilesMap = Record<string, string[]>;
 
-const prettyLogCreatedFiles = (obj: FilesMap, method: string) => {
+export const prettyLogCreatedFiles = (obj: FilesMap, method: string) => {
   Object.entries(obj).forEach(([folder, paths]) => {
     if (paths.length !== 0) {
-      console.log(chalk.cyan(`\n Arc ${method} files in folder ${folder} >>> \n`));
+      console.log(chalk.cyan(`\n Arc ${method} files in folder "${folder}": \n`));
       paths.forEach((path) => console.log(`file:///${path}`));
     }
   });
 };
 
-const toMapFolderWithFiles = ({ foldersList, filesList }) => {
+export const toMapFolderWithFiles = ({ foldersList, filesList }) => {
   foldersList.sort((a, b) => b.length - a.length);
 
   const testedPath = new Set();
@@ -38,5 +38,3 @@ const toMapFolderWithFiles = ({ foldersList, filesList }) => {
     return acc;
   }, {});
 };
-
-module.exports = { prettyLogCreatedFiles, toMapFolderWithFiles };

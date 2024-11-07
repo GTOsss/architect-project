@@ -8,12 +8,13 @@ import packageJson from '../package.json';
 
 // import { redoingChanges, undoingChanges } from '../src/utils/change/doChanges';
 
+import { actionEsLint, actionStart, callFunctionWithCurrentSourceMap } from './utils';
+
 const {
   createAndCashSourceMapModule,
   createAndCashSourceMapAtom,
 } = require('../src/utils/change/createAndCashSourceMap');
 
-const { callFunctionWithCurrentSourceMap, actionStart, actionEsLint } = require('./utils');
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
 commander.option('-w, --watch', 'use watcher');

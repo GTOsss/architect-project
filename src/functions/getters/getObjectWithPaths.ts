@@ -12,7 +12,7 @@ const getChildPaths = (dir: string, result?: string[]) => {
 
     if (fs.statSync(path).isDirectory()) {
       getChildPaths(path, result);
-    } else if (!/_script_.js$/.test(path)) {
+    } else if (!/_script_\.js|ts$/.test(path)) {
       result.push(path);
     }
   });

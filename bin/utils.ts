@@ -6,7 +6,7 @@ import {
   watchTemplateSettings,
 } from '../src/functions';
 
-const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, callback, options }) => {
+export const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModule, callback, options }) => {
   if (sourceMapModule) {
     callback({ sourceMap: sourceMapModule, options });
     console.log('Reading source-map-module...');
@@ -19,7 +19,7 @@ const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAtomAsModu
 
 // start
 
-const actionStart = ({ sourceMap, options }) => {
+export const actionStart = ({ sourceMap, options }) => {
   if (options.watch) {
     console.log('Watcher running...');
     arcStart({ sourcesMap: sourceMap });
@@ -32,7 +32,7 @@ const actionStart = ({ sourceMap, options }) => {
 
 // esLint
 
-const actionEsLint = ({ sourceMap, options }) => {
+export const actionEsLint = ({ sourceMap, options }) => {
   if (options.watch) {
     console.log('Watcher running...');
     arcStartWithEslint({ sourcesMap: sourceMap });
@@ -41,10 +41,4 @@ const actionEsLint = ({ sourceMap, options }) => {
   } else {
     arcStartWithEslint({ sourcesMap: sourceMap });
   }
-};
-
-module.exports = {
-  callFunctionWithCurrentSourceMap,
-  actionStart,
-  actionEsLint,
 };

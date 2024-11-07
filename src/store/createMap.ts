@@ -1,11 +1,11 @@
-const { sample, createStore } = require('./rootDomain');
-const { $createdFilesList, $replacedFilesList } = require('./createdFiles');
-const { $createdFoldersList } = require('./createdFolders');
-const { toMapFolderWithFiles, prettyLogCreatedFiles } = require('../utils/prettyLogCreatedFiles');
-const { endGeneration } = require('./endGeneration');
+import { createStore, sample } from 'effector';
+import { $createdFilesList, $replacedFilesList } from './createdFiles';
+import { $createdFoldersList } from './createdFolders';
+import { prettyLogCreatedFiles, toMapFolderWithFiles } from '../utils/prettyLogCreatedFiles';
+import { endGeneration } from './endGeneration';
 
-const $prettyMap = createStore({});
-const $prettyMapReplaced = createStore({});
+export const $prettyMap = createStore({});
+export const $prettyMapReplaced = createStore({});
 
 sample({
   source: { filesList: $createdFilesList, foldersList: $createdFoldersList },
@@ -32,5 +32,3 @@ $prettyMapReplaced.watch((state) => {
     prettyLogCreatedFiles(state, 'replaced');
   }
 });
-
-module.exports = { $prettyMap };

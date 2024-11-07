@@ -1,6 +1,6 @@
 import configPath from '../../configPath';
 import { atomToModuleSourceMap } from '../../utils/change/atomToModuleSourceMap';
-import { module2ToModule } from '../../utils/change/module2ToModule';
+import { toConsistentModuleSourceMap } from '../../utils/change/toConsistentModuleSourceMap';
 import { validateAliases, validateAtomMap, validateConfig, validateModuleMap } from '../../utils/validators';
 
 validateConfig(require(configPath.config));
@@ -38,7 +38,7 @@ export const getSourceMaps = () => {
   }
 
   return {
-    sourceMapModule: sourceMapModule && module2ToModule(sourceMapModule),
+    sourceMapModule: sourceMapModule && toConsistentModuleSourceMap(sourceMapModule),
     sourceMapAtomAsModule: sourceMapAtom && atomToModuleSourceMap(sourceMapAtom),
   };
 };

@@ -31,6 +31,7 @@ export const createFilesBySourceMap = (templateMap, sourceMap) => {
     // fixme
     // @ts-expect-error need fix
     const mapCurrentComponent = getSectionFromSourceMap({ sourcePath, components, aliases });
+
     Object.entries(components).forEach(([key, value]) => {
       Object.entries(templateMap).forEach(([template, templateValue]) => {
         let valueComponent = value.template ? value.template : value;

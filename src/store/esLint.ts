@@ -1,8 +1,8 @@
-import { createApi, createStore } from './rootDomain';
+import { createApi, createStore } from 'effector';
 import config from '../configPath';
+import { $createdFilesList, $replacedFilesList } from './createdFiles';
+import { startEsLint } from '../functions';
 
-const { $createdFilesList, $replacedFilesList } = require('./createdFiles');
-const startEsLint = require('../functions/starters/startESLint');
 const $esLintSwitcher = createStore(false);
 
 export const { withEslint } = createApi($esLintSwitcher, {

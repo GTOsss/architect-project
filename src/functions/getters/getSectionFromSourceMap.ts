@@ -1,14 +1,14 @@
 import { ErrorNameEnum } from '../../types/errors';
-import { isTemplateAsObj, TemplateParamsMM } from '../../types/sourceMapModule';
+import { checkValidTemplateValue, isTemplateAsObj, TemplateParamsMMAsObj } from '../../types/sourceMapModule';
 
 type GetSectionFromSourceMapResult = {
   path: string;
-  content: TemplateParamsMM;
+  content: TemplateParamsMMAsObj;
 };
 
 type GetSectionFromSourceMapParams = {
   sourcePath: string;
-  components: Record<string, TemplateParamsMM>;
+  components: Record<string, TemplateParamsMMAsObj>;
   aliases?: Record<string, string>;
 };
 
@@ -19,6 +19,7 @@ export const getSectionFromSourceMap = ({
 }: GetSectionFromSourceMapParams): GetSectionFromSourceMapResult => {
   const objTemplate = Object.entries(components).reduce((acc, [key, val]) => {
     try {
+      checkValidTemplateValue(val);
       let valTemplate = isTemplateAsObj(val) ? val.template : val;
       valTemplate = aliases[valTemplate] || valTemplate;
 
@@ -26,7 +27,7 @@ export const getSectionFromSourceMap = ({
       return acc;
     } catch (e) {
       if (e?.name === ErrorNameEnum.sourceMapValueHasNotTemplateName) {
-        throw new Error(`SourceMap value has not template name. Field key: \n ${key}`);
+        throw new Error(`SourceMap value has not correct template value. Field key: \n ${key}`);
       }
     }
   }, {});
