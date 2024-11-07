@@ -1,5 +1,5 @@
 const stringifyObject = require('stringify-object');
-const { module2ToModule } = require('../../../src/utils/change/module2ToModule');
+const { toConsistentModuleSourceMap } = require('../../../src/utils/change/toConsistentModuleSourceMap');
 const { aliases, map } = require('./source_map/source-map-module2');
 
 const createPrettyObj = (obj) => {
@@ -11,7 +11,7 @@ const createPrettyObj = (obj) => {
 
 describe('test module2ToModule', () => {
   test('simple', () => {
-    const obj = module2ToModule({
+    const obj = toConsistentModuleSourceMap({
       map,
       aliases: {},
     });
@@ -20,7 +20,7 @@ describe('test module2ToModule', () => {
   });
 
   test('simple with aliases', () => {
-    const obj = module2ToModule({
+    const obj = toConsistentModuleSourceMap({
       map,
       aliases,
     });
