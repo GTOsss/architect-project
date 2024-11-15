@@ -9,6 +9,15 @@ import {
 import { getParsedFragmentData } from './parseTemplateFragments.utils';
 import { ArcConfig } from '../../../types/config';
 
+/** Interpolation settings from config for content of file */
+type IntrFileConfig = Pick<ArcConfig, 'itrStart' | 'itrEnd'>;
+/** Interpolation settings from config for filepath */
+type IntrFilePathConfig = Pick<ArcConfig, 'itrFileNameStart' | 'itrFileNameEnd'>;
+
+type IntrConfig<ParseCxt extends ParserContextEnum> = ParseCxt extends ParserContextEnum.fileContent
+  ? IntrFileConfig
+  : IntrFilePathConfig;
+
 /**
  * Executes a regular expression on a given string and returns an array of matches.
  *
@@ -35,11 +44,11 @@ import { ArcConfig } from '../../../types/config';
  *  ]
  *
  */
-export const parseAllInterpolationMarks = (
+export const parseAllInterpolationMarks = <ParserCxt extends ParserContextEnum>(
   str: string,
   re: RegExp,
-  config: ArcConfig,
-  context: ParserContextEnum = ParserContextEnum.fileContent,
+  config: IntrConfig<ParserCxt>,
+  context?: ParserCxt,
 ) => {
   const results: ParsedTemplateFragment[] = [];
   let result: RegExpExecArray;
@@ -48,7 +57,7 @@ export const parseAllInterpolationMarks = (
     const data = getParsedFragmentData(currentResult);
     results.push({
       str: currentResult,
-      originStr: getInterpolationOriginFragment(currentResult, config, context),
+      originStr: getInterpolationOriginFragment(currentResult, config, context ?? ParserContextEnum.fileContent),
       index: result.index,
       data,
     });
@@ -56,15 +65,21 @@ export const parseAllInterpolationMarks = (
   return results;
 };
 
-export const getInterpolationOriginFragment = (str: string, config: ArcConfig, context: ParserContextEnum) => {
+export const getInterpolationOriginFragment = <ParserCxt extends ParserContextEnum>(
+  str: string,
+  config: ParserCxt extends ParserContextEnum.fileContent ? IntrFileConfig : IntrFilePathConfig,
+  context: ParserCxt,
+) => {
   if (context === ParserContextEnum.fileContent) {
-    return [config.itrStart, str, config.itrEnd].join('');
+    const currentConfig = config as IntrFileConfig;
+    return [currentConfig.itrStart, str, currentConfig.itrEnd].join('');
   }
 
-  return [config.itrFileNameStart, str, config.itrFileNameEnd].join('');
+  const currentConfig = config as IntrFilePathConfig;
+  return [currentConfig.itrFileNameStart, str, currentConfig.itrFileNameEnd].join('');
 };
 
-export const createInterpolationRegExp = (config: ArcConfig) =>
+export const createInterpolationRegExp = (config: IntrFileConfig) =>
   new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
 
 /**

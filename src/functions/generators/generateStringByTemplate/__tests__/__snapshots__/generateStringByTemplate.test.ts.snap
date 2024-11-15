@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateStringByTemplate simple 1`] = `"const testMethod = (firstArg, secondArg) => firstArg + secondArg"`;

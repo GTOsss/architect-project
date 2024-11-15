@@ -21,7 +21,6 @@ describe('generateContentByParsedTemplate', () => {
     );
     const result = generateContentByParsedTemplate(
       {
-        file: '',
         content: simpleFunctionTemplate_variable,
         parsed: parsedFragments,
       },
@@ -41,7 +40,6 @@ describe('generateContentByParsedTemplate', () => {
     );
     const result = generateContentByParsedTemplate(
       {
-        file: '',
         content: simpleFunctionTemplate_callFunction,
         parsed: parsedFragments,
       },

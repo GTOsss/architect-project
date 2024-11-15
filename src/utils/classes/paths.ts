@@ -14,7 +14,9 @@ export class Paths {
 
   get output() {
     const configFile = require(`${this.cwd}/${this._settingsFolder}/config`);
-    return configFile.output;
+    // Operator "or" need because config may require via Node module system
+    const config = configFile.config || configFile;
+    return config.output;
   }
   get eslintConfigPath() {
     return `${this.cwd}/.eslintrc.js`;

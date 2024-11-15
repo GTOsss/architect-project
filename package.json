@@ -6,7 +6,7 @@
   },
   "types": "./publicTypesForUser.d.ts",
   "description": "A flexible template generator for any project",
-  "main": "index.js",
+  "main": "publicMethods.ts",
   "scripts": {
     "gen": "node bin/cli.js s",
     "atomToSourceMap": "node src/utils/atomToSourceMap.js",
