@@ -1,29 +1,41 @@
-import { getObjectWithPaths } from '../getters';
-import { parseFiles } from '../parsers';
+import { requireSourceMaps, getTemplatesInfo } from '../getters';
+import { parseTemplateFiles } from '../parsers';
 import { createFilesBySourceMap } from '../generators';
-import { withEslint } from '../../store/esLint';
-import config from '../../configPath';
-import chalk from 'chalk';
-
-const getTemplateMap = () => {
-  const templates = getObjectWithPaths(config.templatesPath);
-  return parseFiles(templates);
-};
+import configPath from '../../configPath';
+import { validateConfig } from '../../utils/validators';
+import { smartRequire } from '../../utils/smartRequire';
+import { ArcConfig } from '../../types/config';
 
 type StartParams = {
-  sourcesMap: Record<string, any>;
-  str?: string;
+  /** Path to config directory of architect. Default 'architect' */
+  settingsFolder: string;
 };
 
-export const arcStart = ({ sourcesMap, str }: StartParams) => {
-  if (str) chalk.yellow(str);
+export const arcStart = ({ settingsFolder = 'architect' }: StartParams) => {
+  // set settings folder
+  configPath.settingsFolder = settingsFolder;
 
-  createFilesBySourceMap(getTemplateMap(), sourcesMap);
+  // require main config
+  const config = smartRequire<ArcConfig, null>(configPath.config, null);
+
+  // validate main config
+  validateConfig(config);
+
+  // require, validate and transform sourceMaps to consistent format
+  const { transformedSourceMapModule, transformedSourceMapAtom } = requireSourceMaps();
+
+  const templates = getTemplatesInfo(configPath.templatesPath);
+  const parsedTemplateInfoMap = parseTemplateFiles(templates, config);
+
+  if (transformedSourceMapModule) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapModule, config);
+  if (transformedSourceMapAtom) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapAtom, config);
 };
 
-export const arcStartWithEslint = ({ sourcesMap, str }: StartParams) => {
-  if (str) chalk.yellow(str);
+export const arcStartWithEslint = ({ settingsFolder }: StartParams) => {
+  console.error('arcStartWithEslint not supported in current version');
 
-  createFilesBySourceMap(getTemplateMap(), sourcesMap);
-  withEslint();
+  // if (str) chalk.yellow(str);
+
+  // createFilesBySourceMap(getTemplateMap(), sourcesMap);
+  // withEslint();
 };

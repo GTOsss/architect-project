@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../../configPath');
 const { resolve } = require('path');
 
-const json = smartRequire(versionsJsonPath, {});
+const json = smartRequire(versionsJsonPath, { current: null });
 
 const doChanges = ({ json, logVariable }) => {
   const current = json.versions[json.current];

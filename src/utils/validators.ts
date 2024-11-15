@@ -1,4 +1,7 @@
 import Joi from 'joi';
+import { SourceMapAtomRequiredFile } from '../types/sourceMapAtom';
+import { SourceMapModuleRequiredFile } from '../types/sourceMapModule';
+import { AnyObject } from '../types/common';
 
 const templatesSchema = Joi.object().custom((value) => {
   Object.values(value).forEach((templateValue) => {
@@ -46,8 +49,8 @@ const aliasesSchema = Joi.object().custom((value) => {
 
 const templateParamsSchema = Joi.alternatives(Joi.string().required(), Joi.object().required());
 
-const moduleMapSchema = Joi.object().custom((value) => {
-  Object.values(value).forEach((component) => {
+const moduleMapSchema = Joi.object().custom((value: AnyObject) => {
+  Object.values(value).forEach((component: AnyObject) => {
     const componentSchema = Joi.object();
 
     const componentValidationResult = componentSchema.validate(component);
@@ -105,10 +108,32 @@ export const validateAtomMap = (map) => {
   }
 };
 
-export const validateAliases = (aliases) => {
+export const validateAliases = (aliases: Record<string, string>) => {
+  if (!aliases) return;
+
   const validateAliasesResult = aliasesSchema.validate(aliases);
 
   if (validateAliasesResult.error) {
     throw new Error(validateAliasesResult.error.message);
+  }
+};
+
+type ValidateSourceMapsParams = {
+  sourceMapModule?: SourceMapModuleRequiredFile | null;
+  sourceMapAtom?: SourceMapAtomRequiredFile | null;
+};
+export const validateSourceMapFiles = ({ sourceMapAtom, sourceMapModule }: ValidateSourceMapsParams) => {
+  if (!sourceMapAtom && !sourceMapModule) {
+    throw new Error('No detect source map files.');
+  }
+
+  if (sourceMapModule) {
+    validateAliases(sourceMapModule.aliases);
+    validateModuleMap(sourceMapModule);
+  }
+
+  if (sourceMapAtom) {
+    validateAliases(sourceMapAtom.aliases);
+    validateAtomMap(sourceMapAtom);
   }
 };

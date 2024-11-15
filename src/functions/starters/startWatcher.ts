@@ -1,18 +1,10 @@
 import chokidar from 'chokidar';
-import fs from 'file-system';
 import configPath from '../../configPath';
-import { arcStart, arcStartWithEslint } from './arcStart';
 
-const sourceMapModulePath = fs.existsSync(configPath.sourcesMapModuleTxtPath)
-  ? configPath.sourcesMapModuleTxtPath
-  : configPath.sourcesMapModuleJsPath;
-
-const sourceMapAtomPath = configPath.sourcesMapAtomJsPath;
-
-const ifExistSourceMapPath = fs.existsSync(configPath.sourcesMapModuleTxtPath);
+// todo Need to combine both methods below to one method
 
 export const startWatcher = () => {
-  const watcher = chokidar.watch([sourceMapModulePath, sourceMapAtomPath], {
+  const watcher = chokidar.watch([configPath.sourceMapModuleJsPath, configPath.sourceMapAtomJsPath], {
     persistent: true,
   });
 
@@ -21,24 +13,18 @@ export const startWatcher = () => {
   watcher.on('change', (path) => {
     log(`File ${path} has been changed`);
 
-    delete require.cache[require.resolve(configPath.sourcesMapModuleJsPath)];
-    delete require.cache[require.resolve(configPath.sourcesMapAtomJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapModuleJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapAtomJsPath)];
 
-    const sourceMapModulePath = ifExistSourceMapPath
-      ? require('./functions/parseSourceMap')
-      : require(configPath.sourcesMapModuleJsPath);
-
-    const sourceMapAtomPath = require(configPath.sourcesMapAtomJsPath);
-
-    arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
-    arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });
+    // arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
+    // arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });
 
     console.log('Project has been rebuild');
   });
 };
 
 export const startWatcherWithEslint = () => {
-  const watcher = chokidar.watch([sourceMapModulePath, sourceMapAtomPath], {
+  const watcher = chokidar.watch([configPath.sourceMapModuleJsPath, configPath.sourceMapAtomJsPath], {
     persistent: true,
   });
 
@@ -47,17 +33,11 @@ export const startWatcherWithEslint = () => {
   watcher.on('change', (path) => {
     log(`File ${path} has been changed`);
 
-    delete require.cache[require.resolve(configPath.sourcesMapModuleJsPath)];
-    delete require.cache[require.resolve(configPath.sourcesMapAtomJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapModuleJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapAtomJsPath)];
 
-    const sourceMapModulePath = ifExistSourceMapPath
-      ? require('./functions/parseSourceMap')
-      : require(configPath.sourcesMapModuleJsPath);
-
-    const sourceMapAtomPath = require(configPath.sourcesMapAtomJsPath);
-
-    arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
-    arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });
+    // arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
+    // arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });
 
     console.log('Project has been rebuild');
   });

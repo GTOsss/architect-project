@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import fs from 'file-system';
-import { generateTemplateFiles } from './generateTemplateFiles';
+import { generateFilesByTemplate } from './generateFilesByTemplate';
 import configPath from '../../configPath';
 
 export const generateTemplateFilesWithoutCash = ({ assets, template, ...rest }) => {
@@ -24,7 +24,7 @@ export const generateTemplateFilesWithoutCash = ({ assets, template, ...rest }) 
 
     // fixme
     // @ts-expect-error need fix
-    generateTemplateFiles({ ...rest, assets: currentAssets, config: templateConfig });
+    generateFilesByTemplate({ ...rest, assets: currentAssets, config: templateConfig });
 
     console.log(chalk.green('Success'));
   } else {

@@ -1,8 +1,8 @@
 import { createEvent, createStore, sample } from 'effector';
 import { endGeneration } from './endGeneration';
 
-export const $createdFiles = createStore({ set: new Set() });
-export const $replacedFiles = createStore({ set: new Set() });
+export const $createdFiles = createStore({ set: new Set<string>() });
+export const $replacedFiles = createStore({ set: new Set<string>() });
 export const $createdFilesList = createStore([]);
 export const $replacedFilesList = createStore([]);
 

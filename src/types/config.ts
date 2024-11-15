@@ -1,9 +1,9 @@
-type TemplateConfig = {
+export type TemplateConfig = {
   replace: boolean;
   clean: boolean;
 };
 
-export type Config = TemplateConfig & {
+export type ArcConfig = TemplateConfig & {
   output: string;
   itrStart: string;
   itrEnd: string;

@@ -11,8 +11,8 @@ const eslintConfig = smartRequire(configPath.eslintConfigPath, {});
 const startEsLint = require('../../functions/starters/startESLint');
 const appendVersion = require('./appendVersion');
 
-const sourceMapAtom = smartRequire(configPath.sourcesMapAtomJsPath, {});
-const sourceMapModule = smartRequire(configPath.sourcesMapModuleJsPath, {});
+const sourceMapAtom = smartRequire(configPath.sourceMapAtomJsPath, {});
+const sourceMapModule = smartRequire(configPath.sourceMapModuleJsPath, {});
 
 const { sourceMapToModule } = require('./atomToModuleSourceMap');
 const { sourceMapToAtom } = require('./moduleToAtomSourceMap');
@@ -20,7 +20,7 @@ const { sourceMapToAtom } = require('./moduleToAtomSourceMap');
 const atomToModuleParams = {
   prefix: 'atm_',
   fileName: 'source-map-module.js',
-  oldPath: resolve(configPath.sourcesMapModuleJsPath),
+  oldPath: resolve(configPath.sourceMapModuleJsPath),
   currentSourceMap: sourceMapAtom,
   currentFileName: 'source-map-atom.js',
   method: sourceMapToModule,
@@ -34,7 +34,7 @@ const atomToModuleParams = {
 const moduleToAtomParams = {
   prefix: 'mta_',
   fileName: 'source-map-atom.js',
-  oldPath: resolve(configPath.sourcesMapAtomJsPath),
+  oldPath: resolve(configPath.sourceMapAtomJsPath),
   currentSourceMap: sourceMapModule,
   currentFileName: 'source-map-module.js',
   method: sourceMapToAtom,

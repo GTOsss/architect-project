@@ -1,4 +1,4 @@
-export * from './generateTemplateFiles';
+export * from './generateFilesByTemplate';
 export * from './createFileBySourceMap';
-export * from './generateFilePath';
+export * from './generateFilePath/generateFilePath';
 export * from './generateTemplateFilesWithoutCash';

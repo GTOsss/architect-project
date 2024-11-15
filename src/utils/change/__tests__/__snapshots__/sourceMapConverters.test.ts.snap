@@ -9,15 +9,21 @@ exports[`Source map converters module2ToModule simple (only string values) 1`] =
   "map": {
     "src/components": {
       "header": {
+        "outputPath": "src/components",
         "template": "react-component",
+        "variableNameValue": "header",
       },
     },
     "src/components/inputs": {
       "button": {
+        "outputPath": "src/components/inputs",
         "template": "react-component",
+        "variableNameValue": "button",
       },
       "index": {
+        "outputPath": "src/components/inputs",
         "template": "index",
+        "variableNameValue": "index",
       },
     },
   },
@@ -33,15 +39,21 @@ exports[`Source map converters module2ToModule simple (string and array values) 
   "map": {
     "src/components": {
       "header": {
+        "outputPath": "src/components",
         "template": "react-component",
+        "variableNameValue": "header",
       },
     },
     "src/components/inputs": {
       "button": {
+        "outputPath": "src/components/inputs",
         "template": "react-component",
+        "variableNameValue": "button",
       },
       "index": {
+        "outputPath": "src/components/inputs",
         "template": "index",
+        "variableNameValue": "index",
       },
     },
   },
@@ -57,15 +69,21 @@ exports[`Source map converters module2ToModule simple (string and object values)
   "map": {
     "src/components": {
       "header": {
+        "outputPath": "src/components",
         "template": "react-component",
+        "variableNameValue": "header",
       },
     },
     "src/components/inputs": {
       "button": {
+        "outputPath": "src/components/inputs",
         "template": "react-component",
+        "variableNameValue": "button",
       },
       "index": {
+        "outputPath": "src/components/inputs",
         "template": "index",
+        "variableNameValue": "index",
       },
     },
   },

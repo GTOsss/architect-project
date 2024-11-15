@@ -3,30 +3,25 @@ import { ErrorNameEnum } from './errors';
 /** Template params in "source-map-module" as arr */
 export type TemplateParamsMMAsArray = [string, { [key: string]: any }];
 
-/** Template params in "source-map-module" as obj */
+/** Template params in "source-map-module" as obj (base **consistent format**) */
 export type TemplateParamsMMAsObj = {
   /** Template name */
   template?: string;
   [key: string]: any;
 };
 
-export type TemplateSourceMapValue = string | TemplateParamsMMAsObj | TemplateParamsMMAsArray;
-
-// todo need test and review for this type
-// export type TemplateAsObj = {
-//   [key: string]: string[];
-// };
+export type TemplateSourceMapMMValue = string | TemplateParamsMMAsObj | TemplateParamsMMAsArray;
 
 /**
- * Second level (file-name to template-name lvl) source-map-module.
+ * Second level (file-name to template lvl) source-map-module.
  * Pair { ["fileName"]: <templateName/templateParamsObj> }
- * @Example:
- *
+
+ * @Example
  * const sourceMap = {
  *   <...>,
  *
  *   'src/components/inputs': {
- *     Button: 'react-component'
+ *     Button: 'react-component',
  *     Input: 'react-component',
  *     index: {
  *       template: 'index-file',
@@ -39,15 +34,14 @@ export type TemplateSourceMapValue = string | TemplateParamsMMAsObj | TemplatePa
  *
  * */
 export type FileLevelTemplateMap = {
-  [name: string]: TemplateSourceMapValue;
+  [name: string]: TemplateSourceMapMMValue;
 };
 
 /**
- *  Top level (dir-path lvl) source-map-module.
- *  Pair { "path": { FileLevelTemplateMap> } }
+ * Top level (dir-path lvl) source-map-module.
+ * Pair { "path": { FileLevelTemplateMap> } }
  *
- *  @Example:
- *
+ * @Example
  * const sourceMap = {
  *   'src/components': { <FileLevelTemplateMap> },
  *   'src/user/components': { <FileLevelTemplateMap> },
@@ -66,7 +60,7 @@ export type SourceMapModule = {
 
 export const isString = (value: any): value is string => typeof value === 'string';
 
-export const isTemplateAsArray = (value: TemplateSourceMapValue): value is TemplateParamsMMAsArray => {
+export const isTemplateAsArray = (value: TemplateSourceMapMMValue): value is TemplateParamsMMAsArray => {
   if (isString(value)) {
     return false;
   }
@@ -74,7 +68,7 @@ export const isTemplateAsArray = (value: TemplateSourceMapValue): value is Templ
   return Array.isArray(value) && typeof value[0] === 'string';
 };
 
-export const isTemplateAsObj = (value: TemplateSourceMapValue): value is TemplateParamsMMAsObj => {
+export const isTemplateAsObj = (value: TemplateSourceMapMMValue): value is TemplateParamsMMAsObj => {
   if (isString(value)) {
     return false;
   }
@@ -85,7 +79,7 @@ export const isTemplateAsObj = (value: TemplateSourceMapValue): value is Templat
 /**
  * Will throw error if sourceMap has incorrect value.
  * */
-export const checkValidTemplateValue = (value: TemplateSourceMapValue) => {
+export const checkValidTemplateValue = (value: TemplateSourceMapMMValue) => {
   if (isString(value) || isTemplateAsObj(value) || isTemplateAsArray(value)) {
     return;
   }
@@ -93,4 +87,9 @@ export const checkValidTemplateValue = (value: TemplateSourceMapValue) => {
   const err = new Error();
   err.name = ErrorNameEnum.sourceMapValueHasNotTemplateName;
   throw err;
+};
+
+export type SourceMapModuleRequiredFile = {
+  aliases: Record<string, string>;
+  map: SourceMapModule;
 };

@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseTemplateFiles isCallFunctionStr 1`] = `
+"func(a);             → true
+func(a1);            → true
+func1(a)             → true
+func1(a2)            → true
+camelNameFn()        → true
+CamelNameFn()        → true
+camelNameFn(a)       → true
+CamelNameFn(a)       → true
+toCamelCase(name)    → true
+func (a);            → true
+func (a1);           → true
+func1 (a)            → true
+func1 (a2)           → true
+func(3)              → true
+a()                  → true
+a1()                 → true
+
+(a)          → false
+(a1)         → false
+fn(a b)      → false
+func(a b c)  → false
+fn(1a a)     → false
+test         → false
+test1        → false"
+`;
+
+exports[`parseTemplateFiles parseAllInterpolationMarks 1`] = `
+[
+  {
+    "data": {
+      "functionArgs": [
+        "name",
+      ],
+      "functionName": "toCamelCase",
+      "type": "callFunction",
+    },
+    "index": 14,
+    "originStr": "{{toCamelCase(name)}}",
+    "str": "toCamelCase(name)",
+  },
+  {
+    "data": {
+      "type": "variable",
+      "variableName": "name",
+    },
+    "index": 60,
+    "originStr": "{{name}}",
+    "str": "name",
+  },
+  {
+    "data": {
+      "functionArgs": [
+        "name",
+      ],
+      "functionName": "toLowerCamelCase",
+      "type": "callFunction",
+    },
+    "index": 83,
+    "originStr": "{{toLowerCamelCase(name)}}",
+    "str": "toLowerCamelCase(name)",
+  },
+  {
+    "data": {
+      "functionArgs": [
+        "name",
+      ],
+      "functionName": "toCamelCase",
+      "type": "callFunction",
+    },
+    "index": 117,
+    "originStr": "{{toCamelCase(name)}}",
+    "str": "toCamelCase(name)",
+  },
+]
+`;
+
+exports[`parseTemplateFiles parseAllInterpolationMarks mini template 1`] = `
+{
+  "input": "so{{me}} "{{fn(name)}}"",
+  "result": [
+    {
+      "data": {
+        "type": "variable",
+        "variableName": "me",
+      },
+      "index": 4,
+      "originStr": "{{me}}",
+      "str": "me",
+    },
+    {
+      "data": {
+        "functionArgs": [
+          "name",
+        ],
+        "functionName": "fn",
+        "type": "callFunction",
+      },
+      "index": 12,
+      "originStr": "{{fn(name)}}",
+      "str": "fn(name)",
+    },
+  ],
+}
+`;

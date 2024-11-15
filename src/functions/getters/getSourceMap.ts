@@ -1,44 +1,29 @@
 import configPath from '../../configPath';
 import { atomToModuleSourceMap } from '../../utils/change/atomToModuleSourceMap';
 import { toConsistentModuleSourceMap } from '../../utils/change/toConsistentModuleSourceMap';
-import { validateAliases, validateAtomMap, validateConfig, validateModuleMap } from '../../utils/validators';
+import { validateSourceMapFiles } from '../../utils/validators';
+import { smartRequire } from '../../utils/smartRequire';
+import { SourceMapModuleRequiredFile } from '../../types/sourceMapModule';
+import { SourceMapAtomRequiredFile } from '../../types/sourceMapAtom';
+import chalk from 'chalk';
 
-validateConfig(require(configPath.config));
+/**
+ * Require sourceMaps files, validate and transform its to consistent format. */
+export const requireSourceMaps = () => {
+  const sourceMapModule = smartRequire<SourceMapModuleRequiredFile, null>(configPath.sourceMapModuleJsPath, null);
+  const sourceMapAtom = smartRequire<SourceMapAtomRequiredFile, null>(configPath.sourceMapAtomJsPath, null);
 
-export const getSourceMaps = () => {
-  let sourceMapAtom = null;
-  let sourceMapModule = null;
+  validateSourceMapFiles({ sourceMapModule, sourceMapAtom });
 
-  try {
-    sourceMapAtom = require(configPath.sourcesMapAtomJsPath);
-  } catch {
-    console.log('Can not find file source-map-atom.js');
+  if (sourceMapModule) {
+    console.log(chalk.yellow('Detected "source-map-module"'));
   }
-
-  if (sourceMapAtom?.aliases) {
-    validateAliases(sourceMapAtom?.aliases);
-  }
-
-  if (sourceMapAtom?.map) {
-    validateAtomMap(sourceMapAtom?.map);
-  }
-
-  try {
-    sourceMapModule = require(configPath.sourcesMapModuleJsPath);
-  } catch {
-    console.log('Can not find file source-map-module.js');
-  }
-
-  if (sourceMapModule?.map) {
-    validateModuleMap(sourceMapModule?.map);
-  }
-
-  if (sourceMapModule?.aliases) {
-    validateAliases(sourceMapModule?.aliases);
+  if (sourceMapAtom) {
+    console.log(chalk.yellow('Detected "source-map-atom"'));
   }
 
   return {
-    sourceMapModule: sourceMapModule && toConsistentModuleSourceMap(sourceMapModule),
-    sourceMapAtomAsModule: sourceMapAtom && atomToModuleSourceMap(sourceMapAtom),
+    transformedSourceMapModule: sourceMapModule && toConsistentModuleSourceMap(sourceMapModule),
+    transformedSourceMapAtom: sourceMapAtom && atomToModuleSourceMap(sourceMapAtom),
   };
 };

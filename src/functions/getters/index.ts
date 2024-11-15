@@ -1,4 +1,3 @@
-export * from './getObjectWithPaths';
-export * from './getSectionFromSourceMap';
-export * from './getScriptPath';
+export * from './getTemplatesInfo';
+export * from './requireScript';
 export * from './getSourceMap';

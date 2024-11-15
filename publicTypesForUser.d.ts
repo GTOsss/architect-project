@@ -1,4 +1,5 @@
 import { HelpAPI } from './src/functions';
+import { TemplateParamsConsistent } from './src/types/sourceMapModuleConsistent';
 
 /**
  * Function for generate template. Should be exported from _script_.<js/ts> files.
@@ -7,6 +8,10 @@ import { HelpAPI } from './src/functions';
  * @param helpAPI Help utils and variables from arc.
  *
  * */
-export type CustomTemplateFunction = (params: any, helpApi: HelpAPI) => string | void;
+export type CustomTemplateFunction = (
+  params: TemplateParamsConsistent['variableNameValue'],
+  helpApi: HelpAPI,
+) => string | void;
 
 export { HelpAPI } from './src/functions';
+export * from './src/types/sourceMapModuleConsistent';

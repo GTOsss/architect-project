@@ -10,4 +10,12 @@ export type TemplateParamsMA = {
 
 export type DefaultParamsMA = Record<string, TemplateParamsMA>;
 
+export type TemplateSourceMapMAValue = string | [string, TemplateParamsMA];
+
 export type SourceMapAtom = Record<string, Array<string | [string, TemplateParamsMA]>>;
+
+export type SourceMapAtomRequiredFile = {
+  aliases: Record<string, string>;
+  defaultParams: DefaultParamsMA;
+  map: SourceMapAtom;
+};
