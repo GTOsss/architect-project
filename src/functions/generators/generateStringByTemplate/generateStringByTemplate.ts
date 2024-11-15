@@ -4,6 +4,12 @@ import { generateContentByParsedTemplate } from '../generateContentByParsedTempl
 
 const intrConfig = { itrStart: '{{', itrEnd: '}}' };
 
+type ExtractTemplateKeys<S extends string> = S extends `${infer _Start}{{${infer Key}}}${infer Rest}`
+  ? Key | ExtractTemplateKeys<Rest>
+  : never;
+
+type GenerateStringByTemplateParams<T extends string> = Record<ExtractTemplateKeys<T>, string>;
+
 /**
  * Utility function for generate text content by templates.
  *
@@ -14,9 +20,9 @@ const intrConfig = { itrStart: '{{', itrEnd: '}}' };
  * const result = generateStringByTemplate(simpleTemplate, templateParams);
  * // const testMethod = (firstArg, secondArg) => firstArg + secondArg
  * */
-export const generateStringByTemplate = (template: string, params: Record<string, any>) => {
+export const generateStringByTemplate = <T extends string>(template: T, params: GenerateStringByTemplateParams<T>) => {
   const intrRegExp = createInterpolationRegExp(intrConfig);
 
   const parsed = parseAllInterpolationMarks(template, intrRegExp, intrConfig, ParserContextEnum.fileContent);
-  return generateContentByParsedTemplate({ parsed, content: template }, params, true);
+  return generateContentByParsedTemplate({ parsed, content: template }, params as unknown as Record<string, any>, true);
 };
