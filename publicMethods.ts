@@ -1,1 +1,4 @@
-export { generateStringByTemplate } from './src/functions/generators/generateStringByTemplate';
+export {
+  generateStringByTemplate,
+  createGeneratorStrByTemplate,
+} from './src/functions/generators/generateStringByTemplate';
