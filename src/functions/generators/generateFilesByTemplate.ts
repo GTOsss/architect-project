@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import fs from 'file-system';
-import { generateFilePath } from './generateFilePath/generateFilePath';
+import { generateFilePath } from './generateFilePath';
 import configPath from '../../configPath';
 // import { backupFile } from '../../utils/backup/backupFile';
 import { pushFiles, pushReplacedFiles } from '../../store';

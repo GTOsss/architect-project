@@ -10,11 +10,11 @@ import { getParsedFragmentData } from './parseTemplateFragments.utils';
 import { ArcConfig } from '../../../types/config';
 
 /** Interpolation settings from config for content of file */
-type IntrFileConfig = Pick<ArcConfig, 'itrStart' | 'itrEnd'>;
+export type IntrFileConfig = Pick<ArcConfig, 'itrStart' | 'itrEnd'>;
 /** Interpolation settings from config for filepath */
-type IntrFilePathConfig = Pick<ArcConfig, 'itrFileNameStart' | 'itrFileNameEnd'>;
+export type IntrFilePathConfig = Pick<ArcConfig, 'itrFileNameStart' | 'itrFileNameEnd'>;
 
-type IntrConfig<ParseCxt extends ParserContextEnum> = ParseCxt extends ParserContextEnum.fileContent
+export type IntrConfig<ParseCxt extends ParserContextEnum> = ParseCxt extends ParserContextEnum.fileContent
   ? IntrFileConfig
   : IntrFilePathConfig;
 

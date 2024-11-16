@@ -1,8 +1,4 @@
-import {
-  createInterpolationRegExp,
-  parseAllInterpolationMarks,
-  IntrFileConfig as IntrFileConfigType,
-} from '../../parsers';
+import { createInterpolationRegExp, parseAllInterpolationMarks } from '../../parsers';
 import { ParserContextEnum } from '../../parsers/parseTemplateFiles';
 import { generateContentByParsedTemplate } from '../generateContentByParsedTemplate/generateContentByParsedTemplate';
 
@@ -45,8 +41,3 @@ export function generateStringByTemplate<T extends string, IS extends string = '
   const parsed = parseAllInterpolationMarks(template, intrRegExp, intrConfig, ParserContextEnum.fileContent);
   return generateContentByParsedTemplate({ parsed, content: template }, params as unknown as Record<string, any>, true);
 }
-export const createGeneratorStrByTemplate = <IS extends string, IE extends string>(config: IntrFileConfig<IS, IE>) => {
-  return <T extends string>(template: T, params: GenerateStringByTemplateParams<T, IS, IE>) => {
-    return generateStringByTemplate(template, params, config);
-  };
-};
