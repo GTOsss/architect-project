@@ -5,6 +5,7 @@ import configPath from '../../configPath';
 import { validateConfig } from '../../utils/validators';
 import { smartRequire } from '../../utils/smartRequire';
 import { ArcConfig } from '../../types/config';
+import { setConfig } from '../../store/config';
 
 type StartParams = {
   /** Path to config directory of architect. Default 'architect' */
@@ -16,7 +17,8 @@ export const arcStart = ({ settingsFolder = 'architect' }: StartParams) => {
   configPath.settingsFolder = settingsFolder;
 
   // require main config
-  const config = smartRequire<ArcConfig, null>(configPath.config, null);
+  const config = smartRequire<{ config: ArcConfig }, null>(configPath.config, null).config;
+  setConfig(config);
 
   // validate main config
   validateConfig(config);
@@ -25,10 +27,10 @@ export const arcStart = ({ settingsFolder = 'architect' }: StartParams) => {
   const { transformedSourceMapModule, transformedSourceMapAtom } = requireSourceMaps();
 
   const templates = getTemplatesInfo(configPath.templatesPath);
-  const parsedTemplateInfoMap = parseTemplateFiles(templates, config);
+  const parsedTemplateInfoMap = parseTemplateFiles(templates);
 
-  if (transformedSourceMapModule) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapModule, config);
-  if (transformedSourceMapAtom) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapAtom, config);
+  if (transformedSourceMapModule) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapModule);
+  if (transformedSourceMapAtom) createFilesBySourceMap(parsedTemplateInfoMap, transformedSourceMapAtom);
 };
 
 export const arcStartWithEslint = ({ settingsFolder }: StartParams) => {

@@ -21,11 +21,11 @@ export class Paths {
   get eslintConfigPath() {
     return `${this.cwd}/.eslintrc.js`;
   }
-  get sourceMapModuleJsPath() {
-    return `${this.cwd}/${this._settingsFolder}/source_map/source-map-module.js`;
+  get sourceMapModule() {
+    return `${this.cwd}/${this._settingsFolder}/source_map/source-map-module`;
   }
-  get sourceMapAtomJsPath() {
-    return `${this.cwd}/${this._settingsFolder}/source_map/source-map-atom.js`;
+  get sourceMapAtom() {
+    return `${this.cwd}/${this._settingsFolder}/source_map/source-map-atom`;
   }
   get templatesPath() {
     return `${this.cwd}/${this._settingsFolder}/templates`;

@@ -8,6 +8,7 @@ import {
 } from './parseTemplateFiles.types';
 import { getParsedFragmentData } from './parseTemplateFragments.utils';
 import { ArcConfig } from '../../../types/config';
+import { getConfigByTemplate } from '../../../store/config';
 
 /** Interpolation settings from config for content of file */
 export type IntrFileConfig = Pick<ArcConfig, 'itrStart' | 'itrEnd'>;
@@ -113,12 +114,12 @@ export const createInterpolationRegExp = (config: IntrFileConfig) =>
  *   ...,
  * ];
  * */
-export const parseTemplateFiles = (templates: TemplateObjWithPaths[], config: ArcConfig) => {
-  const reInterpolation = createInterpolationRegExp(config);
-
+export const parseTemplateFiles = (templates: TemplateObjWithPaths[]) => {
   const parsedTemplateMap: ParsedTemplateMap = {};
 
   templates.forEach(({ files, script: templateScript, templateName }) => {
+    const config = getConfigByTemplate(templateName);
+    const reInterpolation = createInterpolationRegExp(config);
     const parsedFiles: ParsedTemplateFile[] = [];
 
     files.forEach((path) => {

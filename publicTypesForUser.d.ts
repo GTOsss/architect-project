@@ -14,6 +14,7 @@ export type CustomTemplateFunction = (
 ) => string | void;
 
 export { HelpAPI } from './src/functions';
-export * from './src/types/sourceMapModuleConsistent';
 
+export * from './src/types/sourceMapModuleConsistent';
+export * from './src/types/config';
 export * from './publicMethods';

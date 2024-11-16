@@ -22,11 +22,11 @@ export const callFunctionWithCurrentSourceMap = ({ sourceMapModule, sourceMapAto
 export const actionStart = ({ sourceMap, options }) => {
   if (options.watch) {
     console.log('Watcher running...');
-    arcStart({ sourcesMap: sourceMap });
+    // arcStart({ sourceMap });
     startWatcher();
     watchTemplateSettings();
   } else {
-    arcStart({ sourcesMap: sourceMap });
+    // arcStart({ sourceMap });
   }
 };
 
@@ -35,10 +35,10 @@ export const actionStart = ({ sourceMap, options }) => {
 export const actionEsLint = ({ sourceMap, options }) => {
   if (options.watch) {
     console.log('Watcher running...');
-    arcStartWithEslint({ sourcesMap: sourceMap });
+    // arcStartWithEslint({ sourceMap });
     startWatcherWithEslint();
     watchTemplateSettings();
   } else {
-    arcStartWithEslint({ sourcesMap: sourceMap });
+    // arcStartWithEslint({ sourceMap });
   }
 };

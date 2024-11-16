@@ -10,8 +10,8 @@ import chalk from 'chalk';
 /**
  * Require sourceMaps files, validate and transform its to consistent format. */
 export const requireSourceMaps = () => {
-  const sourceMapModule = smartRequire<SourceMapModuleRequiredFile, null>(configPath.sourceMapModuleJsPath, null);
-  const sourceMapAtom = smartRequire<SourceMapAtomRequiredFile, null>(configPath.sourceMapAtomJsPath, null);
+  const sourceMapModule = smartRequire<SourceMapModuleRequiredFile, null>(configPath.sourceMapModule, null);
+  const sourceMapAtom = smartRequire<SourceMapAtomRequiredFile, null>(configPath.sourceMapAtom, null);
 
   validateSourceMapFiles({ sourceMapModule, sourceMapAtom });
 

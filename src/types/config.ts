@@ -1,9 +1,7 @@
 export type TemplateConfig = {
   replace: boolean;
   clean: boolean;
-};
-
-export type ArcConfig = TemplateConfig & {
+  watch: boolean;
   output: string;
   itrStart: string;
   itrEnd: string;
@@ -13,5 +11,8 @@ export type ArcConfig = TemplateConfig & {
   esLint: {
     quiet: boolean;
   };
+};
+
+export type ArcConfig = TemplateConfig & {
   templates: Record<string, Partial<TemplateConfig>>;
 };

@@ -9,14 +9,14 @@ import { SourceMapModuleConsistent, TemplateParamsConsistent } from '../../types
 import { ParsedTemplateMap } from '../parsers/parseTemplateFiles';
 import { ArcConfig, TemplateConfig } from '../../types/config';
 import { generateContentByParsedTemplate } from './generateContentByParsedTemplate/generateContentByParsedTemplate';
+import { logToFileJson } from '../../utils/debug';
 
 type GenerateTemplateFilesParams = {
   /** Target path for generation from source-map file. */
   targetPath: string;
   parsedTemplateMap: ParsedTemplateMap;
   assets: any;
-  templateConfig: Partial<TemplateConfig>;
-  config: ArcConfig;
+  config: TemplateConfig;
   templateParams: TemplateParamsConsistent;
   sourceMap: SourceMapModuleConsistent;
 };
@@ -25,7 +25,6 @@ export const generateFilesByTemplate = ({
   targetPath,
   parsedTemplateMap,
   assets,
-  templateConfig,
   config,
   templateParams,
   sourceMap,
@@ -38,7 +37,7 @@ export const generateFilesByTemplate = ({
 
   //flag clean >>>
   const dirToRemove = outputPath;
-  if (templateConfig.clean) {
+  if (config.clean) {
     if (fs.existsSync(dirToRemove)) {
       fs.rmdirSync(dirToRemove, { recursive: true });
     }

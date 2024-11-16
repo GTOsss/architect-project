@@ -9,6 +9,15 @@ const templatesSchema = Joi.object().custom((value) => {
       replace: Joi.boolean(),
       clean: Joi.boolean(),
       watch: Joi.array().items(Joi.string()),
+      output: Joi.string(),
+      itrStart: Joi.string(),
+      itrEnd: Joi.string(),
+      itrFileNameStart: Joi.string(),
+      itrFileNameEnd: Joi.string(),
+      templateExt: Joi.string(),
+      esLint: Joi.object({
+        quiet: Joi.boolean(),
+      }),
     });
 
     const result = schema.validate(templateValue);
@@ -22,15 +31,16 @@ const templatesSchema = Joi.object().custom((value) => {
 
 const configSchema = Joi.object({
   output: Joi.string().required(),
-  replace: Joi.boolean(),
-  clean: Joi.boolean(),
+  replace: Joi.boolean().required(),
+  clean: Joi.boolean().required(),
+  watch: Joi.boolean().required(),
   itrStart: Joi.string().required(),
   itrEnd: Joi.string().required(),
   itrFileNameStart: Joi.string().required(),
   itrFileNameEnd: Joi.string().required(),
   templateExt: Joi.string().required(),
   esLint: Joi.object({
-    quiet: Joi.boolean(),
+    quiet: Joi.boolean().required(),
   }),
   templates: templatesSchema,
 });

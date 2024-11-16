@@ -4,7 +4,7 @@ import configPath from '../../configPath';
 // todo Need to combine both methods below to one method
 
 export const startWatcher = () => {
-  const watcher = chokidar.watch([configPath.sourceMapModuleJsPath, configPath.sourceMapAtomJsPath], {
+  const watcher = chokidar.watch([configPath.sourceMapModule, configPath.sourceMapAtom], {
     persistent: true,
   });
 
@@ -13,8 +13,8 @@ export const startWatcher = () => {
   watcher.on('change', (path) => {
     log(`File ${path} has been changed`);
 
-    delete require.cache[require.resolve(configPath.sourceMapModuleJsPath)];
-    delete require.cache[require.resolve(configPath.sourceMapAtomJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapModule)];
+    delete require.cache[require.resolve(configPath.sourceMapAtom)];
 
     // arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
     // arcStart({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });
@@ -24,7 +24,7 @@ export const startWatcher = () => {
 };
 
 export const startWatcherWithEslint = () => {
-  const watcher = chokidar.watch([configPath.sourceMapModuleJsPath, configPath.sourceMapAtomJsPath], {
+  const watcher = chokidar.watch([configPath.sourceMapModule, configPath.sourceMapAtom], {
     persistent: true,
   });
 
@@ -33,8 +33,8 @@ export const startWatcherWithEslint = () => {
   watcher.on('change', (path) => {
     log(`File ${path} has been changed`);
 
-    delete require.cache[require.resolve(configPath.sourceMapModuleJsPath)];
-    delete require.cache[require.resolve(configPath.sourceMapAtomJsPath)];
+    delete require.cache[require.resolve(configPath.sourceMapModule)];
+    delete require.cache[require.resolve(configPath.sourceMapAtom)];
 
     // arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapModulePath });
     // arcStartWithEslint({ str: 'Rebuilding...', sourcesMap: sourceMapAtomPath });

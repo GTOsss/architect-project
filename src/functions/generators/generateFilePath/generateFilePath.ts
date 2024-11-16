@@ -1,13 +1,13 @@
 import { TemplateParamsConsistent } from '../../../types/sourceMapModuleConsistent';
-import { ArcConfig } from '../../../types/config';
+import { TemplateConfig } from '../../../types/config';
 import { parseAllInterpolationMarks } from '../../parsers';
 import { ParsedFragmentDataTypeEnum, ParserContextEnum } from '../../parsers/parseTemplateFiles';
 
-const createInterpolationRegExpPath = ({ itrFileNameStart, itrFileNameEnd }: ArcConfig) =>
+const createInterpolationRegExpPath = ({ itrFileNameStart, itrFileNameEnd }: TemplateConfig) =>
   new RegExp(`(?<=\\${itrFileNameStart})(.+?)(?=\\${itrFileNameEnd})`, 'gm');
 
 type GenerateFilePathParams = {
-  config: ArcConfig;
+  config: TemplateConfig;
   filePath: string;
   outputPath: string;
   inputPath: string;

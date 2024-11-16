@@ -6,7 +6,7 @@ import { pushFolders } from '../../store';
 import { SourceMapModuleConsistentRequiredFile } from '../../types/sourceMapModuleConsistent';
 import { ParsedTemplateMap } from '../parsers/parseTemplateFiles';
 import { AnyMethod } from '../../types/common';
-import { ArcConfig } from '../../types/config';
+import { getConfigByTemplate } from '../../store/config';
 
 const memoData = {};
 
@@ -24,7 +24,6 @@ const awaitEndGeneration = async (endGenerationPromises: PromiseLike<any>[], eve
 export const createFilesBySourceMap = (
   parsedTemplateMap: ParsedTemplateMap,
   { map }: SourceMapModuleConsistentRequiredFile,
-  config: ArcConfig,
 ) => {
   const endGenerationPromises = [];
 
@@ -37,6 +36,8 @@ export const createFilesBySourceMap = (
       const assetsKey = templateParams && templateParams.assets;
       const assets = assetsKey ? parseAssets()[assetsKey] : null;
 
+      const config = getConfigByTemplate(templateParams.template);
+
       const params = { targetPath, parsedTemplateMap, assets, sourceMap: map, config };
 
       if (memoData[template]) {
@@ -45,9 +46,7 @@ export const createFilesBySourceMap = (
         memoData[template] = [params];
       }
 
-      const templateConfig = config.templates[template] ? config.templates[template] : config;
-
-      endGenerationPromises.push(generateFilesByTemplate({ ...params, templateConfig, templateParams }));
+      endGenerationPromises.push(generateFilesByTemplate({ ...params, templateParams }));
     });
   });
 
