@@ -3,6 +3,7 @@ import { TemplateObjWithPaths } from '../../getters/getObjectWithPaths.types';
 import {
   ParsedTemplateFile,
   ParsedTemplateFragment,
+  ParsedTemplateInfo,
   ParsedTemplateMap,
   ParserContextEnum,
 } from './parseTemplateFiles.types';
@@ -40,10 +41,19 @@ export type IntrConfig<ParseCxt extends ParserContextEnum> = ParseCxt extends Pa
  * const re = /(?<=\{).+?(?=})/g; // lookbehind `(?<=\{)` and lookahead `(?=})` to find content enclosed in curly braces.
  * const matches = reExec(str, re); // result:
  *  [
- *    { data: ParsedFragmentData, str: 'test', originStr: '{{test}}',  index: 10 },
- *    { data: ParsedFragmentData, str: 'multiple', originStr: '{{multiple}}', index: 28 }
+ *    {
+ *      data: ParsedFragmentData,
+ *      str: 'test',
+ *      originStr: '{{test}}',
+ *      index: 10
+ *    },
+ *    {
+ *      data: ParsedFragmentData,
+ *      str: 'multiple',
+ *      originStr: '{{multiple}}',
+ *      index: 28
+ *    }
  *  ]
- *
  */
 export const parseAllInterpolationMarks = <ParserCxt extends ParserContextEnum>(
   str: string,
@@ -66,6 +76,11 @@ export const parseAllInterpolationMarks = <ParserCxt extends ParserContextEnum>(
   return results;
 };
 
+/**
+ * @example
+ * const config = { itrStart: '#', itrEnd: '#' };
+ * getInterpolationOriginFragment('test', config) // "#test#"
+ * */
 export const getInterpolationOriginFragment = <ParserCxt extends ParserContextEnum>(
   str: string,
   config: ParserCxt extends ParserContextEnum.fileContent ? IntrFileConfig : IntrFilePathConfig,
@@ -82,6 +97,28 @@ export const getInterpolationOriginFragment = <ParserCxt extends ParserContextEn
 
 export const createInterpolationRegExp = (config: IntrFileConfig) =>
   new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
+
+export const parseTemplateFile = ({
+  templateName,
+  files,
+  templateScript,
+}: TemplateObjWithPaths): ParsedTemplateInfo => {
+  const config = getConfigByTemplate(templateName);
+  const reInterpolation = createInterpolationRegExp(config);
+  const parsedFiles: ParsedTemplateFile[] = [];
+
+  files.forEach((path) => {
+    const content = fs.readFileSync(path, 'utf8');
+    const parsed = parseAllInterpolationMarks(content, reInterpolation, config);
+    parsedFiles.push({
+      file: path,
+      parsed,
+      content,
+    });
+  });
+
+  return { parsedFiles, templateScript };
+};
 
 /**
  * Iterates by template files, read and parse it to object with interpolation info.
@@ -114,29 +151,9 @@ export const createInterpolationRegExp = (config: IntrFileConfig) =>
  *   ...,
  * ];
  * */
-export const parseTemplateFiles = (templates: TemplateObjWithPaths[]) => {
-  const parsedTemplateMap: ParsedTemplateMap = {};
-
-  templates.forEach(({ files, script: templateScript, templateName }) => {
-    const config = getConfigByTemplate(templateName);
-    const reInterpolation = createInterpolationRegExp(config);
-    const parsedFiles: ParsedTemplateFile[] = [];
-
-    files.forEach((path) => {
-      const content = fs.readFileSync(path, 'utf8');
-      const parsed = parseAllInterpolationMarks(content, reInterpolation, config);
-      parsedFiles.push({
-        file: path,
-        parsed,
-        content,
-      });
-    });
-
-    parsedTemplateMap[templateName] = {
-      parsedFiles,
-      templateScript,
-    };
-  });
-
-  return parsedTemplateMap;
+export const parseTemplateFiles = (templates: TemplateObjWithPaths[]): ParsedTemplateMap => {
+  return templates.reduce((parsedTemplateMap, template) => {
+    parsedTemplateMap[template.templateName] = parseTemplateFile(template);
+    return parsedTemplateMap;
+  }, {} as ParsedTemplateMap);
 };

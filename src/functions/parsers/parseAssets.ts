@@ -1,12 +1,9 @@
 import { basename } from 'path';
 import fs from 'file-system';
-import configPath from '../../configPath';
 import { getTemplatesInfo } from '../getters';
 
 export const parseAssets = () => {
-  const assetsPath = configPath.assetsPath;
-
-  const allFilesPaths = getTemplatesInfo(assetsPath);
+  const allFilesPaths = getTemplatesInfo();
 
   return allFilesPaths.reduce((acc, { templateName, files }) => {
     acc[templateName] = files.map((path) => ({

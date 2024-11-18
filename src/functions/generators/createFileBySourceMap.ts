@@ -6,7 +6,6 @@ import { pushFolders } from '../../store';
 import { SourceMapModuleConsistentRequiredFile } from '../../types/sourceMapModuleConsistent';
 import { ParsedTemplateMap } from '../parsers/parseTemplateFiles';
 import { AnyMethod } from '../../types/common';
-import { getConfigByTemplate } from '../../store/config';
 
 const memoData = {};
 
@@ -30,22 +29,19 @@ export const createFilesBySourceMap = (
   Object.entries(map).forEach(([targetPath, componentsMap]) => {
     pushFolders({ folder: targetPath });
 
-    Object.entries(componentsMap).forEach(([, templateParams]) => {
+    Object.values(componentsMap).forEach((templateParams) => {
       const template = templateParams.template || '';
 
       const assetsKey = templateParams && templateParams.assets;
       const assets = assetsKey ? parseAssets()[assetsKey] : null;
 
-      const config = getConfigByTemplate(templateParams.template);
-
-      const params = { targetPath, parsedTemplateMap, assets, sourceMap: map, config };
+      const params = { targetPath, assets, sourceMap: map };
 
       if (memoData[template]) {
         memoData[template].push(params);
       } else {
         memoData[template] = [params];
       }
-
       endGenerationPromises.push(generateFilesByTemplate({ ...params, templateParams }));
     });
   });

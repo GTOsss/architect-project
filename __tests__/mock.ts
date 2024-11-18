@@ -6,6 +6,8 @@ export const arcMockConfig: ArcConfig = {
   output: 'output-test',
   replace: true,
   clean: false,
+  backup: false,
+  watch: false,
   itrStart: '{{',
   itrEnd: '}}',
   itrFileNameStart: '[',

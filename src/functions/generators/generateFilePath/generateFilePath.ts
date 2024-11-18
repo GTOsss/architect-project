@@ -10,7 +10,7 @@ type GenerateFilePathParams = {
   config: TemplateConfig;
   filePath: string;
   outputPath: string;
-  inputPath: string;
+  templatePath: string;
   templateParams: TemplateParamsConsistent;
   backupPath: string;
 };
@@ -19,7 +19,7 @@ export const generateFilePath = ({
   config,
   filePath,
   outputPath,
-  inputPath,
+  templatePath,
   templateParams,
   backupPath,
 }: GenerateFilePathParams) => {
@@ -40,7 +40,7 @@ export const generateFilePath = ({
   });
 
   return {
-    filePath: pathWithSourceMapVariable.replace(inputPath, outputPath).replace(config.templateExt, ''),
-    backupFilePath: pathWithSourceMapVariable.replace(inputPath, backupPath).replace(config.templateExt, ''),
+    filePath: pathWithSourceMapVariable.replace(templatePath, outputPath).replace(config.templateExt, ''),
+    backupFilePath: pathWithSourceMapVariable.replace(templatePath, backupPath).replace(config.templateExt, ''),
   };
 };

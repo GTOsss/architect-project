@@ -1,7 +1,9 @@
 import { resolve } from 'path';
 
 /**
- * Object with getters for all app paths. For example: outputPath, sourcemap.
+ * Object with getters for all app paths relative of:
+ * • cwd - current working dir
+ * • settingsFolder - "settingsFolder" value from cli arguments
  * */
 export class Paths {
   _settingsFolder = 'architect';
@@ -66,4 +68,7 @@ export class Paths {
   get architect() {
     return `${this.cwd}/${this._settingsFolder}`;
   }
+
+  /** Resolve path to particular template */
+  resolveToTemplate = (template: string) => resolve(this.templatesPath, template);
 }

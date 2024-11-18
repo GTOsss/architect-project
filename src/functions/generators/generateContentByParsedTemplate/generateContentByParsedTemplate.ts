@@ -19,6 +19,8 @@ export type GenerateContentByParsedTemplateBaseParams = {
 };
 
 /**
+ * Generate content by ParsedTemplateFile, TemplateParams and other detected data
+ *
  * @param parsed
  * @param originContent
  * @param templateParams
@@ -26,7 +28,6 @@ export type GenerateContentByParsedTemplateBaseParams = {
  * @param baseMode If true, methods from interpolation fragments will be call with
  * only one fn argument (without HelpAPI). Default false.
  *
- * Generate content by ParsedTemplateFile, TemplateParams and other detected data
  * */
 export const generateContentByParsedTemplate = <BaseMode extends boolean>(
   { parsed, content: originContent }: ParsedTemplate,

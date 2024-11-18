@@ -8,7 +8,8 @@ const templatesSchema = Joi.object().custom((value) => {
     const schema = Joi.object({
       replace: Joi.boolean(),
       clean: Joi.boolean(),
-      watch: Joi.array().items(Joi.string()),
+      watch: Joi.boolean(),
+      backup: Joi.boolean(),
       output: Joi.string(),
       itrStart: Joi.string(),
       itrEnd: Joi.string(),
@@ -34,6 +35,7 @@ const configSchema = Joi.object({
   replace: Joi.boolean().required(),
   clean: Joi.boolean().required(),
   watch: Joi.boolean().required(),
+  backup: Joi.boolean().required(),
   itrStart: Joi.string().required(),
   itrEnd: Joi.string().required(),
   itrFileNameStart: Joi.string().required(),

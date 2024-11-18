@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { requireScript } from './requireScript';
 import fs from 'file-system';
 import { TemplateObjWithPaths } from './getObjectWithPaths.types';
+import configPath from '../../configPath';
 
 /**
  * Get recursively file path from dir without "_script_.js/ts" files. */
@@ -24,6 +25,31 @@ const getChildPaths = (dir: string, result?: string[]) => {
 };
 
 /**
+ *
+ * @param templateName
+ *
+ * @example
+ * // result value example:
+ *  {
+ *    templateName: 'react-component',
+ *    templateScript: RequiredTemplateScript,
+ *    files: [
+ *      'C:/someProject/architect/templates/react-component/[name]/index.ts.hbs',
+ *      'C:/someProject/architect/templates/react-component/[name]/[name].tsx.hbs',
+ *      'C:/someProject/architect/templates/react-component/[name]/[name].css',
+ *    ]
+ *  },
+ */
+export const getTemplateInfo = (templateName: string) => {
+  const pathToTemplateDir = configPath.templatesPath;
+  return {
+    templateName,
+    files: getChildPaths(resolve(pathToTemplateDir, templateName)),
+    templateScript: requireScript({ pathToTemplateDir, templateName }),
+  };
+};
+
+/**
  * Return array of objects with template name, its file paths and script from _script_.js/ts.
  *
  * @example
@@ -32,7 +58,7 @@ const getChildPaths = (dir: string, result?: string[]) => {
  *    ...,
  *    {
  *      templateName: 'react-component',
- *      script: RequiredTemplateScript,
+ *      templateScript: RequiredTemplateScript,
  *      files: [
  *        'C:/someProject/architect/templates/react-component/[name]/index.ts.hbs',
  *        'C:/someProject/architect/templates/react-component/[name]/[name].tsx.hbs',
@@ -43,20 +69,8 @@ const getChildPaths = (dir: string, result?: string[]) => {
  *  ]
  *
  * */
-export const getTemplatesInfo = (dir: string) => {
-  const allPaths: TemplateObjWithPaths[] = [];
-
-  const parentPathsFile: string[] = fs.readdirSync(dir);
-
-  parentPathsFile.forEach((el) => {
-    const scriptPath = requireScript({ dir, template: el });
-
-    allPaths.push({
-      templateName: el,
-      files: getChildPaths(resolve(dir, el)),
-      script: scriptPath,
-    });
-  });
-
-  return allPaths;
+export const getTemplatesInfo = (): TemplateObjWithPaths[] => {
+  const pathToTemplateDir = configPath.templatesPath;
+  const templates: string[] = fs.readdirSync(pathToTemplateDir);
+  return templates.map((templateName) => getTemplateInfo(templateName));
 };

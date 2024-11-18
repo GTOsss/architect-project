@@ -9,6 +9,7 @@ const initArcConfig: ArcConfig = {
   replace: false,
   clean: false,
   watch: false,
+  backup: false,
   itrStart: '{{',
   itrEnd: '}}',
   itrFileNameStart: '[',

@@ -2,33 +2,32 @@ import { resolve } from 'path';
 import fs from 'file-system';
 import { generateFilePath } from './generateFilePath';
 import configPath from '../../configPath';
-// import { backupFile } from '../../utils/backup/backupFile';
+import { backupFile } from '../../utils/backup/backupFile';
 import { pushFiles, pushReplacedFiles } from '../../store';
 import { promisifyWriteFile } from '../../utils/promisifyWriteFile';
 import { SourceMapModuleConsistent, TemplateParamsConsistent } from '../../types/sourceMapModuleConsistent';
-import { ParsedTemplateMap } from '../parsers/parseTemplateFiles';
-import { ArcConfig, TemplateConfig } from '../../types/config';
 import { generateContentByParsedTemplate } from './generateContentByParsedTemplate/generateContentByParsedTemplate';
-import { logToFileJson } from '../../utils/debug';
+import { getConfigByTemplate } from '../../store/config';
+import { $parsedTemplateMap } from '../../store/templates';
 
-type GenerateTemplateFilesParams = {
+export type GenerateTemplateFilesParams = {
   /** Target path for generation from source-map file. */
   targetPath: string;
-  parsedTemplateMap: ParsedTemplateMap;
   assets: any;
-  config: TemplateConfig;
   templateParams: TemplateParamsConsistent;
   sourceMap: SourceMapModuleConsistent;
 };
 
 export const generateFilesByTemplate = ({
   targetPath,
-  parsedTemplateMap,
   assets,
-  config,
   templateParams,
   sourceMap,
 }: GenerateTemplateFilesParams) => {
+  const config = getConfigByTemplate(templateParams.template);
+
+  const parsedTemplateMap = $parsedTemplateMap.getState();
+
   const { parsedFiles, templateScript } = parsedTemplateMap[templateParams.template];
 
   const outputPath = resolve(configPath.outputPath, targetPath);
@@ -49,7 +48,7 @@ export const generateFilesByTemplate = ({
       config,
       filePath: parsedTemplateFile.file,
       outputPath,
-      inputPath: templatePath,
+      templatePath,
       templateParams,
       backupPath,
     });
@@ -73,11 +72,10 @@ export const generateFilesByTemplate = ({
     }
     // <<<
 
-    // todo implement replace flag
-    // flag replace >>>
-    // if (config.backups) {
-    //   backupFile({ filePath, backupFilePath, template, config });
-    // }
+    // flag backup >>>
+    if (config.backup) {
+      backupFile({ filePath, backupFilePath, template: templateParams.template, config });
+    }
     // <<<
 
     return result;

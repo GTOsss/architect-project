@@ -8,7 +8,7 @@ import { RequiredTemplateScript } from './requireScript';
  *    'C:/project/architect/react-component/[name]/[name].tsx',
  *    ...,
  *   ],
- *   script: <RequiredTemplateScript>,
+ *   templateScript: <RequiredTemplateScript>,
  * }
  *
  * */
@@ -18,5 +18,5 @@ export type TemplateObjWithPaths = {
    * @example ['C:/project/architect/react-component/[name]/[name].tsx', ...] */
   files: string[];
   /** Script from _script_ */
-  script?: RequiredTemplateScript;
+  templateScript?: RequiredTemplateScript;
 };
