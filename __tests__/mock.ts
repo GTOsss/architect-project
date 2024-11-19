@@ -14,7 +14,8 @@ export const arcMockConfig: ArcConfig = {
   itrFileNameEnd: ']',
   templateExt: '.txt',
   esLint: {
-    quiet: false,
+    autofix: false,
+    configFile: '.eslintrc.js',
   },
   templates: {
     component: {

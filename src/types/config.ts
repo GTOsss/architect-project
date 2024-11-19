@@ -1,3 +1,9 @@
+export type ESLinkConfig = {
+  autofix: boolean;
+  /** @example .eslintrc.js  */
+  configFile: string;
+};
+
 export type TemplateConfig = {
   replace: boolean;
   clean: boolean;
@@ -11,9 +17,7 @@ export type TemplateConfig = {
   itrFileNameStart: string;
   itrFileNameEnd: string;
   templateExt: string;
-  esLint: {
-    quiet: boolean;
-  };
+  esLint: ESLinkConfig;
 };
 
 export type ArcConfig = TemplateConfig & {

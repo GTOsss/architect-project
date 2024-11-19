@@ -16,7 +16,8 @@ const initArcConfig: ArcConfig = {
   itrFileNameEnd: ']',
   templateExt: '.txt',
   esLint: {
-    quiet: false,
+    autofix: false,
+    configFile: '',
   },
   templates: {},
 };

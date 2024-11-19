@@ -9,6 +9,19 @@ import { SourceMapModuleConsistent, TemplateParamsConsistent } from '../../types
 import { generateContentByParsedTemplate } from './generateContentByParsedTemplate/generateContentByParsedTemplate';
 import { getConfigByTemplate } from '../../store/config';
 import { $parsedTemplateMap } from '../../store/templates';
+import { applyEslintAutofix } from '../../utils/applyEslintAutoFix';
+import paths from '../../configPath';
+import { TemplateConfig } from '../../types/config';
+import { AnyMethod } from '../../types/common';
+
+export type WriteAndyApplyEslintParams = { filePath: string; content: string; config: TemplateConfig; cb: AnyMethod };
+const writeAndyApplyEslint = async ({ filePath, content, config, cb }: WriteAndyApplyEslintParams) => {
+  await promisifyWriteFile(filePath, content, { cb });
+  if (config.esLint) {
+    const eslintConfigPath = resolve(paths.cwd, config.esLint.configFile);
+    await applyEslintAutofix({ code: content, eslintConfigPath, filePath });
+  }
+};
 
 export type GenerateTemplateFilesParams = {
   /** Target path for generation from source-map file. */
@@ -60,25 +73,25 @@ export const generateFilesByTemplate = ({
       assets,
     });
 
-    // flag replace >>>
-    let result = null;
-
-    if (fs.existsSync(filePath)) {
-      if (config.replace) {
-        result = promisifyWriteFile(filePath, content, { method: pushReplacedFiles });
-      }
-    } else {
-      result = promisifyWriteFile(filePath, content, { method: pushFiles });
-    }
-    // <<<
-
     // flag backup >>>
     if (config.backup) {
       backupFile({ filePath, backupFilePath, template: templateParams.template, config });
     }
     // <<<
 
-    return result;
+    // flag replace >>>
+
+    const isFileExists = fs.existsSync(filePath);
+    const isFileDoesNotExist = !isFileExists;
+    const isActiveReplace = config.replace;
+
+    if (isFileDoesNotExist) {
+      await writeAndyApplyEslint({ filePath, content, config, cb: pushFiles });
+    } else if (isFileExists && isActiveReplace) {
+      await writeAndyApplyEslint({ filePath, content, config, cb: pushReplacedFiles });
+    }
+
+    // <<<
   });
 
   return Promise.all(writeFilePromises);

@@ -13,6 +13,8 @@ import { ArcConfig } from '../types/config';
 export const getConfigByTemplate = (config: ArcConfig, templateName: string) => {
   const baseConfig = omit(config, 'templates');
   const templateConfig = config.templates[templateName];
+  const baseEslint = config.esLint;
+  const templateEslint = config.templates[templateName]?.esLint || {};
 
-  return { ...baseConfig, ...templateConfig };
+  return { ...baseConfig, ...templateConfig, eslint: { ...baseEslint, ...templateEslint } };
 };

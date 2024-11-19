@@ -1,12 +1,12 @@
 import fs from 'file-system';
 
-export const promisifyWriteFile = (filePath, parsedContent, { method }) => {
+export const promisifyWriteFile = (filePath, parsedContent, { cb }) => {
   try {
     return new Promise<void>((resolve, reject) => {
       fs.writeFile(filePath, parsedContent, (err) => {
         if (err) reject(err);
         else {
-          method({ filePath });
+          cb({ filePath });
 
           resolve();
         }

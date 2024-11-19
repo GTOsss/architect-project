@@ -17,7 +17,8 @@ const templatesSchema = Joi.object().custom((value) => {
       itrFileNameEnd: Joi.string(),
       templateExt: Joi.string(),
       esLint: Joi.object({
-        quiet: Joi.boolean(),
+        autofix: Joi.boolean(),
+        configFile: Joi.string(),
       }),
     });
 
@@ -42,7 +43,8 @@ const configSchema = Joi.object({
   itrFileNameEnd: Joi.string().required(),
   templateExt: Joi.string().required(),
   esLint: Joi.object({
-    quiet: Joi.boolean().required(),
+    autofix: Joi.boolean().required(),
+    configFile: Joi.string().required(),
   }),
   templates: templatesSchema,
 });
