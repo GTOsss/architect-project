@@ -6,7 +6,6 @@ const stringifyObject = require('stringify-object');
 const chalk = require('chalk');
 const fs = require('file-system');
 const { resolve } = require('path');
-const eslintConfig = smartRequire(configPath.eslintConfigPath, {});
 
 const startEsLint = require('../../functions/starters/startESLint');
 const appendVersion = require('./appendVersion');
@@ -97,10 +96,10 @@ const createAndCashSourceMap = (params) => {
 
   //start EsLint
 
-  startEsLint({ eslintConfig, outputPath: configPath.esLintSourceMapPath }).catch((error) => {
-    process.exitCode = 1;
-    console.error(error);
-  });
+  // startEsLint({ eslintConfig, outputPath: configPath.esLintSourceMapPath }).catch((error) => {
+  //   process.exitCode = 1;
+  //   console.error(error);
+  // });
 };
 
 const createAndCashSourceMapModule = () => createAndCashSourceMap(atomToModuleParams);

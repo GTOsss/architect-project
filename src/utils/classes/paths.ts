@@ -20,9 +20,6 @@ export class Paths {
     const config = configFile.config || configFile;
     return config.output;
   }
-  get eslintConfigPath() {
-    return `${this.cwd}/.eslintrc.js`;
-  }
   get sourceMapModule() {
     return `${this.cwd}/${this._settingsFolder}/source_map/source-map-module`;
   }
@@ -35,9 +32,6 @@ export class Paths {
   get outputPath() {
     return resolve(this.cwd, this.output);
   }
-  get esLintOutputPath() {
-    return `${this.cwd}/${this.output}/**/*[.tsx, .ts, .js, .jsx,]`;
-  }
   get assetsPath() {
     return `${this.cwd}/${this._settingsFolder}/assets`;
   }
@@ -46,9 +40,6 @@ export class Paths {
   }
   get config() {
     return `${this.cwd}/${this._settingsFolder}/config`;
-  }
-  get esLintSourceMapPath() {
-    return `${this.cwd}/${this._settingsFolder}/source_map/*[.js,]`;
   }
   get arcHistoryPath() {
     return `${this.cwd}/${this._settingsFolder}/.arc/history/source-map`;

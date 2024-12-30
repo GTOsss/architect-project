@@ -84,3 +84,5 @@ yarn.lock
 ../../../parse1Cdata/.prettierrc.js
 __tests__/cases/architectV1
 .arc
+
+dist

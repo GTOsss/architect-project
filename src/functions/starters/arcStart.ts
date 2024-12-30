@@ -20,7 +20,13 @@ export const arcStart = ({ settingsFolder = 'architect' }: StartParams) => {
   configPath.settingsFolder = settingsFolder;
 
   // require main config
-  const config = smartRequire<{ config: ArcConfig }, null>(configPath.config, null).config;
+  const configFile = smartRequire<{ config: ArcConfig }, null>(configPath.config, null);
+
+  if (!configFile) {
+    throw new Error(`Configuration file not found at ${configPath.config}`);
+  }
+
+  const config = configFile.config;
   setConfig(config);
 
   // validate main config
