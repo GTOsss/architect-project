@@ -1,13 +1,12 @@
 import paths from '../../configPath';
 import { resolve } from 'path';
+import _ from 'lodash';
+import fs from 'file-system';
 
-const fs = require('file-system');
+import { cleanHistory } from './cleanHistory';
 
 const { arcBackupsPath, backupsVersionsJsonPath } = paths;
 const exportPath = resolve(arcBackupsPath, 'versions.json');
-
-const _ = require('lodash');
-const cleanHistory = require('./cleanHistory');
 
 const createVersionsJson = (template) => {
   const defContent = {

@@ -1,5 +1,5 @@
-const moduleToAtomSourceMap = (sourceMap, defaultParams = {}) => {
-  let map = {};
+export const moduleToAtomSourceMap = (sourceMap, defaultParams = {}) => {
+  const map = {};
 
   Object.entries(sourceMap.map).forEach(([path, files]) => {
     Object.entries(files).forEach(([fileName, params]) => {
@@ -28,8 +28,4 @@ const moduleToAtomSourceMap = (sourceMap, defaultParams = {}) => {
   });
 
   return { map, aliases: sourceMap.aliases };
-};
-
-module.exports = {
-  sourceMapToAtom: moduleToAtomSourceMap,
 };

@@ -4,8 +4,25 @@ import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import { defineConfig } from 'rollup';
 
+const plugins = [
+  typescript({
+    tsconfig: './tsconfig.json',
+    sourceMap: true,
+  }),
+  resolve({
+    preferBuiltins: true,
+  }),
+  commonjs(),
+  json(),
+];
+
+const external = [
+  ...Object.keys(require('./package.json').dependencies || {}),
+  ...Object.keys(require('./package.json').peerDependencies || {}),
+];
+
 export default defineConfig([
-  // CommonJS (Node js)
+  // publicMethods CommonJS (Node js)
   {
     input: 'publicMethods.ts',
     output: {
@@ -13,23 +30,11 @@ export default defineConfig([
       format: 'cjs',
       sourcemap: true,
     },
-    plugins: [
-      typescript({
-        tsconfig: './tsconfig.json',
-        sourceMap: true,
-      }),
-      resolve({
-        preferBuiltins: true,
-      }),
-      commonjs(),
-      json(),
-    ],
-    external: [
-      ...Object.keys(require('./package.json').dependencies || {}),
-      ...Object.keys(require('./package.json').peerDependencies || {}),
-    ],
+    plugins: plugins,
+    external: external,
   },
-  // ESM (webpack and other builders)
+
+  // publicMethods ESM (webpack and other builders)
   {
     input: 'publicMethods.ts',
     output: {
@@ -37,20 +42,7 @@ export default defineConfig([
       format: 'esm',
       sourcemap: true,
     },
-    plugins: [
-      typescript({
-        tsconfig: './tsconfig.json',
-        sourceMap: true,
-      }),
-      resolve({
-        preferBuiltins: true,
-      }),
-      commonjs(),
-      json(),
-    ],
-    external: [
-      ...Object.keys(require('./package.json').dependencies || {}),
-      ...Object.keys(require('./package.json').peerDependencies || {}),
-    ],
+    plugins: plugins,
+    external: external,
   },
 ]);

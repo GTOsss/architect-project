@@ -1,7 +1,7 @@
-const fs = require('file-system');
-const { resolve } = require('path');
+import fs from 'file-system';
+import { resolve } from 'path';
 
-const cleanHistory = ({ jsonArr, arcHistoryPath }) => {
+export const cleanHistory = ({ jsonArr, arcHistoryPath }) => {
   const pathsToDelete = [];
 
   jsonArr.push('versions.json');
@@ -28,5 +28,3 @@ const cleanHistory = ({ jsonArr, arcHistoryPath }) => {
     }
   });
 };
-
-module.exports = cleanHistory;

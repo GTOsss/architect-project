@@ -1,7 +1,9 @@
-const fs = require('file-system');
-const { arcHistoryPath, versionsJsonPath } = require('../../configPath');
-const { resolve } = require('path');
-const cleanHistory = require('./cleanHistory');
+import fs from 'file-system';
+import paths from '../../configPath';
+import { resolve } from 'path';
+import { cleanHistory } from './cleanHistory';
+
+const { arcHistoryPath, versionsJsonPath } = paths;
 
 const createVersionsJson = async () => {
   const defContent = {

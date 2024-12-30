@@ -1,9 +1,10 @@
 import { smartRequire } from '../smartRequire';
+import fs from 'file-system';
+import chalk from 'chalk';
+import paths from '../../configPath';
+import { resolve } from 'path';
 
-const fs = require('file-system');
-const chalk = require('chalk');
-const { versionsJsonPath, arcHistoryPath, sourceMap: sourceMapPath } = require('../../configPath');
-const { resolve } = require('path');
+const { arcHistoryPath, sourceMap: sourceMapPath, versionsJsonPath } = paths;
 
 const json = smartRequire(versionsJsonPath, { current: null });
 

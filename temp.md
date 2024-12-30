@@ -1,6 +1,57 @@
+Есть npm модуль который должен запускаться через команду "arc".  
+Например "arc -v".
+
+### ./bin/cli.ts
+```ts
+#!/usr/bin/env ts-node
+import '../src/store/index';
+import commander from 'commander';
+import packageJson from '../package.json';
+import { arcStart } from '../src/functions';
+
+import { createAndCashSourceMapAtom, createAndCashSourceMapModule } from '../src/utils/change/createAndCashSourceMap';
+
+// cli
+commander.version(packageJson.version).description('Configuration files creator.');
+commander.option('-w, --watch', 'use watcher');
+commander.option('-e, --eslint', 'use esLint');
+commander.option('-mta, --module_to_atom', 'from module to atom');
+commander.option('-atm, --atom_to_module', 'from atom to module');
+commander.option('-u, --undo', 'undoing changes');
+commander.option('-r, --redo', 'redoing changes');
+commander.option('-c, --config <path>', 'path of the configuration to use');
+
+const options = commander.opts();
+
+commander
+  .command('start')
+  .alias('s')
+  .description('Start architect-project generation')
+  .action(() => arcStart({ settingsFolder: options.config }));
+
+//convert
+
+commander
+  .command('convert')
+  .alias('con')
+  .description('Convert source-map')
+  .action(() => {
+    if (options.module_to_atom) {
+      createAndCashSourceMapAtom();
+    }
+    if (options.atom_to_module) {
+      createAndCashSourceMapModule();
+    }
+  });
+
+commander.parse(process.argv);
+```
+
+### package.json
+```json
 {
   "name": "architect-project",
-  "version": "2.0.5-10",
+  "version": "2.0.5-8",
   "bin": {
     "arc": "./bin/cli.ts"
   },
@@ -75,8 +126,8 @@
   },
   "files": [
     "bin",
-    "src",
     "dist",
     "publicTypesForUser.d.ts"
   ]
 }
+```

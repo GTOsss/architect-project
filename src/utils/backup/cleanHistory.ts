@@ -1,7 +1,7 @@
 import fs from 'file-system';
 import { resolve } from 'path';
 
-const cleanHistory = ({ jsonArr, arcBackupsPath, template }) => {
+export const cleanHistory = ({ jsonArr, arcBackupsPath, template }) => {
   const pathsToDelete = [];
 
   jsonArr.push('versions.json');
@@ -30,5 +30,3 @@ const cleanHistory = ({ jsonArr, arcBackupsPath, template }) => {
     }
   });
 };
-
-module.exports = cleanHistory;

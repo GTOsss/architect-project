@@ -1,20 +1,16 @@
 import { smartRequire } from '../smartRequire';
-
 import configPath from '../../configPath';
-
-const stringifyObject = require('stringify-object');
-const chalk = require('chalk');
-const fs = require('file-system');
-const { resolve } = require('path');
-
-const startEsLint = require('../../functions/starters/startESLint');
-const appendVersion = require('./appendVersion');
+import stringifyObject from 'stringify-object';
+import chalk from 'chalk';
+import fs from 'file-system';
+import { resolve } from 'path';
+// import { startEsLint } from '../../functions/starters/startESLint';
+import { appendVersion } from './appendVersion';
+import { moduleToAtomSourceMap } from './moduleToAtomSourceMap';
+import { atomToModuleSourceMap } from './atomToModuleSourceMap';
 
 const sourceMapAtom = smartRequire(configPath.sourceMapAtom, {});
 const sourceMapModule = smartRequire(configPath.sourceMapModule, {});
-
-const { sourceMapToModule } = require('./atomToModuleSourceMap');
-const { sourceMapToAtom } = require('./moduleToAtomSourceMap');
 
 const atomToModuleParams = {
   prefix: 'atm_',
@@ -22,7 +18,7 @@ const atomToModuleParams = {
   oldPath: resolve(configPath.sourceMapModule),
   currentSourceMap: sourceMapAtom,
   currentFileName: 'source-map-atom.js',
-  method: sourceMapToModule,
+  method: atomToModuleSourceMap,
   prettyMap: {
     indent: '  ',
     singleQuotes: false,
@@ -36,7 +32,7 @@ const moduleToAtomParams = {
   oldPath: resolve(configPath.sourceMapAtom),
   currentSourceMap: sourceMapModule,
   currentFileName: 'source-map-module.js',
-  method: sourceMapToAtom,
+  method: moduleToAtomSourceMap,
   prettyMap: {
     indent: '  ',
     transform: (map, prop, originalResult) => {
@@ -102,10 +98,5 @@ const createAndCashSourceMap = (params) => {
   // });
 };
 
-const createAndCashSourceMapModule = () => createAndCashSourceMap(atomToModuleParams);
-const createAndCashSourceMapAtom = () => createAndCashSourceMap(moduleToAtomParams);
-
-module.exports = {
-  createAndCashSourceMapModule,
-  createAndCashSourceMapAtom,
-};
+export const createAndCashSourceMapModule = () => createAndCashSourceMap(atomToModuleParams);
+export const createAndCashSourceMapAtom = () => createAndCashSourceMap(moduleToAtomParams);

@@ -1,18 +1,15 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env tsx
 import '../src/store/index';
 import commander from 'commander';
 // import chalk from 'chalk';
 import packageJson from '../package.json';
-import { arcStart } from '../src/functions/starters';
+import { arcStart } from '../src/functions';
 
 // import { redoingChanges, undoingChanges } from '../src/utils/change/doChanges';
 
 // import { actionEsLint, actionStart, callFunctionWithCurrentSourceMap } from './utils';
 
-const {
-  createAndCashSourceMapModule,
-  createAndCashSourceMapAtom,
-} = require('../src/utils/change/createAndCashSourceMap');
+import { createAndCashSourceMapAtom, createAndCashSourceMapModule } from '../src/utils/change/createAndCashSourceMap';
 
 // cli
 commander.version(packageJson.version).description('Configuration files creator.');
