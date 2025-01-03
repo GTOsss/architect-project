@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createGeneratorStrByTemplate simple 1`] = `"first fnName(argumentA, argumentB) second"`;
+
+exports[`generateStringByTemplate simple 1`] = `"const testMethod = (firstArg, secondArg) => firstArg + secondArg"`;
+
+exports[`generateStringByTemplate simple different interpolation syntax 1`] = `"const testMethod= ({ a, b}) => [a,b]"`;

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateContentByParsedTemplate simple template with call function 1`] = `"const TestValueName = () => {}"`;
+
+exports[`generateContentByParsedTemplate simple template with variable 1`] = `"const TEST_VALUE_NAME = () => {}"`;

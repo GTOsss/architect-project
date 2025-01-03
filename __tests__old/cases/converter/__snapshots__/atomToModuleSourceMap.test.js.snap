@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test atomToModule simple with aliases 1`] = `
+"{
+  map: {
+    src: {
+      stadiums: 'store'
+    },
+    'src/components/pages': {
+      stadiums: 'component'
+    }
+  },
+  aliases: {
+    c: 'component',
+    p: 'page',
+    s: 'store',
+    ix: 'index'
+  }
+}"
+`;
+
+exports[`test atomToModule simple with atom defaultParams 1`] = `
+"{
+  map: {
+    'src/pages': {
+      stadiums: 'page'
+    },
+    'src/components/pages': {
+      stadiums: 'component'
+    },
+    'src/store': {
+      stadiums: 'store'
+    }
+  },
+  aliases: {}
+}"
+`;

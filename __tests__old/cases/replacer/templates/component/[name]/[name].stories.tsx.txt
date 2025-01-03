@@ -1,0 +1,11 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import centered from '@storybook/addon-centered/react';
+import {{toCamelCase(name)}} from './{{name}}';
+
+const stories = storiesOf('{{name}}', module).addDecorator(centered);
+
+stories.add('default', () => {
+
+  return <{{toCamelCase(name)}} />;
+});

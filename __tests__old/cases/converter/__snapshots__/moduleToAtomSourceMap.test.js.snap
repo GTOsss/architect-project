@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test moduleToAtom simple 1`] = `
+"{
+  map: {
+    icons: [
+      [
+        'i',
+        {
+          assets: 'icons-sprite',
+          test: '123',
+          path: 'src/components'
+        }
+      ]
+    ],
+    index: [
+      [
+        'ix',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    button: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    textarea: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    input: [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    'input-select': [
+      [
+        'rc',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ]
+  },
+  aliases: {}
+}"
+`;
+
+exports[`test moduleToAtom simple with aliases 1`] = `
+"{
+  map: {
+    icons: [
+      [
+        'icons',
+        {
+          assets: 'icons-sprite',
+          test: '123',
+          path: 'src/components'
+        }
+      ]
+    ],
+    index: [
+      [
+        'index',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    button: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    textarea: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    input: [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ],
+    'input-select': [
+      [
+        'react-component',
+        {
+          path: 'src/components/inputs'
+        }
+      ]
+    ]
+  },
+  aliases: {
+    rc: 'react-component',
+    s: 'store',
+    ix: 'index',
+    i: 'icons'
+  }
+}"
+`;

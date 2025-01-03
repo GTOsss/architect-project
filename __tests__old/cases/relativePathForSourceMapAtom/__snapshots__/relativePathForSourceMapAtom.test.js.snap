@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`relativePathForSourceMapAtom test relative Path For SourceMapAtom 1`] = `
+Array [
+  "{
+  folder: 'src',
+  files: [
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/clubs.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/clubs/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/comands.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/comands/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/slesh/stadiums/stadiums.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/stadiums/stadiums.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/comands.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/test/test2/comands/index.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.module.scss',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.stories.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/clubs.tsx',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/relativePathForSourceMapAtom/output/src/page/withoutSlesh/clubs/index.ts'
+  ]
+}",
+]
+`;

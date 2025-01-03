@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assetsFromSourceMap test call function from script 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/a.svg",
+    },
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/arrow-right.svg",
+    },
+    Object {
+      "content": "test",
+      "path": "*/assetsFromSourceMap/output/src/services/icons/svg/blue-posts.svg",
+    },
+    Object {
+      "content": "const t = "t"
+",
+      "path": "*/assetsFromSourceMap/output/src/services/name/index.ts",
+    },
+  ],
+}
+`;

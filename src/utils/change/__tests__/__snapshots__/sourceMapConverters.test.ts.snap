@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Source map converters module2ToModule simple (only string values) 1`] = `
+{
+  "aliases": {
+    "i": "index",
+    "rc": "react-component",
+  },
+  "map": {
+    "src/components": {
+      "header": {
+        "name": "header",
+        "outputPath": "src/components",
+        "template": "react-component",
+      },
+    },
+    "src/components/inputs": {
+      "button": {
+        "name": "button",
+        "outputPath": "src/components/inputs",
+        "template": "react-component",
+      },
+      "index": {
+        "name": "index",
+        "outputPath": "src/components/inputs",
+        "template": "index",
+      },
+    },
+  },
+}
+`;
+
+exports[`Source map converters module2ToModule simple (string and array values) 1`] = `
+{
+  "aliases": {
+    "i": "index",
+    "rc": "react-component",
+  },
+  "map": {
+    "src/components": {
+      "header": {
+        "name": "header",
+        "outputPath": "src/components",
+        "template": "react-component",
+      },
+    },
+    "src/components/inputs": {
+      "button": {
+        "name": "button",
+        "outputPath": "src/components/inputs",
+        "template": "react-component",
+      },
+      "index": {
+        "name": "index",
+        "outputPath": "src/components/inputs",
+        "template": "index",
+      },
+    },
+  },
+}
+`;
+
+exports[`Source map converters module2ToModule simple (string and object values) 1`] = `
+{
+  "aliases": {
+    "i": "index",
+    "rc": "react-component",
+  },
+  "map": {
+    "src/components": {
+      "header": {
+        "name": "header",
+        "outputPath": "src/components",
+        "template": "react-component",
+      },
+    },
+    "src/components/inputs": {
+      "button": {
+        "name": "button",
+        "outputPath": "src/components/inputs",
+        "template": "react-component",
+      },
+      "index": {
+        "name": "index",
+        "outputPath": "src/components/inputs",
+        "template": "index",
+      },
+    },
+  },
+}
+`;

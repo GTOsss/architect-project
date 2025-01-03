@@ -54,7 +54,7 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
+# dotenv environment variableInTemplate files
 .env*
 
 # gatsby files
@@ -70,3 +70,21 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# playGround
+playGround.js
+
+# npm package
+output-test/
+architect/
+yarn.lock
+.eslintignore
+../../../parse1Cdata/.eslintrc.js
+.prettierignore
+../../../parse1Cdata/.prettierrc.js
+__tests__/cases/architectV1
+.arc
+
+dist
+dist-bin
+dist-types

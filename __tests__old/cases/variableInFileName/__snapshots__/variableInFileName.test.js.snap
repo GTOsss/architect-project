@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`variable get content variableInFileName in template 1`] = `
+Object {
+  "src": Array [
+    Object {
+      "content": "const variable = 'myName';",
+      "path": "*/variableInFileName/output/src/icons/myName/dirName-myName_test_fox/test-myName-fox.js",
+    },
+    Object {
+      "content": "const variable = 'myName';",
+      "path": "*/variableInFileName/output/src/icons/myName/myName-myName-any/myName-myName-any.ts",
+    },
+    Object {
+      "content": "const variable = 'myName';",
+      "path": "*/variableInFileName/output/src/icons/myName/myName-myName-any/myName.ts",
+    },
+  ],
+}
+`;
+
+exports[`variable get path from variableInFileName in template 1`] = `
+Array [
+  "{
+  folder: 'src',
+  files: [
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/dirName-myName_test_fox/test-myName-fox.js',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName-myName-any.ts',
+    'C:/Users/mail/Desktop/timoha/arhitect/architect/__tests__/cases/variableInFileName/output/src/icons/myName/myName-myName-any/myName.ts'
+  ]
+}",
+]
+`;
