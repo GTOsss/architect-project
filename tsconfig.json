@@ -7,11 +7,11 @@
     "moduleResolution": "Node",
     "target": "es5",
     "baseUrl": "./",
-    "paths": {
-      "*": ["src/**/*"]
-    },
     "types": ["jest", "node"],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "#": ["./src/*"]
+    }
   },
   "include": ["src/**/*", "index.d.ts", "architect"],
   "exclude": ["src/**/*.test.ts"],

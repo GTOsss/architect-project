@@ -87,3 +87,4 @@ __tests__/cases/architectV1
 
 dist
 dist-bin
+dist-types

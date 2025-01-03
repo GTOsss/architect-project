@@ -17,4 +17,5 @@ export { HelpAPI } from './src/functions';
 
 export * from './src/types/sourceMapModuleConsistent';
 export * from './src/types/config';
-export * from './publicMethods';
+
+export * from './dist-types/dist';

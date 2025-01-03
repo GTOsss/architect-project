@@ -1,8 +1,4 @@
-import {
-  createInterpolationRegExp,
-  parseAllInterpolationMarks,
-  IntrFileConfig as IntrFileConfigType,
-} from '../../parsers';
+import { createInterpolationRegExp, parseAllInterpolationMarks } from '../../parsers';
 import { ParserContextEnum } from '../../parsers/parseTemplateFiles';
 import { generateContentByParsedTemplate } from '../generateContentByParsedTemplate/generateContentByParsedTemplate';
 
@@ -17,6 +13,7 @@ type ExtractTemplateKeys<
   S extends string,
   IS extends string,
   IE extends string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 > = S extends `${infer _Start}${IS}${infer Key}${IE}${infer Rest}` ? Key | ExtractTemplateKeys<Rest, IS, IE> : never;
 
 type GenerateStringByTemplateParams<T extends string, IS extends string, IE extends string> = Record<
@@ -45,6 +42,18 @@ export function generateStringByTemplate<T extends string, IS extends string = '
   const parsed = parseAllInterpolationMarks(template, intrRegExp, intrConfig, ParserContextEnum.fileContent);
   return generateContentByParsedTemplate({ parsed, content: template }, params as unknown as Record<string, any>, true);
 }
+
+/**
+ * Fabric method for create generator with custom config.
+ *
+ * @example
+ * export const genCode = createGeneratorStrByTemplate({ itrStart: '~', itrEnd: '~' });
+ * const fnTemplate = `export const ~name~ = (~params~) => ~body~`;
+ *
+ * genCode(fnTemplate, { name: 'myMethod', params: '{ a, b }', body: 'a + b' });
+ * // ↓ genCode result ↓
+ * "export const myMethod = ({ a, b }) => a + b"
+ * */
 export const createGeneratorStrByTemplate = <IS extends string, IE extends string>(config: IntrFileConfig<IS, IE>) => {
   return <T extends string>(template: T, params: GenerateStringByTemplateParams<T, IS, IE>) => {
     return generateStringByTemplate(template, params, config);

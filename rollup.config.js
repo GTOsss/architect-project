@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import { defineConfig } from 'rollup';
+import { dts } from 'rollup-plugin-dts';
 
 const plugins = [
   typescript({
@@ -22,7 +23,7 @@ const external = [
 ];
 
 export default defineConfig([
-  // publicMethods CommonJS (Node js)
+  // publicMethods CommonJS (Node.js)
   {
     input: 'publicMethods.ts',
     output: {
@@ -43,6 +44,17 @@ export default defineConfig([
       sourcemap: true,
     },
     plugins: plugins,
+    external: external,
+  },
+
+  // Generate *.d.ts files
+  {
+    input: 'publicMethods.ts',
+    output: {
+      file: 'dist-types/dist.d.ts',
+      format: 'es',
+    },
+    plugins: [dts()],
     external: external,
   },
 ]);
