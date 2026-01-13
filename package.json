@@ -1,6 +1,6 @@
 {
   "name": "architect-project",
-  "version": "2.0.8-beta.4",
+  "version": "2.0.8-beta.5",
   "bin": {
     "arc": "./dist/cli.js"
   },
