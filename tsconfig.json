@@ -13,7 +13,7 @@
       "#": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "index.d.ts", "architect"],
+  "include": ["src/**/*", "index.d.ts", "architect", "publicMethods.ts", "bin/**/*"],
   "exclude": ["src/**/*.test.ts"],
   "references": [
     {

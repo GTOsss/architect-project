@@ -38,4 +38,13 @@ describe('createGeneratorStrByTemplate', () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  it('near values', () => {
+    // todo проблема в том, что регулярное выражение захватывает вторую часть начиная с первого символа интерполяции "~~second~" а нужно "~second~"
+    // решением является использование разных символов начала и конца интерполяции: { itrStart: '->', itrEnd: '<-' }
+    const genStrByTemplate = createGeneratorStrByTemplate({ itrStart: '~', itrEnd: '~' });
+    const result = genStrByTemplate('~first~~second~', { first: 'firstPart_', second: 'secondPart' });
+
+    expect(result).toMatchSnapshot();
+  });
 });
