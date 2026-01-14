@@ -47,6 +47,20 @@ export default defineConfig([
     external: external,
   },
 
+  // CLI bundle
+  {
+    input: 'bin/cli.ts',
+    output: {
+      file: 'dist/cli.js',
+      format: 'cjs',
+      sourcemap: true,
+      banner: '#!/usr/bin/env node',
+      inlineDynamicImports: true,
+    },
+    plugins: plugins,
+    external: external,
+  },
+
   // Generate *.d.ts files
   {
     input: 'publicMethods.ts',

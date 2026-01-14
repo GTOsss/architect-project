@@ -95,8 +95,16 @@ export const getInterpolationOriginFragment = <ParserCxt extends ParserContextEn
   return [currentConfig.itrFileNameStart, str, currentConfig.itrFileNameEnd].join('');
 };
 
-export const createInterpolationRegExp = (config: IntrFileConfig) =>
-  new RegExp(`(?<=${config.itrStart}).+?(?=${config.itrEnd})`, 'gm');
+/**
+ * Экранирование специальных символов в регулярных выражениях
+ * */
+const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+export const createInterpolationRegExp = (config: IntrFileConfig) => {
+  const start = escapeRegExp(config.itrStart);
+  const end = escapeRegExp(config.itrEnd);
+  return new RegExp(`(?<=${start}).+?(?=${end})`, 'gm');
+};
 
 export const parseTemplateFile = ({
   templateName,

@@ -23,7 +23,11 @@ export const arcStart = ({ settingsFolder = 'architect' }: StartParams) => {
   const configFile = smartRequire<{ config: ArcConfig }, null>(configPath.config, null);
 
   if (!configFile) {
-    throw new Error(`Configuration file not found at ${configPath.config}`);
+    throw new Error(
+      `Configuration file not found at "${configPath.config}".\n` +
+        `Make sure you have created the config file at: ${configPath.cwd}/${configPath.settingsFolder}/config.js (or config.ts)\n` +
+        `Current working directory: ${configPath.cwd}`,
+    );
   }
 
   const config = configFile.config;

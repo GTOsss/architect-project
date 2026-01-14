@@ -14,6 +14,10 @@ export class Paths {
     this._settingsFolder = settingsFolder;
   }
 
+  get settingsFolder() {
+    return this._settingsFolder;
+  }
+
   get output() {
     const configFile = require(`${this.cwd}/${this._settingsFolder}/config`);
     // Operator "or" need because config may require via Node module system

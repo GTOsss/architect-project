@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+import 'tsx/cjs';
 import '../src/store/index';
 import commander from 'commander';
 // import chalk from 'chalk';
