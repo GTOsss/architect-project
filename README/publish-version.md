@@ -10,7 +10,7 @@ npm publish --tag beta
 
 Release
 ```bash
-npm version prerelease
+npm version patch
 ```
 
 ```bash
